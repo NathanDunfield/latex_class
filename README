@@ -15,7 +15,7 @@ Using as a Mercurial subproject:
   
   hg status --subrepo
 
- Commits automatically check inside the subrepo, but need to push changes
- manually. 
+ Commits automatically check inside the subrepo, but need to push 
+ and pull changes manually. 
 
    
