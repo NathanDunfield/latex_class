@@ -1,0 +1,21 @@
+Nathan M. Dunfield's personal LaTeX and BibTeX style files.
+
+Using as a Mercurial subproject:
+
+* Initial setup:
+
+  hg clone ~/work/tex/pkgs/nmd 
+  echo "nmd = ~/work/tex/pkgs/nmd" > .hgsub 
+  hg add .hgsub
+  hg commit -m "Added nmd subrepository"
+
+* Usage: 
+
+ To see status of the subproject: 
+  
+  hg status --subrepo
+
+ Commits automatically check inside the subrepo, but need to push changes
+ manually. 
+
+   
