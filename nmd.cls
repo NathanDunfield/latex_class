@@ -187,7 +187,9 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
   \let\theequation=\thesubsection
 \makeatother
 
-% Change float params as per TeX FAQ
+%%% Change float params as per TeX FAQ to make things more 
+%%% flexible 
+
 \renewcommand{\topfraction}{.85}
 \renewcommand{\bottomfraction}{.7}
 \renewcommand{\textfraction}{.15}
