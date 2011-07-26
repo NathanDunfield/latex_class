@@ -51,7 +51,7 @@
 %%% Load basic style file %%% 
 
 \ifgt
- \LoadClass{gtpart} 
+ \LoadClass[microtype]{gtpart} 
   %% Improve fit on US letter
   \addtolength{\topmargin}{-1.3cm}
   \addtolength{\oddsidemargin}{0.35cm}
