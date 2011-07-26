@@ -2,6 +2,9 @@
 %
 %  Main options: gt, ams, custom
 %  Font options: times, utopia, lucida
+%  
+%  Formating commands:
+%    \trim, \laptop, \printing
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nmd}[2011/07/25 - Post Australia Funk Edition]
@@ -14,7 +17,6 @@
 \newif\iftimes
 \newif\ifutopia
 \newif\iflucida
-\newif\iflaptop
 \newif\ifninept
 \newif\iftenpt
 \newif\ifelevenpt
@@ -25,7 +27,6 @@
 \DeclareOption{times}{\timestrue}
 \DeclareOption{utopia}{\utopiatrue}
 \DeclareOption{lucida}{\lucidatrue}
-\DeclareOption{laptop}{\laptoptrue}
 
 % The GT style has a fixed font, but the AMS one doesn't.  
 \DeclareOption{9pt}{\ninepttrue}
@@ -38,6 +39,7 @@
 %%% Switch to turn on Nathan's features if his custom option file exists
 \newif\ifnmd
 \InputIfFileExists{user-is-nathan-dunfield}{\nmdtrue}{\nmdfalse}
+
 %%% Other people probably don't have the Lucida fonts
 \ifnmd \relax \else \iflucida \lucidafalse \utopiatrue \fi \fi
 
@@ -96,6 +98,61 @@
   \fi 
   \usepackage[lucidasmallscale, nofontinfo]{lucimatx}
 \fi
+
+
+%%% Macros for formating:
+
+% Strip off the margins for onscreen viewing
+
+\let\trimpdfpages\undefined
+\newcommand{\trimpdfpages}[1]{%
+\let\remnantmargin\undefined
+\newcommand{\remnantmargin}{#1}
+
+% First move the PDF origin to the upper-left
+% corner of the text
+
+\setlength{\pdfhorigin}{-\oddsidemargin}
+\addtolength{\pdfhorigin}{-\hoffset}
+
+\setlength{\pdfvorigin}{-\topmargin}
+\addtolength{\pdfvorigin}{-\voffset}
+
+% Now trim to the minimal page size
+\setlength{\pdfpagewidth}{\textwidth}
+\setlength{\pdfpageheight}{\textheight}
+
+\addtolength{\pdfpageheight}{\headsep}
+\addtolength{\pdfpageheight}{\headheight}
+\addtolength{\pdfpageheight}{\footskip}
+
+% Now pad out to the desired margins
+\addtolength{\pdfhorigin}{\remnantmargin}
+\addtolength{\pdfpagewidth}{\remnantmargin}
+\addtolength{\pdfpagewidth}{\remnantmargin}
+
+\addtolength{\pdfvorigin}{\remnantmargin}
+\addtolength{\pdfpageheight}{\remnantmargin}
+\addtolength{\pdfpageheight}{\remnantmargin}
+}
+\newcommand{\trimpages}[1]{%
+   \AtBeginDocument{\trimpdfpages{#1}}
+}
+
+% Format for printing on US Letter pages
+
+\newcommand{\printing}[1]{%
+  \setlength{\textwidth}{#1\textwidth}
+  \setlength{\textheight}{1.5\textwidth}
+  \trimpages{0.3cm}
+}
+
+\newcommand{\laptop}{%
+  \setlength{\textheight}{1.2\textwidth}
+  \trimpages{0.5cm}
+}
+
+
 
 %%% Graphics 
 \usepackage{graphicx, color}
