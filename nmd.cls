@@ -263,6 +263,8 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 
 \newcommand{\hyp}{\nobreakdash-\hspace{0pt}}
 \newcommand{\3}[1]{3\hyp}
+\let\2\undefined
+\newcommand{\2}[1]{2\hyp}
 
 % Show current page layout using \layout
 
