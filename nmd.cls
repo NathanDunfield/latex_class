@@ -202,7 +202,11 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 %%% Setup Theorems
 
 % Theorem definitions
-%\newtheoremstyle{plain}{}{}{\slshape}{}{\bfseries}{.}{0.5em}{}
+
+
+\ifams
+   \newtheoremstyle{plain}{}{}{\slshape}{}{\bfseries}{.}{0.5em}{}
+\fi
 \theoremstyle{plain}
 \swapnumbers
 \newtheorem{theorem}[subsection]{Theorem}
