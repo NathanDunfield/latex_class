@@ -17,6 +17,7 @@
 \newif\iftimes
 \newif\ifutopia
 \newif\iflucida
+\newif\ifcm
 \newif\ifninept
 \newif\iftenpt
 \newif\ifelevenpt
@@ -27,6 +28,7 @@
 \DeclareOption{times}{\timestrue}
 \DeclareOption{utopia}{\utopiatrue}
 \DeclareOption{lucida}{\lucidatrue}
+\DeclareOption{cm}{\cmtrue}
 
 % The GT style has a fixed font, but the AMS one doesn't.  
 \DeclareOption{9pt}{\ninepttrue}
@@ -84,6 +86,10 @@
 \fi
 
 %%% Set font %%% 
+%
+%  Assumes we will use CM only if it is the default 
+%  font for a particular class. 
+
 \iftimes
    \ifgt \relax \else 
    \usepackage{mathptmx} 
@@ -325,6 +331,13 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
         \end{smallmatrix}\right)
 }
 \newcommand{\mtext}[1]{\quad \mbox{#1} \quad}
+
+\newcommand{\makeassignmacro}[2]{\hspace{#1}\raisebox{#2}{\ensuremath{:}}\hspace{-#1}=}
+\newcommand{\assign}{:=}
+\ifutopia \renewcommand{\assign}{\makeassignmacro{0.45ex}{0.095ex}} \fi
+\iftimes \renewcommand{\assign}{\makeassignmacro{0.5ex}{0.06ex}} \fi
+\iflucida \renewcommand{\assign}{\makeassignmacro{0.6ex}{0.046ex}} \fi
+\ifcm \renewcommand{\assign}{\makeassignmacro{0.6ex}{0.085ex}} \fi
 
 % Better overlines and tildes.  Example of useage
 % \newcommand{\barN}{\kernoverline{4}{N}{1}} 
