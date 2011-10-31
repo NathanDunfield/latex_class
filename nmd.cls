@@ -357,3 +357,8 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 }}
 \newcommand{\doublerightquom}[4]{{\raisebox{#3}{$#1$}}#4/ \! \, \! #4/ {\raisebox{-#3}{$#2$}}}
 
+% CSisms:
+
+\renewcommand{\P}{\mathbf{P}}
+\newcommand{\NP}{\mathbf{NP}}
+\newcommand{\coNP}{\mbox{\textbf{co-NP}}}
