@@ -154,7 +154,7 @@
 }
 
 \newcommand{\laptop}{%
-  \setlength{\textheight}{1.2\textwidth}
+  \setlength{\textheight}{1.0\textwidth}
   \trimpages{0.5cm}
 }
 
@@ -207,7 +207,7 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 
 %%% Setup Theorems
 
-% Theorem definitions
+% Theorem definitions, compatible with cleveref
 
 
 \ifams
@@ -215,35 +215,54 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 \fi
 \theoremstyle{plain}
 \swapnumbers
-\newtheorem{theorem}[subsection]{Theorem}
-\newtheorem{conjecture}[subsection]{Conjecture}
-\newtheorem{lemma}[subsection]{Lemma}
-\newtheorem{corollary}[subsection]{Corollary}
-\newtheorem{proposition}[subsection]{Proposition}
-\newtheorem{claim}[subsection]{Claim}
-\newtheorem{question}[subsection]{Question}
-\newtheorem{criterion}[subsection]{Criterion}
-\newtheorem{project}[subsection]{Project}
+
+
+% Tried to get cleveref to work, but proved to flaky 
+% to be worth it.  
+%
+% \usepackage[capitalize]{cleveref}
+% \crefformat{equation}{(#2#1#3)} 
+% \usepackage{aliascnt}
+%
+% \def\myupcase#1{\uppercase{#1}}
+% \newcommand{\nmdnewtheorem}[1]{
+%  \newaliascnt{#1}{subsection}
+%  \newtheorem{#1}[#1]{\expandafter\myupcase#1}
+%  \aliascntresetthe{#1}
+%}
+
+\def\myupcase#1{\uppercase{#1}}
+\newcommand{\nmdnewtheorem}[1]{\newtheorem{#1}[subsection]{\expandafter\myupcase#1}}
+
+\nmdnewtheorem{theorem}
+\nmdnewtheorem{conjecture}
+\nmdnewtheorem{lemma}
+\nmdnewtheorem{corollary}
+\nmdnewtheorem{proposition}
+\nmdnewtheorem{claim}
+\nmdnewtheorem{question}
+\nmdnewtheorem{criterion}
+\nmdnewtheorem{project}
 
 \theoremstyle{definition}
-\newtheorem{definition}[subsection]{Definition}
-\newtheorem{notation}[subsection]{Notation}
+\nmdnewtheorem{definition}
+\nmdnewtheorem{notation}
 
 \theoremstyle{remark}
-\newtheorem{remark}[subsection]{Remark}
-\newtheorem{example}[subsection]{Example}
+\nmdnewtheorem{remark}
+\nmdnewtheorem{example}
 
 \theoremstyle{plain}
 
-% Change enum to use letters, so there's no confusion with equation labels.
+% Change enum to use letters, so there's no confusion 
+% with equation labels.  I'm not really happy with this. 
 
 \renewcommand{\labelenumi}{(\alph{enumi}) }
 \renewcommand{\theenumi}{\alph{enumi}}
 
-% I want subsections and theorems to be numbered on the same counter,
-% E.g.  Section 1, Subsection 1.1, Lemma 1.2, Theorem 1.3, Subsection
-% 1.4, etc. There ought to be a better way to equate two counters
-% than this, but...
+% Put figures, tables, and equations onto the common
+% subsection/theorem counter. There ought to be a better 
+% way to equate two counters than this, but...
 
 \makeatletter
   \let\c@figure=\c@subsection
