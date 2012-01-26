@@ -4,7 +4,7 @@
 %  Font options: times, utopia, lucida
 %  
 %  Formating commands:
-%    \trim, \laptop, \printing
+%    \trimpages, \laptop, \printing
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nmd}[2011/07/25 - Post Australia Funk Edition]
