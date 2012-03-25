@@ -7,7 +7,7 @@
 %    \trimpages, \laptop, \printing
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd}[2011/07/25 - Post Australia Funk Edition]
+\ProvidesClass{nmd}[2012/03/25 - Spring Break Blahs Edition]
 
 %%% Setup options
 
@@ -30,7 +30,7 @@
 \DeclareOption{lucida}{\lucidatrue}
 \DeclareOption{cm}{\cmtrue}
 
-% The GT style has a fixed font, but the AMS one doesn't.  
+% The GT and custom styles have a fixed font, but the AMS one doesn't.  
 \DeclareOption{9pt}{\ninepttrue}
 \DeclareOption{10pt}{\tenpttrue}
 \DeclareOption{11pt}{\elevenpttrue}
@@ -45,10 +45,10 @@
 %%% Other people probably don't have the Lucida fonts
 \ifnmd \relax \else \iflucida \lucidafalse \utopiatrue \fi \fi
 
-%%%  Make the GT based style the default
-\gttrue
-\ifams \gtfalse \fi
-\ifcustom \gtfalse \fi
+%%%  Make the custom style the default
+\customtrue
+\ifams \customfalse \fi
+\ifgt \customfalse \fi
 
 %%% Load basic style file %%% 
 
@@ -75,14 +75,176 @@
   \iftwelvept \PassOptionsToClass{12pt}{amsart} \fi 
   \LoadClass{amsart} 
   \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
-  
-  % Dummy commands for things used by GT style
+\fi
+
+% Dummy commands for things used by GT style
+\ifgt \relax \else
   \newcommand{\givenname}[1]{}
   \newcommand{\surname}[1]{}
   \newcommand{\arxivreference}[1]{}
   \newcommand{\arxivpassword}[1]{}
   \newcommand{\subject}[3]{}
   \newcommand{\keyword}[1]{}
+\fi
+
+
+%%% Core of custom style %%% 
+
+\ifcustom
+   \PassOptionsToClass{12pt}{article}
+   \LoadClass{article}
+   
+   % Set page size
+   \usepackage{calc}
+   \newlength{\nmdwidth}
+   \newlength{\nmdhmargins}
+   \setlength{\nmdwidth}{410bp}
+   \setlength{\nmdhmargins}{45bp}
+   \usepackage[papersize={\nmdwidth+2\nmdhmargins,
+     1.33\nmdwidth+2.66\nmdhmargins},
+     hmarginratio=1:1, top=0.85\nmdhmargins, textwidth=\nmdwidth,
+     textheight=1.4\nmdwidth, headsep=10bp, headheight=15bp]{geometry}
+
+   % Make the default font Utopia 
+   \iflucida \relax \else \iftimes \relax \else \utopiatrue \fi \fi 
+
+   % Load a decent sans serif font
+   \usepackage[scaled]{berasans}
+   %\usepackage{avant}
+   
+   % Hyperref with dark blue links for better printing.  
+   \usepackage{color}
+   \definecolor{darkblue}{rgb}{0.0, 0.0, 0.5}
+   \usepackage[colorlinks=true, linkcolor=darkblue,
+         citecolor=darkblue,urlcolor=darkblue]{hyperref}
+   
+   % Format the sections
+   \usepackage[medium]{titlesec}
+   \definecolor{sectioncolor}{rgb}{0.906,0.882,1.0}
+   \newcommand{\titlebar}{%
+     \setlength{\fboxsep}{0bp}%
+     \colorbox{sectioncolor}{\hbox to \textwidth{\rule[-10bp]{0bp}{30bp}}}%
+     \hspace*{-\textwidth}%
+     \hspace{0.5em}\thesection %
+   }
+   \titleformat{\section}[hang]{\large\sffamily\bfseries}{\titlebar}{0.7em}{}[]
+   \titlespacing*{\section}{0pt}{3ex}{2ex}
+   
+   % Format the subsections
+   \titlespacing{\subsection}{0ex}{1.5ex}{0.5em}
+   \titleformat{\subsection}[runin]{\normalsize\bfseries}{\thesubsection}{0.35em}{}[.]
+   
+   % Set the headers
+   \usepackage{fancyhdr}
+   \pagestyle{fancy}
+   \lhead{\small \hrulefill\hspace{0.5em}\raisebox{-0.6ex}{\thepage}\hspace{0.5em}\hrulefill}
+   \chead{}
+   \rhead{}
+   \lfoot{}
+   \cfoot{}
+   \rfoot{}
+   \renewcommand{\headrulewidth}{0pt}
+   
+   % AMS Maths 
+   \usepackage{amsmath, amssymb}
+   
+   % Theorems
+   \usepackage{amsthm}
+   \usepackage{thmtools}
+   \newtheoremstyle{plain}{}{}{\slshape}{0pt}{\bfseries}{.}{0.5em}{}
+   % make spacing after theorem number match section style
+   \makeatletter
+      \def\swappedhead#1#2#3{%
+      \thmnumber{\@upn{\the\thm@headfont#2\@ifnotempty{#1}{\hspace{0.35em}}}}%
+      \thmname{#1}%
+      \thmnote{ {\the\thm@notefont(#3)}}}
+    \makeatother
+   % Add the rule on the left
+   \usepackage{settobox}
+
+   \newsavebox{\nmdparasavebox}
+   \newlength{\nmdparaboxheight}
+   \newenvironment{leftruledparagraph}[3]{%
+     \def\nmdparaboxrule{#1} %
+     \def\nmdparaboxspace{#2} %
+     \def\nmdparaboxcolor{#3} %
+     \begin{lrbox}{\nmdparasavebox}%
+     \begin{minipage}[b]{\textwidth - #1 - #2}}%
+    {%
+     \end{minipage}% 
+     \end{lrbox}%
+     \settoboxheight{\nmdparaboxheight}{\nmdparasavebox}% 
+     \addtolength{\nmdparaboxheight}{3bp}
+     \begin{trivlist}\item[]% In a trivlist because theorems are in trivlists.
+     \textcolor{\nmdparaboxcolor}{%
+       \raisebox{-2.5bp}{\rule{\nmdparaboxrule}{\nmdparaboxheight}}%
+     }%
+     \hspace{\nmdparaboxspace}%
+     \usebox{\nmdparasavebox}%
+     \end{trivlist}
+   }
+   
+   \makeatletter
+   \define@key{thmdef}{nmd}[{}]{%
+   \thmt@trytwice{}{%
+     \addtotheorempreheadhook[\thmt@envname]{%
+       \begin{leftruledparagraph}{3bp}{6bp}{darkblue}}}
+     {%
+      \addtotheorempostfoothook[\thmt@envname]{%
+        \end{leftruledparagraph}}
+      }
+    }
+   \makeatother
+
+   \def\myupcase#1{\uppercase{#1}}
+\newcommand{\nmdnewtheorem}[1]{%
+  \declaretheorem[nmd, name=\expandafter\myupcase#1,
+  sibling=subsection]{#1}}
+
+   
+   % Code for names, title, etc.  Mostly taken from amsart
+   \makeatletter
+     \renewcommand{\title}[2][]{\gdef\@title{#2}}
+     \newcommand{\nmd@authorand}{ and }
+     \let\authors\@empty
+     \let\addresses\@empty 
+     \renewcommand{\author}[2][]{%
+       \ifx\@empty\authors
+       \gdef\authors{#2}%
+       \else
+       \g@addto@macro\authors{\nmd@authorand#2}%
+       \g@addto@macro\addresses{\author{}}%
+       \fi
+     }%
+
+     \newsavebox\abstractbox
+     \renewenvironment{abstract}{%
+       \global\setbox\abstractbox=\vtop \bgroup%
+        \begin{leftruledparagraph}{3bp}{8bp}{darkblue}
+        \textbf{Abstract.} }
+       {\end{leftruledparagraph}\egroup}
+
+     \def\maketitle{\par
+       \@topnum\z@ % this prevents figures from falling at the top of page 1
+       \thispagestyle{empty}
+       \noindent
+       {\Huge \sffamily\bfseries \@title}
+
+       \vspace{20bp}
+       \noindent
+       {\Large \sffamily \authors}
+
+       \noindent
+       \usebox{\abstractbox}
+       }
+   \makeatother
+
+
+   \newcommand{\address}[1]{}
+   \newcommand{\email}[1]{}
+   \newcommand{\urladdr}[1]{}
+   \newcommand{\keywords}[1]{}
+   \newcommand{\subjclass}[2][2010]{}
 \fi
 
 %%% Set font %%% 
@@ -216,23 +378,15 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 \theoremstyle{plain}
 \swapnumbers
 
-
-% Tried to get cleveref to work, but proved to flaky 
+% Tried to get cleveref to work, but proved too flaky 
 % to be worth it.  
-%
-% \usepackage[capitalize]{cleveref}
-% \crefformat{equation}{(#2#1#3)} 
-% \usepackage{aliascnt}
-%
-% \def\myupcase#1{\uppercase{#1}}
-% \newcommand{\nmdnewtheorem}[1]{
-%  \newaliascnt{#1}{subsection}
-%  \newtheorem{#1}[#1]{\expandafter\myupcase#1}
-%  \aliascntresetthe{#1}
-%}
 
 \def\myupcase#1{\uppercase{#1}}
-\newcommand{\nmdnewtheorem}[1]{\newtheorem{#1}[subsection]{\expandafter\myupcase#1}}
+
+\newcommand{\plainnewtheorem}[1]{\newtheorem{#1}[subsection]{\expandafter\myupcase#1}}
+\ifcustom \relax \else
+   \let\nmdnewtheorem\plainnewtheorem
+\fi
 
 \nmdnewtheorem{theorem}
 \nmdnewtheorem{conjecture}
@@ -245,12 +399,12 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 \nmdnewtheorem{project}
 
 \theoremstyle{definition}
-\nmdnewtheorem{definition}
-\nmdnewtheorem{notation}
+\plainnewtheorem{definition}
+\plainnewtheorem{notation}
 
 \theoremstyle{remark}
-\nmdnewtheorem{remark}
-\nmdnewtheorem{example}
+\plainnewtheorem{remark}
+\plainnewtheorem{example}
 
 \theoremstyle{plain}
 
