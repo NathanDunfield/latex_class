@@ -8,6 +8,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nmd}[2012/03/25 - Spring Break Blahs Edition]
+\makeatletter
 
 %%% Setup options
 
@@ -158,12 +159,10 @@
    \usepackage{thmtools}
    \newtheoremstyle{plain}{}{}{\slshape}{0pt}{\bfseries}{.}{0.5em}{}
    % make spacing after theorem number match section style
-   \makeatletter
-      \def\swappedhead#1#2#3{%
+   \def\swappedhead#1#2#3{%
       \thmnumber{\@upn{\the\thm@headfont#2\@ifnotempty{#1}{\hspace{0.35em}}}}%
-      \thmname{#1}%
-      \thmnote{ {\the\thm@notefont(#3)}}}
-    \makeatother
+   \thmname{#1}%
+   \thmnote{ {#3}}}
    % Add the rule on the left
    \usepackage{settobox}
 
@@ -189,7 +188,6 @@
      \end{trivlist}
    }
    
-   \makeatletter
    \define@key{thmdef}{nmd}[{}]{%
    \thmt@trytwice{}{%
      \addtotheorempreheadhook[\thmt@envname]{%
@@ -199,12 +197,8 @@
         \end{leftruledparagraph}}
       }
     }
-   \makeatother
- 
-   
    % Code for names, title, etc.  Mostly taken from amsart
-   \makeatletter
-     % Save the title
+   % Save the title
      \renewcommand{\title}[2][]{\gdef\@title{#2}}
      % Formating for addresses at the end
      \newcommand{\nmd@author}[1]{#1\par}
@@ -266,8 +260,6 @@
          \setlength{\parindent}{0pt}
          \addresses
        }
-
-   \makeatother
 
    \newcommand{\keywords}[1]{}
    \newcommand{\subjclass}[2][2010]{}
@@ -354,10 +346,8 @@
 \usepackage{ragged2e}
 \ifgt
 % gtpart hardwires the max width of a biblabel, so we rewire it manually.  
-\makeatletter
 \def\thebibliography#1 {\@thebibliography@{999999}\small\parskip0pt 
 plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
-\makeatother 
 \fi
 
 %% For the MathReview links 
@@ -377,10 +367,8 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 % but proved too flaky to be worth it.  
 
 \ifcustom \relax \else
-   \makeatletter
    \usepackage{thmtools}
    \define@key{thmdef}{nmd}[{}]{}
-   \makeatother
 \fi   
 
 \swapnumbers
@@ -408,7 +396,6 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 \declaretheorem[style=remark, sibling=subsection]{example}
 
 
-
 % Change enum to use letters, so there's no confusion 
 % with equation labels.  I'm not really happy with this. 
 
@@ -426,14 +413,13 @@ labelsep=period]{subfig}
 % subsection/theorem counter. There ought to be a better 
 % way to equate two counters than this, but...
 
-\makeatletter
-  \let\c@figure=\c@subsection
-  \let\thefigure=\thesubsection
-  \let\c@table=\c@subsection
-  \let\thetable=\thesubsection
-  \let\c@equation=\c@subsection
-  \let\theequation=\thesubsection
-\makeatother
+\let\c@figure=\c@subsection
+\let\thefigure=\thesubsection
+\let\c@table=\c@subsection
+\let\thetable=\thesubsection
+\let\c@equation=\c@subsection
+\let\theequation=\thesubsection
+
 
 % Nathan's basic label overlay environment.   The usual version is the second one
 % below.  Args are: coor system, graphics modifiers, graphics name
@@ -562,3 +548,6 @@ labelsep=period]{subfig}
 \renewcommand{\P}{\mathbf{P}}
 \newcommand{\NP}{\mathbf{NP}}
 \newcommand{\coNP}{\mbox{\textbf{co-NP}}}
+
+% End of nmd class
+\makeatother
