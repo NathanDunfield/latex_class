@@ -109,25 +109,31 @@
    \iflucida \relax \else \iftimes \relax \else \utopiatrue \fi \fi 
 
    % Load a decent sans serif font
-   \usepackage[scaled]{berasans}
    %\usepackage{avant}
+   \usepackage[scaled]{berasans}
+   \DeclareFixedFont{\titlefont}{T1}{fvs}{b}{n}{24bp}
+   \DeclareFixedFont{\sectionfont}{T1}{fvs}{b}{n}{15bp}
+   \DeclareFixedFont{\authorfont}{T1}{fvs}{m}{it}{18bp}
    
-   % Hyperref with dark blue links for better printing.  
+   % colors
    \usepackage{color}
-   \definecolor{darkblue}{rgb}{0.0, 0.0, 0.5}
-   \usepackage[colorlinks=true, linkcolor=darkblue,
-         citecolor=darkblue,urlcolor=darkblue]{hyperref}
+   \definecolor{nmdlight}{cmyk}{0.128, 0.176, 0.0, 0.0}
+   \definecolor{nmdmedium}{cmyk}{0.41, 0.49, 0.06, 0.0}
+   \definecolor{nmddark}{rgb}{0.1, 0.0, 0.5}
+   
+   % Hyperref with dark links for better printing.  
+   \usepackage[colorlinks=true, linkcolor=nmddark,
+         citecolor=nmddark,urlcolor=nmddark]{hyperref}
    
    % Format the sections
    \usepackage[medium]{titlesec}
-   \definecolor{sectioncolor}{rgb}{0.906,0.882,1.0}
    \newcommand{\titlebar}{%
      \setlength{\fboxsep}{0bp}%
-     \colorbox{sectioncolor}{\hbox to \textwidth{\rule[-10bp]{0bp}{30bp}}}%
+     \colorbox{nmdlight}{\hbox to \textwidth{\rule[-10bp]{0bp}{30bp}}}%
      \hspace*{-\textwidth}%
      \hspace{0.5em}\thesection %
    }
-   \titleformat{\section}[hang]{\large\sffamily\bfseries}{\titlebar}{0.7em}{}[]
+   \titleformat{\section}[hang]{\sectionfont}{\titlebar}{0.7em}{}[]
    \titlespacing*{\section}{0pt}{3ex}{2ex}
    
    % Format the subsections
@@ -188,7 +194,7 @@
    \define@key{thmdef}{nmd}[{}]{%
    \thmt@trytwice{}{%
      \addtotheorempreheadhook[\thmt@envname]{%
-       \begin{leftruledparagraph}{3bp}{6bp}{darkblue}}}
+       \begin{leftruledparagraph}{3bp}{6bp}{nmdmedium}}}
      {%
       \addtotheorempostfoothook[\thmt@envname]{%
         \end{leftruledparagraph}}
@@ -204,45 +210,71 @@
    
    % Code for names, title, etc.  Mostly taken from amsart
    \makeatletter
+     % Save the title
      \renewcommand{\title}[2][]{\gdef\@title{#2}}
+     % Formating for addresses at the end
+     \newcommand{\nmd@author}[1]{#1\par}
+     \newcommand{\nmd@address}[1]{#1\par}
+     \newcommand{\nmd@email}[1]{email: \texttt{#1}\par}
+     \newcommand{\nmd@urladdr}[1]{\url{#1}\par \vspace{10bp}}
      \newcommand{\nmd@authorand}{ and }
      \let\authors\@empty
-     \let\addresses\@empty 
+     \let\addresses\@empty
      \renewcommand{\author}[2][]{%
        \ifx\@empty\authors
        \gdef\authors{#2}%
+       \gdef\addresses{\nmd@author{#2}}
        \else
        \g@addto@macro\authors{\nmd@authorand#2}%
-       \g@addto@macro\addresses{\author{}}%
+       \g@addto@macro\addresses{\nmd@author{#2}}%
        \fi
      }%
-
+     % Save addresses, emails, and urls.
+     \newcommand{\address}[2][]{%
+       \g@addto@macro\addresses{\nmd@address{#2}}}
+     \newcommand{\email}[2][]{%
+       \g@addto@macro\addresses{\nmd@email{#2}}}
+     \newcommand{\urladdr}[2][]{%
+       \g@addto@macro\addresses{\nmd@urladdr{#2}}}
+     % The abstract.  
      \newsavebox\abstractbox
      \renewenvironment{abstract}{%
        \global\setbox\abstractbox=\vtop \bgroup%
-        \begin{leftruledparagraph}{3bp}{8bp}{darkblue}
+        \begin{leftruledparagraph}{3bp}{8bp}{nmdmedium}
         \textbf{Abstract.} }
        {\end{leftruledparagraph}\egroup}
 
      \def\maketitle{\par
-       \@topnum\z@ % this prevents figures from falling at the top of page 1
+       \@topnum\z@ % this prevents figures from falling at the top of page 
        \thispagestyle{empty}
-       \noindent
-       {\Huge \sffamily\bfseries \@title}
+       
+       \
 
        \vspace{20bp}
+
+       {\titlefont\setlength{\baselineskip}{30bp}
        \noindent
-       {\Large \sffamily \authors}
+       \@title
+       
+       }
+
+       \vspace{40bp}
+       \noindent
+       {\authorfont \authors}
+       \vspace{10bp}
 
        \noindent
        \usebox{\abstractbox}
        }
+       \AtEndDocument{%
+         \small 
+         \interlinepenalty\@M
+         \setlength{\parindent}{0pt}
+         \addresses
+       }
+
    \makeatother
 
-
-   \newcommand{\address}[1]{}
-   \newcommand{\email}[1]{}
-   \newcommand{\urladdr}[1]{}
    \newcommand{\keywords}[1]{}
    \newcommand{\subjclass}[2][2010]{}
 \fi
