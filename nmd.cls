@@ -87,7 +87,6 @@
   \newcommand{\keyword}[1]{}
 \fi
 
-
 %%% Core of custom style %%% 
 
 \ifcustom
@@ -201,12 +200,7 @@
       }
     }
    \makeatother
-
-   \def\myupcase#1{\uppercase{#1}}
-\newcommand{\nmdnewtheorem}[1]{%
-  \declaretheorem[nmd, name=\expandafter\myupcase#1,
-  sibling=subsection]{#1}}
-
+ 
    
    % Code for names, title, etc.  Mostly taken from amsart
    \makeatletter
@@ -354,28 +348,6 @@
 
 
 
-%%% Graphics 
-\usepackage{graphicx, color}
-\usepackage[all,import,rotate]{xy}
-\usepackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{caption}
-\usepackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{subfig}
-
-% Nathan's basic label overlay environment.   The usual version is the second one
-% below.  Args are: coor system, graphics modifiers, graphics name
-
-\newenvironment{xyoverpic}[3]
-{%
-\begin{xy}
-\xyimport#1{\includegraphics[#2]{#3}}
-}{\end{xy}}
-
-\newenvironment{cxyoverpic}[3]
-{%
-\begin{center}
-\centering\leavevmode\small
-\begin{xyoverpic}{#1}{#2}{#3}
-}{\end{xyoverpic}
-\end{center}}
 
 %%% Bibilography
 
@@ -401,24 +373,24 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 
 %%% Setup Theorems
 
-% Theorem definitions, compatible with cleveref
+% Theorem definitions.  Note tried to get cleveref to work,
+% but proved too flaky to be worth it.  
 
+\ifcustom \relax \else
+   \makeatletter
+   \usepackage{thmtools}
+   \define@key{thmdef}{nmd}[{}]{}
+   \makeatother
+\fi   
+
+\swapnumbers
 
 \ifams
    \newtheoremstyle{plain}{}{}{\slshape}{}{\bfseries}{.}{0.5em}{}
 \fi
-\theoremstyle{plain}
-\swapnumbers
-
-% Tried to get cleveref to work, but proved too flaky 
-% to be worth it.  
-
-\def\myupcase#1{\uppercase{#1}}
-
-\newcommand{\plainnewtheorem}[1]{\newtheorem{#1}[subsection]{\expandafter\myupcase#1}}
-\ifcustom \relax \else
-   \let\nmdnewtheorem\plainnewtheorem
-\fi
+  
+\newcommand{\nmdnewtheorem}[1]{%
+  \declaretheorem[nmd, style=plain, sibling=subsection]{#1}}
 
 \nmdnewtheorem{theorem}
 \nmdnewtheorem{conjecture}
@@ -430,21 +402,25 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 \nmdnewtheorem{criterion}
 \nmdnewtheorem{project}
 
-\theoremstyle{definition}
-\plainnewtheorem{definition}
-\plainnewtheorem{notation}
+\declaretheorem[style=definition, sibling=subsection]{definition}
+\declaretheorem[style=definition, sibling=subsection]{notation}
+\declaretheorem[style=remark, sibling=subsection]{remark}
+\declaretheorem[style=remark, sibling=subsection]{example}
 
-\theoremstyle{remark}
-\plainnewtheorem{remark}
-\plainnewtheorem{example}
 
-\theoremstyle{plain}
 
 % Change enum to use letters, so there's no confusion 
 % with equation labels.  I'm not really happy with this. 
 
 \renewcommand{\labelenumi}{(\alph{enumi}) }
 \renewcommand{\theenumi}{\alph{enumi}}
+
+%%% Graphics 
+\usepackage{graphicx, color}
+\usepackage[all,import,rotate]{xy}
+\usepackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{caption}
+\usepackage[margin=15pt,font=small,labelfont=bf,
+labelsep=period]{subfig}
 
 % Put figures, tables, and equations onto the common
 % subsection/theorem counter. There ought to be a better 
@@ -458,6 +434,25 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
   \let\c@equation=\c@subsection
   \let\theequation=\thesubsection
 \makeatother
+
+% Nathan's basic label overlay environment.   The usual version is the second one
+% below.  Args are: coor system, graphics modifiers, graphics name
+
+\newenvironment{xyoverpic}[3]
+{%
+\begin{xy}
+\xyimport#1{\includegraphics[#2]{#3}}
+}{\end{xy}}
+
+\newenvironment{cxyoverpic}[3]
+{%
+\begin{center}
+\centering\leavevmode\small
+\begin{xyoverpic}{#1}{#2}{#3}
+}{\end{xyoverpic}
+\end{center}}
+
+
 
 %%% Change float params as per TeX FAQ to make things more 
 %%% flexible 
