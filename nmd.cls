@@ -503,7 +503,12 @@ labelsep=period]{subfig}
 \DeclareMathOperator{\vol}{vol}
 \DeclareMathOperator{\Vol}{Vol}
 \DeclareMathOperator{\Isom}{Isom}
-
+\DeclareMathOperator{\Teich}{Teich}
+\DeclareMathOperator{\inj}{inj}
+\newcommand{\bdry}{\partial}
+\newcommand{\PML}{\mathcal{P \!\!\! M \! L}}
+\newcommand{\MCG}{\mathcal{M \! CG}}
+\newcommand{\Tor}{\mathcal{T} \!\!\!\! \mathit{or}}
 \newcommand{\norm}[1]{{\left\| #1 \right\|}}
 \newcommand{\abs}[1]{{\left| #1 \right|}}
 \newcommand{\pair}[1]{\left\langle #1 \right\rangle}
