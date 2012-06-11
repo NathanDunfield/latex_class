@@ -334,7 +334,7 @@
 }
 
 \newcommand{\laptop}{%
-  \setlength{\textheight}{1.0\textwidth}
+  \setlength{\textheight}{1.1\textwidth}
   \trimpages{0.5cm}
 }
 
