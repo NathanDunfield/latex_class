@@ -23,6 +23,7 @@
 \newif\iftenpt
 \newif\ifelevenpt
 \newif\iftwelvept
+\newif\iffullpage
 \DeclareOption{gt}{\gttrue}
 \DeclareOption{ams}{\amstrue}
 \DeclareOption{custom}{\customtrue}
@@ -30,6 +31,7 @@
 \DeclareOption{utopia}{\utopiatrue}
 \DeclareOption{lucida}{\lucidatrue}
 \DeclareOption{cm}{\cmtrue}
+\DeclareOption{fullpage}{\fullpagetrue}
 
 % The GT and custom styles have a fixed font, but the AMS one doesn't.  
 \DeclareOption{9pt}{\ninepttrue}
@@ -100,10 +102,16 @@
    \newlength{\nmdhmargins}
    \setlength{\nmdwidth}{410bp}
    \setlength{\nmdhmargins}{45bp}
+   \iffullpage
+   \usepackage[paper=letterpaper,
+     hmarginratio=1:1, top=1.5\nmdhmargins, textwidth=\nmdwidth,
+     textheight=1.4\nmdwidth, headsep=10bp, headheight=15bp]{geometry}
+   \else
    \usepackage[papersize={\nmdwidth+2\nmdhmargins,
      1.33\nmdwidth+2.66\nmdhmargins},
      hmarginratio=1:1, top=0.85\nmdhmargins, textwidth=\nmdwidth,
      textheight=1.4\nmdwidth, headsep=10bp, headheight=15bp]{geometry}
+   \fi
 
    % Make the default font Utopia 
    \iflucida \relax \else \iftimes \relax \else \utopiatrue \fi \fi 
@@ -405,6 +413,9 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 %%% Graphics 
 \usepackage{graphicx, color}
 \usepackage[all,import,rotate]{xy}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
 \usepackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{caption}
 \usepackage[margin=15pt,font=small,labelfont=bf,
 labelsep=period]{subfig}
@@ -437,6 +448,49 @@ labelsep=period]{subfig}
 \begin{xyoverpic}{#1}{#2}{#3}
 }{\end{xyoverpic}
 \end{center}}
+
+% USAGE:  \begin{tikzoverlay}[<graphics opts>]{file name}[tikz opts]
+%              (tikz commands in coordinate system where horizontal
+%              direction is 100)
+%              \end{tikzoverlay}
+%
+% The variant tikzoverlayabs uses coordinates going from (0,0) to (1,1).
+%
+% Modeled on 
+%
+% http://bazaar.launchpad.net/~tex-sx/tex-sx/development/view/head:/onimage.dtx
+
+\def\tikzoverlay{%
+    \pgfutil@ifnextchar[{\tikzoverlay@opt}{\tikzoveraly@opt[]}%
+}
+\def\tikzoverlay@opt[#1]#2{%
+    \begin{tikzpicture}
+        \node[anchor=south west, inner sep=0] (image) at (0,0) {\includegraphics[#1]{#2}};
+        \newdimen\nmd@tikzoverlaywidth
+        \pgfextractx{\nmd@tikzoverlaywidth}{\pgfpointanchor{image}{south east}}
+        \begin{scope}
+          \tikzset{x=0.01\nmd@tikzoverlaywidth}
+          \tikzset{y=0.01\nmd@tikzoverlaywidth}
+}
+\def\endtikzoverlay{%
+    \end{scope}
+    \end{tikzpicture}
+}
+
+\def\tikzoverlayabs{%
+    \pgfutil@ifnextchar[{\tikzoverlayabs@opt}{\tikzoveralyabs@opt[]}%
+}
+\def\tikzoverlayabs@opt[#1]#2{%
+    \begin{tikzpicture}
+        \node[anchor=south west, inner sep=0] (image) at (0,0) {\includegraphics[#1]{#2}};
+        \begin{scope}
+          \tikzset{x=(image.south east)}
+          \tikzset{y=(image.north west)}
+}
+\def\endtikzoverlayabs{%
+    \end{scope}
+    \end{tikzpicture}
+}
 
 
 
@@ -520,6 +574,10 @@ labelsep=period]{subfig}
         \scriptstyle #1 & \scriptstyle #2  \\ \scriptstyle #3 &
         \scriptstyle #4
         \end{smallmatrix}\right)
+}
+\newcommand{\twobytwomatrix}[4]{\left(\begin{array}{cc}
+        #1 & #2  \\  #3 & #4
+        \end{array}\right)
 }
 \newcommand{\mtext}[1]{\quad \mbox{#1} \quad}
 
