@@ -24,6 +24,7 @@
 \newif\ifelevenpt
 \newif\iftwelvept
 \newif\iffullpage
+\newif\iffatpage
 \DeclareOption{gt}{\gttrue}
 \DeclareOption{ams}{\amstrue}
 \DeclareOption{custom}{\customtrue}
@@ -32,6 +33,7 @@
 \DeclareOption{lucida}{\lucidatrue}
 \DeclareOption{cm}{\cmtrue}
 \DeclareOption{fullpage}{\fullpagetrue}
+\DeclareOption{fatpage}{\fatpagetrue}
 
 % The GT and custom styles have a fixed font, but the AMS one doesn't.  
 \DeclareOption{9pt}{\ninepttrue}
@@ -103,15 +105,18 @@
    \setlength{\nmdwidth}{410bp}
    \setlength{\nmdhmargins}{45bp}
    \iffullpage
-   \usepackage[paper=letterpaper,
-     hmarginratio=1:1, top=1.5\nmdhmargins, textwidth=\nmdwidth,
-     textheight=1.4\nmdwidth, headsep=10bp, headheight=15bp]{geometry}
+      \usepackage[paper=letterpaper, hmarginratio=1:1, top=1.5\nmdhmargins, textwidth=\nmdwidth, textheight=1.4\nmdwidth, headsep=10bp, headheight=15bp]{geometry}
    \else
-   \usepackage[papersize={\nmdwidth+2\nmdhmargins,
-     1.33\nmdwidth+2.66\nmdhmargins},
-     hmarginratio=1:1, top=0.85\nmdhmargins, textwidth=\nmdwidth,
-     textheight=1.4\nmdwidth, headsep=10bp, headheight=15bp]{geometry}
+      \iffatpage
+         \usepackage[paper=letterpaper, hmarginratio=1:1, top=1.65\nmdhmargins, textwidth=1.1\nmdwidth, textheight=1.55\nmdwidth, headsep=10bp, headheight=15bp]{geometry}
+      \else
+       \usepackage[papersize={\nmdwidth+2\nmdhmargins,
+         1.33\nmdwidth+2.66\nmdhmargins}, hmarginratio=1:1,
+         top=0.85\nmdhmargins, textwidth=\nmdwidth,
+         textheight=1.4\nmdwidth, headsep=10bp, headheight=15bp]{geometry}
+       \fi
    \fi
+   
 
    % Make the default font Utopia 
    \iflucida \relax \else \iftimes \relax \else \utopiatrue \fi \fi 
