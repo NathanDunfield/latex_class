@@ -124,7 +124,7 @@
    \DeclareFixedFont{\authorfont}{T1}{fvs}{m}{it}{18bp}
    
    % colors
-   \usepackage{color}
+   \usepackage{xcolor}
    \definecolor{nmdlight}{cmyk}{0.128, 0.176, 0.0, 0.0}
    \definecolor{nmdmedium}{cmyk}{0.41, 0.49, 0.06, 0.0}
    \definecolor{nmddark}{rgb}{0.1, 0.0, 0.5}
