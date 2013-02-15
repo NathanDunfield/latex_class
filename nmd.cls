@@ -553,6 +553,7 @@ labelsep=period]{subfig}
 \newcommand{\PGL}[2]{\mathrm{PGL}_{#1} #2}
 \newcommand{\RP}{{{\mathbb{R}}\,\mathrm{P}}}
 \newcommand{\CP}{{{\mathbb{C}}\,\mathrm{P}}}
+\newcommand{\cO}{{\mathcal O}}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Out}{Out}
