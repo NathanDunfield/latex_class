@@ -565,6 +565,7 @@ labelsep=period]{subfig}
 \DeclareMathOperator{\Isom}{Isom}
 \DeclareMathOperator{\Teich}{Teich}
 \DeclareMathOperator{\inj}{inj}
+\DeclareMathOperator{\diam}{diam}
 \newcommand{\bdry}{\partial}
 \newcommand{\PML}{\mathcal{P \!\!\! M \! L}}
 \newcommand{\MCG}{\mathcal{M \! CG}}
