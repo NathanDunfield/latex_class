@@ -25,6 +25,7 @@
 \newif\iftwelvept
 \newif\iffullpage
 \newif\iffatpage
+\newif\ifgrant
 \DeclareOption{gt}{\gttrue}
 \DeclareOption{ams}{\amstrue}
 \DeclareOption{custom}{\customtrue}
@@ -34,8 +35,9 @@
 \DeclareOption{cm}{\cmtrue}
 \DeclareOption{fullpage}{\fullpagetrue}
 \DeclareOption{fatpage}{\fatpagetrue}
+\DeclareOption{grant}{\granttrue}
 
-% The GT and custom styles have a fixed font, but the AMS one doesn't.  
+% The GT style has a fixed font, but the AMS and custom ones doesn't.  
 \DeclareOption{9pt}{\ninepttrue}
 \DeclareOption{10pt}{\tenpttrue}
 \DeclareOption{11pt}{\elevenpttrue}
@@ -95,7 +97,11 @@
 %%% Core of custom style %%% 
 
 \ifcustom
-   \PassOptionsToClass{12pt}{article}
+   \ifelevenpt 
+     \PassOptionsToClass{11pt}{article} 
+    \else
+      \PassOptionsToClass{12pt}{article}
+   \fi
    \LoadClass{article}
    
    % Set page size
@@ -109,7 +115,10 @@
    \else
       \iffatpage
          \usepackage[paper=letterpaper, hmarginratio=1:1, top=1.65\nmdhmargins, textwidth=1.1\nmdwidth, textheight=1.55\nmdwidth, headsep=10bp, headheight=15bp]{geometry}
-      \else
+	 \else
+	    \ifgrant
+               \usepackage[paper=letterpaper, margin=1in]{geometry}
+           \else % The default
        \usepackage[papersize={\nmdwidth+2\nmdhmargins,
          1.33\nmdwidth+2.66\nmdhmargins}, hmarginratio=1:1,
          top=0.85\nmdhmargins, textwidth=\nmdwidth,
@@ -124,9 +133,15 @@
    % Load a decent sans serif font
    %\usepackage{avant}
    \usepackage[scaled]{berasans}
-   \DeclareFixedFont{\titlefont}{T1}{fvs}{b}{n}{24bp}
-   \DeclareFixedFont{\sectionfont}{T1}{fvs}{b}{n}{15bp}
-   \DeclareFixedFont{\authorfont}{T1}{fvs}{m}{it}{18bp}
+   \ifelevenpt
+       \DeclareFixedFont{\titlefont}{T1}{fvs}{b}{n}{22bp}
+       \DeclareFixedFont{\sectionfont}{T1}{fvs}{b}{n}{13.5bp}
+       \DeclareFixedFont{\authorfont}{T1}{fvs}{m}{it}{16bp}
+   \else % Twelve pt
+       \DeclareFixedFont{\titlefont}{T1}{fvs}{b}{n}{24bp}
+       \DeclareFixedFont{\sectionfont}{T1}{fvs}{b}{n}{15bp}
+       \DeclareFixedFont{\authorfont}{T1}{fvs}{m}{it}{18bp}
+    \fi
    
    % colors
    \usepackage{xcolor}
@@ -140,30 +155,51 @@
    
    % Format the sections
    \usepackage[medium]{titlesec}
-   \newcommand{\titlebar}{%
-     \setlength{\fboxsep}{0bp}%
-     \colorbox{nmdlight}{\hbox to \textwidth{\rule[-10bp]{0bp}{30bp}}}%
-     \hspace*{-\textwidth}%
-     \hspace{0.5em}\thesection %
-   }
-   \titleformat{\section}[hang]{\sectionfont}{\titlebar}{0.7em}{}[]
-   \titlespacing*{\section}{0pt}{3ex}{2ex}
+   \ifelevenpt
+      \newcommand{\titlebar}{%
+         \setlength{\fboxsep}{0bp}%
+         \colorbox{nmdlight}{\hbox to \textwidth{\rule[-7bp]{0bp}{23bp}}}%
+         \hspace*{-\textwidth}%
+         \hspace{0.5em}\thesection %
+         }
+       \titleformat{\section}[hang]{\sectionfont}{\titlebar}{0.7em}{}[]
+       \titlespacing*{\section}{0pt}{3ex}{2ex}
+   \else  % Twelve point
+      \newcommand{\titlebar}{%
+         \setlength{\fboxsep}{0bp}%
+         \colorbox{nmdlight}{\hbox to \textwidth{\rule[-10bp]{0bp}{30bp}}}%
+         \hspace*{-\textwidth}%
+         \hspace{0.5em}\thesection %
+         }
+       \titleformat{\section}[hang]{\sectionfont}{\titlebar}{0.7em}{}[]
+       \titlespacing*{\section}{0pt}{3ex}{2ex}
+   \fi
    
    % Format the subsections
    \titlespacing{\subsection}{0ex}{1.5ex}{0.5em}
    \titleformat{\subsection}[runin]{\normalsize\bfseries}{\thesubsection}{0.35em}{}[.]
    
    % Set the headers
+
    \usepackage{fancyhdr}
    \pagestyle{fancy}
-   \lhead{\small \hrulefill\hspace{0.5em}\raisebox{-0.6ex}{\thepage}\hspace{0.5em}\hrulefill}
-   \chead{}
-   \rhead{}
-   \lfoot{}
-   \cfoot{}
-   \rfoot{}
-   \renewcommand{\headrulewidth}{0pt}
-   
+   \ifgrant 
+      \lhead{}
+      \chead{}
+      \rhead{}
+      \lfoot{}
+      \cfoot{\thepage}
+      \rfoot{}
+      \renewcommand{\headrulewidth}{0pt}
+   \else
+      \lhead{\small \hrulefill\hspace{0.5em}\raisebox{-0.6ex}{\thepage}\hspace{0.5em}\hrulefill}
+      \chead{}
+      \rhead{}
+      \lfoot{}
+      \cfoot{}
+      \rfoot{}
+      \renewcommand{\headrulewidth}{0pt}
+   \fi 
    % AMS Maths 
    \usepackage{amsmath, amssymb}
    
@@ -292,9 +328,7 @@
 \ifutopia \usepackage{fourier} \fi
 
 \iflucida 
-  \ifgt 
   \let\digamma\undefined
-  \fi 
   \usepackage[lucidasmallscale, nofontinfo]{lucimatx}
 \fi
 
@@ -400,6 +434,7 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 \nmdnewtheorem{proposition}
 \nmdnewtheorem{claim}
 \nmdnewtheorem{question}
+\nmdnewtheorem{goal}
 \nmdnewtheorem{criterion}
 \nmdnewtheorem{project}
 
@@ -533,16 +568,31 @@ labelsep=period]{subfig}
 
 %% Black Board Bold Letters
 
-\def\Q{{\mathbb Q}}
-\def\R{{\mathbb R}}
-\def\C{{\mathbb C}}
+\newcommand{\Q}{{\mathbb Q}}
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\C}{{\mathbb C}}
 \newcommand{\T}{{\mathbb T}}
-\def\Z{{\mathbb Z}}
+\newcommand{\Z}{{\mathbb Z}}
 \newcommand{\E}{{\mathbb E}}
 \newcommand{\F}{{\mathbb F}}
 \newcommand{\N}{{\mathbb N}}
-\renewcommand{\H}{{\mathbb H}}
+\renewcommand{\H}{{\mathbb{H}}}
 \newcommand{\CH}{{\mathbb{CH}}}
+\newcommand{\RH}{{\mathbb{RH}}}
+
+%% Calligraphic letters
+
+\newcommand{\cA}{{\mathcal A}}
+\newcommand{\cB}{{\mathcal B}}
+\newcommand{\cC}{{\mathcal C}}
+\newcommand{\cD}{{\mathcal D}}
+\newcommand{\cE}{{\mathcal E}}
+\newcommand{\cF}{{\mathcal F}} 
+\newcommand{\cG}{{\mathcal G}}
+\newcommand{\cH}{{\mathcal H}}
+\newcommand{\cT}{{\mathcal T}}
+\newcommand{\cS}{{\mathcal S}}
+\newcommand{\cV}{{\mathcal V}}
 
 %% macros for things
 
@@ -562,8 +612,10 @@ labelsep=period]{subfig}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\vol}{vol}
 \DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\Area}{Area}
 \DeclareMathOperator{\Isom}{Isom}
 \DeclareMathOperator{\Teich}{Teich}
+\DeclareMathOperator{\Homeo}{Homeo}
 \DeclareMathOperator{\inj}{inj}
 \DeclareMathOperator{\diam}{diam}
 \newcommand{\bdry}{\partial}
@@ -612,6 +664,27 @@ labelsep=period]{subfig}
 \newcommand{\leftquom}[4]{{\raisebox{-#3}{$#1$}}#4\backslash{\raisebox{#3}{$#2$}
 }}
 \newcommand{\doublerightquom}[4]{{\raisebox{#3}{$#1$}}#4/ \! \, \! #4/ {\raisebox{-#3}{$#2$}}}
+
+% Standard overlines and tildes.
+
+\newcommand{\tilM}{\kerntilde{2}{M}{-1}}
+\newcommand{\tilF}{\kerntilde{2.5}{F}{-1}}
+\newcommand{\tilS}{\kerntilde{2.5}{S}{0}}
+\newcommand{\tilX}{\kerntilde{2.5}{X}{0}}
+\newcommand{\tilY}{\kerntilde{2.5}{Y}{0}}
+\newcommand{\tilrho}{\kerntilde{2.5}{\rho}{0}}
+\newcommand{\barM}{\kernoverline{2}{M}{-1}}
+\newcommand{\barF}{\kernoverline{2.5}{F}{-1}}
+\newcommand{\barS}{\kernoverline{2.5}{S}{0}}
+\newcommand{\barX}{\kernoverline{2.5}{X}{0}}
+\newcommand{\barY}{\kernoverline{2.5}{Y}{0}}
+
+% heegaard floer stuff
+
+\newcommand{\HFhat}{\kernhat{0}{HF}{0}}
+\newcommand{\HomeoR}{\Homeo^+\!(\R)}
+\newcommand{\tilPSLTwoR}{\kerntilde{0}{\PSL{2}{\R}}{0}}
+
 
 % CSisms:
 
