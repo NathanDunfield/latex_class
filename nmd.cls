@@ -603,7 +603,6 @@ labelsep=period]{subfig}
 \newcommand{\PGL}[2]{\mathrm{PGL}_{#1} #2}
 \newcommand{\RP}{{{\mathbb{R}}\,\mathrm{P}}}
 \newcommand{\CP}{{{\mathbb{C}}\,\mathrm{P}}}
-\newcommand{\cO}{{\mathcal O}}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Out}{Out}
@@ -617,7 +616,6 @@ labelsep=period]{subfig}
 \DeclareMathOperator{\Teich}{Teich}
 \DeclareMathOperator{\Homeo}{Homeo}
 \DeclareMathOperator{\inj}{inj}
-\DeclareMathOperator{\diam}{diam}
 \newcommand{\bdry}{\partial}
 \newcommand{\PML}{\mathcal{P \!\!\! M \! L}}
 \newcommand{\MCG}{\mathcal{M \! CG}}
@@ -667,6 +665,21 @@ labelsep=period]{subfig}
 
 % Standard overlines and tildes.
 
+% New style
+\newcommand{\Mtil}{\kerntilde{2}{M}{-1}}
+\newcommand{\Ftil}{\kerntilde{2.5}{F}{-1}}
+\newcommand{\Stil}{\kerntilde{2.5}{S}{0}}
+\newcommand{\Xtil}{\kerntilde{2.5}{X}{0}}
+\newcommand{\Ytil}{\kerntilde{2.5}{Y}{0}}
+\newcommand{\rhotil}{\kerntilde{2.5}{\rho}{0}}
+\newcommand{\Mbar}{\kernoverline{2}{M}{-1}}
+\newcommand{\Fbar}{\kernoverline{2.5}{F}{-1}}
+\newcommand{\Sbar}{\kernoverline{2.5}{S}{0}}
+\newcommand{\Xbar}{\kernoverline{2.5}{X}{0}}
+\newcommand{\Ybar}{\kernoverline{2.5}{Y}{0}}
+\newcommand{\Tbar}{\kernoverline{2.5}{T}{0}}
+
+% Old style
 \newcommand{\tilM}{\kerntilde{2}{M}{-1}}
 \newcommand{\tilF}{\kerntilde{2.5}{F}{-1}}
 \newcommand{\tilS}{\kerntilde{2.5}{S}{0}}
@@ -678,6 +691,7 @@ labelsep=period]{subfig}
 \newcommand{\barS}{\kernoverline{2.5}{S}{0}}
 \newcommand{\barX}{\kernoverline{2.5}{X}{0}}
 \newcommand{\barY}{\kernoverline{2.5}{Y}{0}}
+\newcommand{\barT}{\kernoverline{2.5}{T}{0}}
 
 % heegaard floer stuff
 

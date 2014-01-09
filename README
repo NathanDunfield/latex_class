@@ -1,6 +1,9 @@
 Nathan M. Dunfield's personal LaTeX and BibTeX style files.
 
-Using as a Mercurial subproject:
+Instructions for using as a Mercurial subrepo, but note this is a 
+feature of last resort as per:
+
+http://mercurial.selenic.com/wiki/Subrepository
 
 * Initial setup:
 
