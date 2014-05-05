@@ -532,6 +532,19 @@ labelsep=period]{subfig}
     \end{tikzpicture}
 }
 
+%%%  Including Matplotlib figures with TikZ overlay 
+
+\pgfkeys{
+  /matplotlibfigure/.is family, /matplotlibfigure, 
+  default/.style = {width = 0.95\textwidth, font = \footnotesize}, 
+  width/.store in = \matplotlibfigurewidth,
+  font/.store in = \matplotlibfigurefont,
+}
+
+\newcommand{\matplotlibfigure}[2][]{%
+ \pgfkeys{/matplotlibfigure, default, #1}%
+ \input{plots/#2}
+}
 
 
 %%% Change float params as per TeX FAQ to make things more 
