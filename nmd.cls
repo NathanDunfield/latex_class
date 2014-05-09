@@ -26,6 +26,7 @@
 \newif\iffullpage
 \newif\iffatpage
 \newif\ifgrant
+\newif\ifaddress \addresstrue
 \DeclareOption{gt}{\gttrue}
 \DeclareOption{ams}{\amstrue}
 \DeclareOption{custom}{\customtrue}
@@ -36,6 +37,7 @@
 \DeclareOption{fullpage}{\fullpagetrue}
 \DeclareOption{fatpage}{\fatpagetrue}
 \DeclareOption{grant}{\granttrue}
+\DeclareOption{noaddress}{\addressfalse}
 
 % The GT style has a fixed font, but the AMS and custom ones doesn't.  
 \DeclareOption{9pt}{\ninepttrue}
@@ -81,7 +83,8 @@
   \ifelevenpt \PassOptionsToClass{11pt}{amsart} \fi 
   \iftwelvept \PassOptionsToClass{12pt}{amsart} \fi 
   \LoadClass{amsart} 
-  \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+  \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue,
+  urlcolor=blue]{hyperref}
 \fi
 
 % Dummy commands for things used by GT style
@@ -152,7 +155,7 @@
    % Hyperref with dark links for better printing.  
    \usepackage[colorlinks=true, linkcolor=nmddark,
          citecolor=nmddark,urlcolor=nmddark]{hyperref}
-   
+      
    % Format the sections
    \usepackage[medium]{titlesec}
    \ifelevenpt
@@ -307,7 +310,7 @@
          \small 
          \interlinepenalty\@M
          \setlength{\parindent}{0pt}
-         \addresses
+         \ifaddress \addresses \fi
        }
 
    \newcommand{\keywords}[1]{}
