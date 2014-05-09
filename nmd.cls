@@ -388,6 +388,11 @@
   \trimpages{0.5cm}
 }
 
+\newcommand{\bigmonitor}{%
+  \setlength{\textheight}{1.7\textwidth}
+  \trimpages{0.5cm}
+}
+
 
 
 
