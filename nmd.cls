@@ -126,9 +126,7 @@
          1.33\nmdwidth+2.66\nmdhmargins}, hmarginratio=1:1,
          top=0.85\nmdhmargins, textwidth=\nmdwidth,
          textheight=1.4\nmdwidth, headsep=10bp, headheight=15bp]{geometry}
-       \fi
-   \fi
-   
+   \fi \fi \fi 
 
    % Make the default font Utopia 
    \iflucida \relax \else \iftimes \relax \else \utopiatrue \fi \fi 
@@ -589,11 +587,13 @@ labelsep=period]{subfig}
 
 %% Black Board Bold Letters
 
+\ifgt \relax \else  % The first four are included in the G&T style. 
 \newcommand{\Q}{{\mathbb Q}}
 \newcommand{\R}{{\mathbb R}}
 \newcommand{\C}{{\mathbb C}}
-\newcommand{\T}{{\mathbb T}}
 \newcommand{\Z}{{\mathbb Z}}
+\fi 
+\newcommand{\T}{{\mathbb T}}
 \newcommand{\E}{{\mathbb E}}
 \newcommand{\F}{{\mathbb F}}
 \newcommand{\N}{{\mathbb N}}
