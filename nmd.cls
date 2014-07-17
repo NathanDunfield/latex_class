@@ -424,6 +424,7 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
    \define@key{thmdef}{nmd}[{}]{}
 \fi   
 
+\usepackage{thm-restate}
 \swapnumbers
 
 \ifams
@@ -716,7 +717,7 @@ labelsep=period]{subfig}
 
 % heegaard floer stuff
 
-\newcommand{\HFhat}{\kernhat{0}{HF}{0}}
+\newcommand{\HFhat}{\kernhat{3}{HF}{-1}}
 \newcommand{\HomeoR}{\Homeo^+\!(\R)}
 \newcommand{\tilPSLTwoR}{\kerntilde{0}{\PSL{2}{\R}}{0}}
 
