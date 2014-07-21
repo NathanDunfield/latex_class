@@ -8,7 +8,6 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nmd}[2012/03/25 - Spring Break Blahs Edition]
-\makeatletter
 
 %%% Setup options
 
@@ -27,6 +26,7 @@
 \newif\iffatpage
 \newif\ifgrant
 \newif\ifaddress \addresstrue
+\newif\ifsmalltitle 
 \DeclareOption{gt}{\gttrue}
 \DeclareOption{ams}{\amstrue}
 \DeclareOption{custom}{\customtrue}
@@ -38,6 +38,7 @@
 \DeclareOption{fatpage}{\fatpagetrue}
 \DeclareOption{grant}{\granttrue}
 \DeclareOption{noaddress}{\addressfalse}
+\DeclareOption{smalltitle}{\smalltitletrue}
 
 % The GT style has a fixed font, but the AMS and custom ones doesn't.  
 \DeclareOption{9pt}{\ninepttrue}
@@ -135,13 +136,23 @@
    %\usepackage{avant}
    \usepackage[scaled]{berasans}
    \ifelevenpt
-       \DeclareFixedFont{\titlefont}{T1}{fvs}{b}{n}{22bp}
-       \DeclareFixedFont{\sectionfont}{T1}{fvs}{b}{n}{13.5bp}
-       \DeclareFixedFont{\authorfont}{T1}{fvs}{m}{it}{16bp}
+      \DeclareFixedFont{\sectionfont}{T1}{fvs}{b}{n}{13.5bp}
+      \ifsmalltitle
+          \DeclareFixedFont{\titlefont}{T1}{fvs}{b}{n}{18bp}
+          \DeclareFixedFont{\authorfont}{T1}{fvs}{m}{it}{14bp}
+      \else
+          \DeclareFixedFont{\titlefont}{T1}{fvs}{b}{n}{22bp}
+          \DeclareFixedFont{\authorfont}{T1}{fvs}{m}{it}{16bp}
+       \fi
    \else % Twelve pt
-       \DeclareFixedFont{\titlefont}{T1}{fvs}{b}{n}{24bp}
        \DeclareFixedFont{\sectionfont}{T1}{fvs}{b}{n}{15bp}
-       \DeclareFixedFont{\authorfont}{T1}{fvs}{m}{it}{18bp}
+       \ifsmalltitle
+           \DeclareFixedFont{\titlefont}{T1}{fvs}{b}{n}{20bp}
+           \DeclareFixedFont{\authorfont}{T1}{fvs}{m}{it}{15bp}
+       \else
+           \DeclareFixedFont{\titlefont}{T1}{fvs}{b}{n}{24bp}
+           \DeclareFixedFont{\authorfont}{T1}{fvs}{m}{it}{18bp}
+       \fi 
     \fi
    
    % colors
@@ -255,7 +266,36 @@
      \newcommand{\nmd@address}[1]{#1\par}
      \newcommand{\nmd@email}[1]{email: \texttt{#1}\par}
      \newcommand{\nmd@urladdr}[1]{\url{#1}\par \vspace{10bp}}
-     \newcommand{\nmd@authorand}{ and }
+     % For combining the authors names, we need this giant mess
+     \let\@xp=\expandafter
+     \let\@nx=\noexpand
+     \long\def\@ifempty#1{\@xifempty#1@@..\@nil}
+     \long\def\@xifempty#1#2@#3#4#5\@nil{%
+       \ifx#3#4\@xp\@firstoftwo\else\@xp\@secondoftwo\fi}
+     \long\def\@ifnotempty#1{\@ifempty{#1}{}}
+     \csname newtoks\endcsname\@emptytoks
+     \newcommand{\xandlist}[4]{\@andlista{{#1}{#2}{#3}}#4\and\and}
+     \def\@andlista#1#2\and#3\and{\@andlistc{#2}\@ifnotempty{#3}{%
+         \@andlistb#1{#3}}}
+     \def\@andlistb#1#2#3#4#5\and{%
+       \@ifempty{#5}{%
+         \@andlistc{#2#4}%
+       }{%
+         \@andlistc{#1#4}\@andlistb{#1}{#3}{#3}{#5}%
+       }}
+     \let\@andlistc\@iden
+     \newcommand{\nxandlist}[4]{%
+       \def\@andlistc##1{\toks@\@xp{\the\toks@##1}}%
+       \toks@{\toks@\@emptytoks \@andlista{{#1}{#2}{#3}}}%
+       \the\@xp\toks@#4\and\and
+       \edef#4{\the\toks@}%
+       \let\@andlistc\@iden}
+     \def\@@and{and}
+     \newcommand{\andify}{%
+       \nxandlist{\unskip, }{\unskip{} \@@and~}{\unskip, \@@and~}}
+     \def\and{\unskip{ }\@@and{ }\ignorespaces}
+     % End giant mess
+
      \let\authors\@empty
      \let\addresses\@empty
      \renewcommand{\author}[2][]{%
@@ -263,7 +303,7 @@
        \gdef\authors{#2}%
        \gdef\addresses{\nmd@author{#2}}
        \else
-       \g@addto@macro\authors{\nmd@authorand#2}%
+       \g@addto@macro\authors{\and#2}%
        \g@addto@macro\addresses{\nmd@author{#2}}%
        \fi
      }%
@@ -298,6 +338,7 @@
 
        \vspace{40bp}
        \noindent
+       \andify\authors 
        {\authorfont \authors}
        \vspace{10bp}
 
@@ -729,4 +770,3 @@ labelsep=period]{subfig}
 \newcommand{\coNP}{\mbox{\textbf{co-NP}}}
 
 % End of nmd class
-\makeatother

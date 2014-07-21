@@ -2,7 +2,7 @@
 %% 	Bibliography style math
 %% 	Curt McMullen January 1989
 %%
-%%	Modified by Nathan Dunfield and Martin Pergler 1997-2010.  
+%%	Modified by Nathan Dunfield and Martin Pergler 1997-2011.  
 %%
 %%-----------------------------------------------
 FUNCTION {print.ver}  % executed below after READ
@@ -13,16 +13,16 @@ FUNCTION {print.ver}  % executed below after READ
 %% -VERSION HISTORY----------
 %%
 
-%% [ver 1.6] Modified by Nathan Dunfield 2011-3 to ignore the DOI field
+%% [ver 1.6] Modified by Nathan Dunfield 2011/3 to ignore the DOI field
 %%      in favor of using the HIDDENURL field since that's what MathSciNet
 %%      always gives you.  
 %% 
 %%      Added support for MR numbers with links 
 %%     
-%% [ver 1.5] Modified by Nathan Dunfield 2010-10 to change the alpha
+%% [ver 1.5] Modified by Nathan Dunfield 2010/10 to change the alpha
 %%             label formating to use the full name if it's four characters.  
 %% 
-%% [ver 1.4] Modified by Nathan Dunfield 2010-2 to add hyperref support, 
+%% [ver 1.4] Modified by Nathan Dunfield 2010/2 to add hyperref support, 
 %%	following utphys.bst.    
 %% 
 %% In particular, the following fields are supported:
@@ -40,7 +40,7 @@ FUNCTION {print.ver}  % executed below after READ
 %%   actually printed.
 %%
 %%
-%% [ver 1.3] Modified by Nathan Dunfield 2005-10 to add an eprint field. 
+%% [ver 1.3] Modified by Nathan Dunfield 2005/10 to add an eprint field. 
 %%
 %% [ver 1.2] Modified Martin Pergler Mar 99 to
 %% a) insert space between journal volume number and year (looks nicer
