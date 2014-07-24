@@ -686,9 +686,13 @@ labelsep=period]{subfig}
 \newcommand{\norm}[1]{{\left\| #1 \right\|}}
 \newcommand{\abs}[1]{{\left| #1 \right|}}
 \newcommand{\pair}[1]{\left\langle #1 \right\rangle}
-\newcommand{\setdef}[2]{{  \left\{  {#1}  \ \left| \   {#2} \right. \right\} }}
-\newcommand{\setdefm}[3]{{  #1\{  {#2}  \ #1 | \   {#3}  #1\} }}
-\newcommand{\spandef}[2]{{  \left\langle  {#1}  \ \left| \   {#2} \right. \right\rangle }}
+\newcommand{\somethingdef}[4]{{\left#1 {#2} \ \left| \ {#3} \vphantom{#2} \right. \right#4}}
+\newcommand{\somethingdefm}[5]{{  #1#2  {#3}  \ #1 | \   {#4}  #1#5 }}
+
+\newcommand{\setdef}[2]{\somethingdef{\{}{#1}{#2}{\}}}
+\newcommand{\spandef}[2]{\somethingdef{\langle}{#1}{#2}{\rangle}}
+\newcommand{\setdefm}[3]{\somethingdefm{#1}{\{}{#2}{#3}{\}}}
+\newcommand{\spandefm}[3]{\somethingdefm{#1}{\langle}{#2}{#3}{\rangle}}
 
 \newcommand{\mysmallmatrix}[4]{\left(\begin{smallmatrix}
         \scriptstyle #1 & \scriptstyle #2  \\ \scriptstyle #3 &
