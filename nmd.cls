@@ -8,6 +8,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nmd}[2012/03/25 - Spring Break Blahs Edition]
+\usepackage{etex}
 
 %%% Setup options
 
@@ -27,6 +28,7 @@
 \newif\ifgrant
 \newif\ifaddress \addresstrue
 \newif\ifsmalltitle 
+\newif\ifxy
 \DeclareOption{gt}{\gttrue}
 \DeclareOption{ams}{\amstrue}
 \DeclareOption{custom}{\customtrue}
@@ -39,6 +41,7 @@
 \DeclareOption{grant}{\granttrue}
 \DeclareOption{noaddress}{\addressfalse}
 \DeclareOption{smalltitle}{\smalltitletrue}
+\DeclareOption{xy}{\xytrue}
 
 % The GT style has a fixed font, but the AMS and custom ones doesn't.  
 \DeclareOption{9pt}{\ninepttrue}
@@ -500,10 +503,10 @@ plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 
 %%% Graphics 
 \usepackage{graphicx, color}
-\usepackage[all,import,rotate]{xy}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{calc}
+\usepackage{booktabs}
 \usepackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{caption}
 \usepackage[margin=15pt,font=small,labelfont=bf,
 labelsep=period]{subfig}
@@ -523,11 +526,14 @@ labelsep=period]{subfig}
 % Nathan's basic label overlay environment.   The usual version is the second one
 % below.  Args are: coor system, graphics modifiers, graphics name
 
-\newenvironment{xyoverpic}[3]
-{%
-\begin{xy}
-\xyimport#1{\includegraphics[#2]{#3}}
-}{\end{xy}}
+\ifxy
+  \usepackage[all,import,rotate]{xy}
+   \newenvironment{xyoverpic}[3]
+    {%
+    \begin{xy}
+    \xyimport#1{\includegraphics[#2]{#3}}
+    }{\end{xy}}
+\else \relax \fi 
 
 \newenvironment{cxyoverpic}[3]
 {%
@@ -762,7 +768,7 @@ labelsep=period]{subfig}
 
 % heegaard floer stuff
 
-\newcommand{\HFhat}{\kernhat{3}{HF}{-1}}
+\newcommand{\HFhat}{\kernhat{3}{\mathit{HF}}{-1}}
 \newcommand{\HomeoR}{\Homeo^+\!(\R)}
 \newcommand{\tilPSLTwoR}{\kerntilde{0}{\PSL{2}{\R}}{0}}
 
