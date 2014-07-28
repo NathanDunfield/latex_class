@@ -768,7 +768,7 @@ labelsep=period]{subfig}
 
 % heegaard floer stuff
 
-\newcommand{\HFhat}{\kernhat{3}{\mathit{HF}}{-1}}
+\newcommand{\HFhat}{\kernhat{2}{\mathit{HF}\vphantom{\raisebox{0.25pt}{$\mathit{HF}$}}}{-2}}
 \newcommand{\HomeoR}{\Homeo^+\!(\R)}
 \newcommand{\tilPSLTwoR}{\kerntilde{0}{\PSL{2}{\R}}{0}}
 
