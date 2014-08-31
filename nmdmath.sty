@@ -1,0 +1,163 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{nmdmath}[2014/08/31 - Semester start edition]
+
+%%% Marking future tasks. 
+
+\newcommand{\todo}[1]{\textcolor{red}{\emph{#1}}}
+
+% The following allows hyphenation in the word 3-manifold, but not
+% on the hyphen itself
+
+\newcommand{\hyp}{\nobreakdash-\hspace{0pt}}
+\newcommand{\3}[1]{3\hyp}
+\let\2\undefined
+\newcommand{\2}[1]{2\hyp}
+
+%%% Standard Math commands
+
+%% Black Board Bold Letters
+
+% The first four are included in the G&T style. 
+\providecommand{\Q}{{\mathbb Q}}
+\providecommand{\R}{{\mathbb R}}
+\providecommand{\C}{{\mathbb C}}
+\providecommand{\Z}{{\mathbb Z}}
+\newcommand{\T}{{\mathbb T}}
+\newcommand{\E}{{\mathbb E}}
+\newcommand{\F}{{\mathbb F}}
+\newcommand{\N}{{\mathbb N}}
+\renewcommand{\H}{{\mathbb{H}}}
+\newcommand{\CH}{{\mathbb{CH}}}
+\newcommand{\RH}{{\mathbb{RH}}}
+
+%% Calligraphic letters
+
+\newcommand{\cA}{{\mathcal A}}
+\newcommand{\cB}{{\mathcal B}}
+\newcommand{\cC}{{\mathcal C}}
+\newcommand{\cD}{{\mathcal D}}
+\newcommand{\cE}{{\mathcal E}}
+\newcommand{\cF}{{\mathcal F}} 
+\newcommand{\cG}{{\mathcal G}}
+\newcommand{\cH}{{\mathcal H}}
+\newcommand{\cT}{{\mathcal T}}
+\newcommand{\cS}{{\mathcal S}}
+\newcommand{\cV}{{\mathcal V}}
+
+%% macros for things
+
+\newcommand{\maps}{\colon\thinspace}
+\newcommand{\SL}[2]{\mathrm{ SL}_{#1} #2}
+\newcommand{\PSL}[2]{\mathrm{PSL}_{#1} #2}
+\newcommand{\GL}[2]{\mathrm{GL}_{#1} #2}
+\newcommand{\PGL}[2]{\mathrm{PGL}_{#1} #2}
+\newcommand{\RP}{{{\mathbb{R}}\,\mathrm{P}}}
+\newcommand{\CP}{{{\mathbb{C}}\,\mathrm{P}}}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Out}{Out}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\Area}{Area}
+\DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\Teich}{Teich}
+\DeclareMathOperator{\Homeo}{Homeo}
+\DeclareMathOperator{\inj}{inj}
+\newcommand{\bdry}{\partial}
+\newcommand{\PML}{\mathcal{P \!\!\! M \! L}}
+\newcommand{\PMF}{\mathcal{P \! \!M \!F}}
+\newcommand{\MCG}{\mathcal{M \! CG}}
+\newcommand{\Tor}{\mathcal{T} \!\!\!\! \mathit{or}}
+\newcommand{\norm}[1]{{\left\| #1 \right\|}}
+\newcommand{\abs}[1]{{\left| #1 \right|}}
+\newcommand{\pair}[1]{\left\langle #1 \right\rangle}
+\newcommand{\somethingdef}[4]{{\left#1 {#2} \ \left| \ {#3} \vphantom{#2} \right. \right#4}}
+\newcommand{\somethingdefm}[5]{{  #1#2  {#3}  \ #1 | \   {#4}  #1#5 }}
+
+\newcommand{\setdef}[2]{\somethingdef{\{}{#1}{#2}{\}}}
+\newcommand{\spandef}[2]{\somethingdef{\langle}{#1}{#2}{\rangle}}
+\newcommand{\setdefm}[3]{\somethingdefm{#1}{\{}{#2}{#3}{\}}}
+\newcommand{\spandefm}[3]{\somethingdefm{#1}{\langle}{#2}{#3}{\rangle}}
+
+\newcommand{\mysmallmatrix}[4]{\left(\begin{smallmatrix}
+        \scriptstyle #1 & \scriptstyle #2  \\ \scriptstyle #3 &
+        \scriptstyle #4
+        \end{smallmatrix}\right)
+}
+\newcommand{\twobytwomatrix}[4]{\left(\begin{array}{cc}
+        #1 & #2  \\  #3 & #4
+        \end{array}\right)
+}
+\newcommand{\mtext}[1]{\quad \mbox{#1} \quad}
+
+\newcommand{\makeassignmacro}[2]{\hspace{#1}\raisebox{#2}{\ensuremath{:}}\hspace{-#1}=}
+\newcommand{\assign}{:=}
+\ifutopia \renewcommand{\assign}{\makeassignmacro{0.45ex}{0.095ex}} \fi
+\iftimes \renewcommand{\assign}{\makeassignmacro{0.5ex}{0.06ex}} \fi
+\iflucida \renewcommand{\assign}{\makeassignmacro{0.6ex}{0.046ex}} \fi
+\ifcm \renewcommand{\assign}{\makeassignmacro{0.6ex}{0.085ex}} \fi
+
+% Better overlines and tildes.  Example of useage
+% \newcommand{\barN}{\kernoverline{4}{N}{1}} 
+% here first number shifts the overline to the right and the second
+% number shortens it somewhat.
+
+\newcommand{\kernoverline}[3]{{\mkern #1mu\overline{\mkern-#1mu #2\mkern-#3mu}\mkern#3mu}}
+\newcommand{\kerntilde}[3]{{\mkern #1mu\widetilde{\mkern-#1mu #2\mkern-#3mu}\mkern#3mu}}
+\newcommand{\kernhat}[3]{{\mkern #1mu\widehat{\mkern-#1mu #2\mkern-#3mu}\mkern#3mu}}
+
+\newcommand{\doublequom}[5]{{\raisebox{-#4}{$#1$}}#5\backslash {\raisebox{#4}{$#2$}}#5 / {\raisebox{-#4}{$#3$}}}
+\newcommand{\doublequo}[3]{\doublequom{#1}{#2}{#3}{4pt}{\big}}
+% other quotient constructions
+\newcommand{\rightquom}[4]{{\raisebox{#3}{$#1$}}#4/ {\raisebox{-#3}{$#2$}}}
+\newcommand{\leftquom}[4]{{\raisebox{-#3}{$#1$}}#4\backslash{\raisebox{#3}{$#2$}
+}}
+\newcommand{\doublerightquom}[4]{{\raisebox{#3}{$#1$}}#4/ \! \, \! #4/ {\raisebox{-#3}{$#2$}}}
+
+% Standard overlines and tildes.
+
+% New style
+\newcommand{\Mtil}{\kerntilde{2}{M}{-1}}
+\newcommand{\Ftil}{\kerntilde{2.5}{F}{-1}}
+\newcommand{\Stil}{\kerntilde{2.5}{S}{0}}
+\newcommand{\Xtil}{\kerntilde{2.5}{X}{0}}
+\newcommand{\Ytil}{\kerntilde{2.5}{Y}{0}}
+\newcommand{\rhotil}{\kerntilde{2.5}{\rho}{0}}
+\newcommand{\Mbar}{\kernoverline{2}{M}{-1}}
+\newcommand{\Fbar}{\kernoverline{2.5}{F}{-1}}
+\newcommand{\Sbar}{\kernoverline{2.5}{S}{0}}
+\newcommand{\Xbar}{\kernoverline{2.5}{X}{0}}
+\newcommand{\Ybar}{\kernoverline{2.5}{Y}{0}}
+\newcommand{\Tbar}{\kernoverline{2.5}{T}{0}}
+
+% Old style
+\newcommand{\tilM}{\kerntilde{2}{M}{-1}}
+\newcommand{\tilF}{\kerntilde{2.5}{F}{-1}}
+\newcommand{\tilS}{\kerntilde{2.5}{S}{0}}
+\newcommand{\tilX}{\kerntilde{2.5}{X}{0}}
+\newcommand{\tilY}{\kerntilde{2.5}{Y}{0}}
+\newcommand{\tilrho}{\kerntilde{2.5}{\rho}{0}}
+\newcommand{\barM}{\kernoverline{2}{M}{-1}}
+\newcommand{\barF}{\kernoverline{2.5}{F}{-1}}
+\newcommand{\barS}{\kernoverline{2.5}{S}{0}}
+\newcommand{\barX}{\kernoverline{2.5}{X}{0}}
+\newcommand{\barY}{\kernoverline{2.5}{Y}{0}}
+\newcommand{\barT}{\kernoverline{2.5}{T}{0}}
+
+% heegaard floer stuff
+
+\newcommand{\HFhat}{\kernhat{2}{\mathit{HF}\vphantom{\raisebox{0.25pt}{$\mathit{HF}$}}}{-2}}
+\newcommand{\HomeoR}{\Homeo^+\!(\R)}
+\newcommand{\tilPSLTwoR}{\kerntilde{0}{\PSL{2}{\R}}{0}}
+
+
+% CSisms:
+
+\renewcommand{\P}{\mathbf{P}}
+\newcommand{\NP}{\mathbf{NP}}
+\newcommand{\coNP}{\mbox{\textbf{co-NP}}}
+
+

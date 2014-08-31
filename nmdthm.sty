@@ -1,0 +1,59 @@
+% Setting up theorems, figures, etc.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{nmdthm}[2014/08/31 - Semester start edition]
+% Theorem definitions.  Note tried to get cleveref to work,
+% but proved too flaky to be worth it.  
+
+% Load thmtools if haven't already 
+\@ifpackageloaded{thmtools}{}{
+   \usepackage{thmtools}
+   \define@key{thmdef}{nmd}[{}]{}
+}
+
+\usepackage{thm-restate}
+\swapnumbers
+
+\@ifclassloaded{amsart}
+   {\newtheoremstyle{plain}{}{}{\slshape}{}{\bfseries}{.}{0.5em}{}}
+   {}
+  
+\newcommand{\nmdnewtheorem}[1]{%
+  \declaretheorem[nmd, style=plain, sibling=subsection]{#1}}
+
+\nmdnewtheorem{theorem}
+\nmdnewtheorem{conjecture}
+\nmdnewtheorem{lemma}
+\nmdnewtheorem{corollary}
+\nmdnewtheorem{proposition}
+\nmdnewtheorem{claim}
+\nmdnewtheorem{question}
+\nmdnewtheorem{goal}
+\nmdnewtheorem{criterion}
+\nmdnewtheorem{project}
+
+\declaretheorem[style=definition, sibling=subsection]{definition}
+\declaretheorem[style=definition, sibling=subsection]{notation}
+\declaretheorem[style=remark, sibling=subsection]{remark}
+\declaretheorem[style=remark, sibling=subsection]{example}
+
+% Change enum to use letters, so there's no confusion 
+% with equation labels.  I'm not really happy with this. 
+
+\renewcommand{\labelenumi}{(\alph{enumi}) }
+\renewcommand{\theenumi}{\alph{enumi}}
+
+% Figures and tables 
+\usepackage{booktabs}
+\usepackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{caption} 
+\usepackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{subfig}
+
+% Put figures, tables, and equations onto the common
+% subsection/theorem counter. There ought to be a better 
+% way to equate two counters than this, but...
+
+\let\c@figure=\c@subsection
+\let\thefigure=\thesubsection
+\let\c@table=\c@subsection
+\let\thetable=\thesubsection
+\let\c@equation=\c@subsection
+\let\theequation=\thesubsection

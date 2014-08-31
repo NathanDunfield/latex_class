@@ -1,24 +1,11 @@
 Nathan M. Dunfield's personal LaTeX and BibTeX style files.
 
-Instructions for using as a Mercurial subrepo, but note this is a 
-feature of last resort as per:
+* nmd.cls: main article class
 
-http://mercurial.selenic.com/wiki/Subrepository
+* nmdmath.sty: math definitions; collaborators look here for what's predefined.
 
-* Initial setup:
+* nmd-letter.cls: University of Illinois letterhead
 
-  hg clone ~/work/tex/pkgs/nmd 
-  echo "nmd = ~/work/tex/pkgs/nmd" > .hgsub 
-  hg add .hgsub
-  hg commit -m "Added nmd subrepository"
+* nmd-hw.cls: homework 
 
-* Usage: 
-
- To see status of the subproject: 
-  
-  hg status --subrepo
-
- Commits automatically check inside the subrepo, but need to push 
- and pull changes manually. 
-
-   
+Copyright 2009 to present by Nathan Dunfield; released under the terms of the GNU General Public License, version 2 or later. 

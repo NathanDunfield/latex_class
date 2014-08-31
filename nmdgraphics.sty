@@ -1,0 +1,105 @@
+%%%  Code for graphics.  
+%%%
+%%%  Two options: tikz and xy
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{nmdgraphics}[2014/08/31 - Semester start edition]
+\newif\iftikz
+\newif\ifxy
+\DeclareOption{xy}{\xytrue}
+\DeclareOption{tikz}{\tikztrue}
+\ProcessOptions
+
+%%% Always load the basics
+\usepackage{graphicx, color, xcolor}
+\definecolor{nmdlight}{cmyk}{0.128, 0.176, 0.0, 0.0}
+\definecolor{nmdmedium}{cmyk}{0.41, 0.49, 0.06, 0.0}
+\definecolor{nmddark}{rgb}{0.1, 0.0, 0.5}
+
+%%% TikZ addons  
+
+\iftikz 
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+
+% USAGE:  \begin{tikzoverlay}[<graphics opts>]{file name}[tikz opts]
+%              (tikz commands in coordinate system where horizontal
+%              direction is 100)
+%              \end{tikzoverlay}
+%
+% The variant tikzoverlayabs uses coordinates going from (0,0) to (1,1).
+%
+% Modeled on 
+%
+% http://bazaar.launchpad.net/~tex-sx/tex-sx/development/view/head:/onimage.dtx
+
+\def\tikzoverlay{%
+    \pgfutil@ifnextchar[{\tikzoverlay@opt}{\tikzoveraly@opt[]}%
+}
+\def\tikzoverlay@opt[#1]#2{%
+    \begin{tikzpicture}
+        \node[anchor=south west, inner sep=0] (image) at (0,0) {\includegraphics[#1]{#2}};
+        \newdimen\nmd@tikzoverlaywidth
+        \pgfextractx{\nmd@tikzoverlaywidth}{\pgfpointanchor{image}{south east}}
+        \begin{scope}
+          \tikzset{x=0.01\nmd@tikzoverlaywidth}
+          \tikzset{y=0.01\nmd@tikzoverlaywidth}
+}
+\def\endtikzoverlay{%
+    \end{scope}
+    \end{tikzpicture}
+}
+
+\def\tikzoverlayabs{%
+    \pgfutil@ifnextchar[{\tikzoverlayabs@opt}{\tikzoveralyabs@opt[]}%
+}
+\def\tikzoverlayabs@opt[#1]#2{%
+    \begin{tikzpicture}
+        \node[anchor=south west, inner sep=0] (image) at (0,0) {\includegraphics[#1]{#2}};
+        \begin{scope}
+          \tikzset{x=(image.south east)}
+          \tikzset{y=(image.north west)}
+}
+\def\endtikzoverlayabs{%
+    \end{scope}
+    \end{tikzpicture}
+}
+
+%%%  Including Matplotlib figures with TikZ overlay 
+
+\pgfkeys{
+  /matplotlibfigure/.is family, /matplotlibfigure, 
+  default/.style = {width = 0.95\textwidth, font = \footnotesize}, 
+  width/.store in = \matplotlibfigurewidth,
+  font/.store in = \matplotlibfigurefont,
+}
+
+\newcommand{\matplotlibfigure}[2][]{%
+ \pgfkeys{/matplotlibfigure, default, #1}%
+ \input{plots/#2}
+}
+
+\else \relax \fi  % End \iftikz
+
+\ifxy
+  % Nathan's XY-pic based label overlay environment.  The usual version
+  % is the second one below.  Args are: coor system, graphics modifiers,
+  % graphics name
+  \usepackage[all,import,rotate]{xy}
+   \newenvironment{xyoverpic}[3]
+    {%
+    \begin{xy}
+    \xyimport#1{\includegraphics[#2]{#3}}
+    }{\end{xy}}
+
+  \newenvironment{cxyoverpic}[3]
+  {%
+    \begin{center}
+      \centering\leavevmode\small
+      \begin{xyoverpic}{#1}{#2}{#3}
+      }{\end{xyoverpic}
+    \end{center}}
+\else \relax \fi 
+
+

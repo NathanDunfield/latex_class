@@ -1,0 +1,64 @@
+%% Miscellaneous macros
+
+%%% Package writing macros:
+
+\newcommand{\PassDownOptionToPackage}[2]{\DeclareOption{#1}{\PassOptionsToPackage{#1}{#2}}}
+\newcommand{\PassDownOptionToClass}[2]{\DeclareOption{#1}{\PassOptionsToClass{#1}{#2}}}
+
+%%% Macros for PDF formating:
+
+% Strip off the margins for onscreen viewing
+
+\let\trimpdfpages\undefined
+\newcommand{\trimpdfpages}[1]{%
+\let\remnantmargin\undefined
+\newcommand{\remnantmargin}{#1}
+
+% First move the PDF origin to the upper-left
+% corner of the text
+
+\setlength{\pdfhorigin}{-\oddsidemargin}
+\addtolength{\pdfhorigin}{-\hoffset}
+
+\setlength{\pdfvorigin}{-\topmargin}
+\addtolength{\pdfvorigin}{-\voffset}
+
+% Now trim to the minimal page size
+\setlength{\pdfpagewidth}{\textwidth}
+\setlength{\pdfpageheight}{\textheight}
+
+\addtolength{\pdfpageheight}{\headsep}
+\addtolength{\pdfpageheight}{\headheight}
+\addtolength{\pdfpageheight}{\footskip}
+
+% Now pad out to the desired margins
+\addtolength{\pdfhorigin}{\remnantmargin}
+\addtolength{\pdfpagewidth}{\remnantmargin}
+\addtolength{\pdfpagewidth}{\remnantmargin}
+
+\addtolength{\pdfvorigin}{\remnantmargin}
+\addtolength{\pdfpageheight}{\remnantmargin}
+\addtolength{\pdfpageheight}{\remnantmargin}
+}
+\newcommand{\trimpages}[1]{%
+   \AtBeginDocument{\trimpdfpages{#1}}
+}
+
+% Format for printing on US Letter pages
+
+\newcommand{\printing}[1]{%
+  \setlength{\textwidth}{#1\textwidth}
+  \setlength{\textheight}{1.5\textwidth}
+  \trimpages{0.3cm}
+}
+
+\newcommand{\laptop}{%
+  \setlength{\textheight}{1.1\textwidth}
+  \trimpages{0.5cm}
+}
+
+\newcommand{\bigmonitor}{%
+  \setlength{\textheight}{1.7\textwidth}
+  \trimpages{0.5cm}
+}
+ 
