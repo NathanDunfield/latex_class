@@ -18,9 +18,9 @@
 \ProcessOptionsX
 
 \LoadClass[12pt]{article}
-\usepackage[letterpaper, margin=\nmdhw@margin]{geometry}
+\RequirePackage[letterpaper, margin=\nmdhw@margin]{geometry}
 
-\usepackage{amsmath,amssymb}
+\RequirePackage{amsmath,amssymb}
 \renewcommand{\baselinestretch}{\nmdhw@baselinestretch}
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
@@ -62,8 +62,9 @@
 \renewcommand{\labelenumi}{(\alph{enumi}) }
 \renewcommand{\theenumi}{\alph{enumi}}
 
-\usepackage{nmd/fonts}
-\usepackage{nmd/graphics}
+%%% Load the rest of the nmd-specific styles
+\RequirePackage{nmd/fonts}
+\RequirePackage{nmd/graphics}
+\RequirePackage{nmd/math}
 \graphicspath{{images/}}
-\usepackage{nmd/math}
 

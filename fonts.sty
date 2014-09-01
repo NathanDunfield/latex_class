@@ -29,17 +29,17 @@
 
 \ifnmd@times
      \@ifclassloaded{gtpart}{\relax}{% 
-       \usepackage{mathptmx} 
-       \usepackage{mathrsfs}
+       \RequirePackage{mathptmx} 
+       \RequirePackage{mathrsfs}
      }
 \fi
 
 \ifnmd@utopia
-    \usepackage{fourier} 
-    \usepackage[scaled]{berasans}
+    \RequirePackage{fourier} 
+    \RequirePackage[scaled]{berasans}
 \fi
 
 \ifnmd@lucida 
    \let\digamma\undefined
-   \usepackage[lucidasmallscale, nofontinfo]{lucimatx}
+   \RequirePackage[lucidasmallscale, nofontinfo]{lucimatx}
 \fi

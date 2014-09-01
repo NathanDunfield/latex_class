@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nmd/letter}[2014/08/31 - Semester start edition]
 \RequirePackage{nmd/common}
-\newif\ifnologo
+\newboolean{nologo}
 \DeclareOption{nologo}{\nologotrue}
 \PassDownOptionToPackage{times}{nmd/fonts}
 \PassDownOptionToPackage{utopia}{nmd/fonts}
@@ -12,21 +12,19 @@
 \LoadClassWithOptions{article} 
 
 \RequirePackage{nmd/graphics}
-\usepackage{amsmath, amssymb, amsthm}
+\RequirePackage{amsmath, amssymb, amsthm}
 \RequirePackage{nmd/thm}
-
-\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
-\usepackage[margin=1in]{geometry}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{1.5ex}
-
-\pagestyle{empty}
-\thispagestyle{empty}
-
+\RequirePackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+\RequirePackage[margin=1in]{geometry}
 \RequirePackage{nmd/fonts}
 \RequirePackage{nmd/math}
 
 %%% Special letter stuff
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.5ex}
+\pagestyle{empty}
+\thispagestyle{empty}
 
 \def\returnaddress{Department of Mathematics \\
   273 Altgeld Hall, MC-382 \\

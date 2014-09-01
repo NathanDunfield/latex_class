@@ -31,8 +31,8 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nmd/article}[2014/08/31 - Semester start edition]
-\usepackage{etex}
-\usepackage{nmd/common}
+\RequirePackage{etex}
+\RequirePackage{nmd/common}
 
 %%% Setup options
 
@@ -74,7 +74,7 @@
   % The style actually has no footers
   \setlength{\footskip}{0pt}
 
-  \usepackage{tocloft}
+  \RequirePackage{tocloft}
   \setlength{\cftbeforesecskip}{0.05cm}
   \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} 
 
@@ -89,7 +89,7 @@
 %% AMS Style
 \ifams 
   \LoadClass{amsart} 
-  \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue,
+  \RequirePackage[colorlinks=true, linkcolor=blue, citecolor=blue,
   urlcolor=blue]{hyperref}
 \fi
 
@@ -114,7 +114,7 @@
 
 
 %%% For the bibilography
-\usepackage{ragged2e}
+\RequirePackage{ragged2e}
 %%% For the MathReview links 
 
 \def\MR#1{\href{http://www.ams.org/mathscinet-getitem?mr=#1}{MR#1}}
