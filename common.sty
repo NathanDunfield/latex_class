@@ -5,7 +5,7 @@
 
 %%% Switch to turn on Nathan's features if his custom option file exists
 \newif\ifnmd
-\InputIfFileExists{user-is-nathan-dunfield}{\nmdtrue}{\nmdfalse}
+\IfFileExists{user-is-nathan-dunfield}{\nmdtrue}{\nmdfalse}
 
 %%% Trying to make the final code somewhat readable
 \RequirePackage{ifthen}
