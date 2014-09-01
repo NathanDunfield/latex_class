@@ -4,35 +4,28 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{nmd/fonts}[2014/08/31 - Semester start edition]
 \RequirePackage{nmd/common}
-\newif\ifnmd@times
-\newif\ifnmd@utopia
-\newif\ifnmd@lucida
-\newif\ifnmd@computermodern
-\newif\ifnmd@fontselected
-\DeclareOption{times}{\nmd@timestrue \nmd@fontselectedtrue}
-\DeclareOption{utopia}{\nmd@utopiatrue \nmd@fontselectedtrue}
-\DeclareOption{lucida}{\nmd@lucidatrue \nmd@fontselectedtrue}
-\DeclareOption{computermodern}{\nmd@computermoderntrue \nmd@fontselectedtrue}
+\newboolean{nmd@times}
+\newboolean{nmd@utopia}
+\newboolean{nmd@lucida}
+\newboolean{nmd@computermodern}
+\DeclareOption{times}{\nmd@timestrue}
+\DeclareOption{utopia}{\nmd@utopiatrue}
+\DeclareOption{lucida}{\nmd@lucidatrue}
+\DeclareOption{computermodern}{\nmd@computermoderntrue}
 \ProcessOptions
 
 %%% Other people probably don't have the Lucida fonts
-\ifnmd \relax \else \ifnmd@lucida \nmd@lucidafalse \nmd@utopiatrue \fi
+\ifthen{\boolean{nmd@lucida} \and \not \boolean{nmd}}{\nmd@lucidafalse \nmd@utopiatrue}
 
-%%% If no font is specified, infer from overall class or default to Utopia.
-\ifnmd@fontselected
-    \relax
-\else
-    \@ifclassloaded{amsart}{\nmd@computermoderntrue \nmd@fontselectedtrue}{}
-    \@ifclassloaded{gtpart}{\nmd@timestrue \nmd@fontselectedtrue}{}
-    \ifnmd@fontselected
-        \relax
-    \else
-        \nmd@utopiatrue
-    \fi
-\fi
+%%% If no font is specified, infer from overall class or default to
+%%% Utopia.
 
-%%% Actually load the fontsf no font is specified, infer from overall
-%%% class or default to Utopia.
+\ifnotthen{\boolean{nmd@times} \or \boolean{nmd@utopia} %
+           \or \boolean{nmd@lucida} \or \boolean{nmd@computermodern}}%
+   { \nmd@utopiatrue % Default 
+     \@ifclassloaded{amsart}{\nmd@computermoderntrue \nmd@utopiafalse}{}
+     \@ifclassloaded{gtpart}{\nmd@timestrue \nmd@utopiafalse}{}
+   } 
 
 \ifnmd@times
      \@ifclassloaded{gtpart}{\relax}{% 

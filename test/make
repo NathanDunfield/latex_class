@@ -1,0 +1,2 @@
+#! /bin/bash
+latexmk -norc -pdf -outdir=tex_output

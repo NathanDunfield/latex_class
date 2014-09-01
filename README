@@ -1,12 +1,12 @@
 Nathan M. Dunfield's personal LaTeX and BibTeX style files.
 
-* nmd/article: main article class
+* nmd/article: main article class.
 
 * nmd/math: math definitions; collaborators look here for what's predefined.
 
-* nmd/letter: University of Illinois letterhead
+* nmd/letter: University of Illinois letterhead.
 
-* nmd/hw: homework 
+* nmd/hw: homework.
 
 Usage: Rename this "latex_class" directory/folder as "nmd" and put somewhere
 in your LaTeX search path.

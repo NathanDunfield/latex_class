@@ -2,12 +2,15 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{nmd/common}[2014/08/31 - Semester start edition]
 
+
 %%% Switch to turn on Nathan's features if his custom option file exists
 \newif\ifnmd
 \InputIfFileExists{user-is-nathan-dunfield}{\nmdtrue}{\nmdfalse}
 
-%%% Package writing macros:
-
+%%% Trying to make the final code somewhat readable
+\RequirePackage{ifthen}
+\newcommand{\ifthen}[2]{\ifthenelse{#1}{#2}{\relax}}
+\newcommand{\ifnotthen}[2]{\ifthenelse{#1}{\relax}{#2}}
 \newcommand{\PassDownOptionToPackage}[2]{\DeclareOption{#1}{\PassOptionsToPackage{#1}{#2}}}
 \newcommand{\PassDownOptionToClass}[2]{\DeclareOption{#1}{\PassOptionsToClass{#1}{#2}}}
 

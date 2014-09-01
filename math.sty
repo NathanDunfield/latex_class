@@ -1,5 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{nmd/math}[2014/08/31 - Semester start edition]
+\RequirePackage{nmd/fonts}
 
 %%% Marking future tasks. 
 
@@ -16,6 +17,8 @@
 %%% Standard Math commands
 
 %% Black Board Bold Letters
+%%% Actually load the fontsf no font is specified, infer from overall
+%%% class or default to Utopia.
 
 % The first four are included in the G&T style. 
 \providecommand{\Q}{{\mathbb Q}}

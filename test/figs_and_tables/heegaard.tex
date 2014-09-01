@@ -1,0 +1,239 @@
+\definecolor{lightblue}{rgb}{0.7,0.83,0.97}
+\definecolor{mediumblue}{rgb}{0.62,0.75,0.88}
+
+\usetikzlibrary{decorations.markings}
+
+\tikzset{alpha/.style={color=lightblue, line width=2pt,
+  dash pattern=on 5pt off 5pt on 1pt off 5pt,
+  line cap=round,
+  decoration={
+  markings,
+  mark=at position #1 with {\arrow{>}}},postaction={decorate}}}
+
+\tikzset{beta/.style={color=nmdlight, line width=2.0pt, 
+  dash pattern=on 3pt off 5pt,
+  line cap=round,
+  decoration={
+  markings,
+  mark=at position #1 with {\arrow{>}}},postaction={decorate}}}
+
+\tikzset{Rone/.style={color=black, line width=2.0pt,  
+  decoration={
+    markings,
+    mark=at position #1 with {\arrow{>}}},postaction={decorate}}}
+
+\tikzset{Rtwo/.style={color=nmdmedium, line width=2.0pt,  
+  decoration={
+    markings,
+    mark=at position #1 with {\arrow{>>}}},postaction={decorate}}}
+
+% Figure begin
+
+\begin{tikzpicture}[scale=1.05, x=0.14cm, y=0.14cm]
+    % Curve labels
+    \node at (38.8,28.0) {$R_1$};
+    \node at (44.3,51.9) {$R_2$};
+    \node at (81.9,38.0) {$\beta$};
+    \node at (88.0,49.1) {$\alpha$};
+
+
+    % Joining b to A, left to right 
+    \draw[Rtwo=0.7] (13.9,57.4) 
+      .. controls (0.2,49.9) and (2.0,26.4)
+      .. (8.4,22.2);
+    \draw[alpha=0.54] (13.8,53.9)
+      .. controls (7.6,47.1) and (4.9,34.5)
+      ..  (10.2,25.0);
+    \draw[Rone=0.7]  (13.0,26.6)        
+        .. controls (10.4,35.7) and (11.9,44.8)
+        .. (16.3,52.1); 
+    % To evade kind of bug in TeX/TikZ, have to do this one
+    % arrowhead by hand.  No idea why.  
+    \draw[color=nmdmedium, line width=2pt] (18.8,51.0) 
+      .. controls (18.8,51.0) and (14.4,40.7)
+      .. (16.5,28.0);
+    \draw[Rtwo=1.0, line cap=round]   (15.95,34.5) -- (15.95,34.0) ;
+
+   % Joining b to C, top to bottom
+    \draw[Rtwo=0.75] (37.0,23.3)
+      .. controls (35.0,25.7) and (26.6,28.1)
+      .. (20.4,25.3);
+   \draw[beta=0.64] (35.5,20.8)
+       .. controls (31.8,22.5) and (26.0,23.2)
+       .. (21.9,22.1);
+   \draw[Rtwo=0.70]  (35.2,18.3) 
+      .. controls (31.4,17.6) and (26.2,17.5)
+      .. (20.8,19.5);
+   \draw[Rone=0.6] (37.1,16.3)        
+      .. controls (33.3,13.9) and (24.0,14.1) 
+      .. (18.3,17.4); 
+
+  % Joining A to a, top to bottom
+      \draw[Rone=0.79] (38.3,45.2) 
+         .. controls (36.5,48.3) and (31.4,53.3)
+         .. (27.0,55.2);
+    \draw[alpha=0.65] (25.6,52.7)
+      .. controls (30.7,48.2)
+      .. (35.9,43.0);
+    \draw[Rtwo=0.5] (23.5,51.2)
+      .. controls (27.6,45.7)
+      .. (34.6,40.0);
+    \draw[beta=0.675] (20.9,50.5)
+       .. controls (22.2,46.4) and (26.8,40.9) 
+       .. (34.0,37.4);
+
+  % Joining A to B, top to bottom
+    \draw[Rone=0.7]  (24.5,61.9)
+         .. controls (34.3,65.0) and (45.2,62.5)
+         .. (51.4,59.7);
+    \draw[Rtwo=0.70]  (49.8,56.1)
+       .. controls (43.4,58.4) and (34.5,60.1)
+       .. (27.5,58.6);
+
+   % Joining a to C
+    \draw[Rone=0.7] (41.3,25.1) --  (41.1,31.7);
+
+   % Joining a to B, top to bottom
+    \draw[Rtwo=0.65] (50.8,53.6) .. controls (46.3,49.8) 
+      .. (43.2,45.6);
+    \draw[beta=0.77] (51.4,50.5) --
+         (45.3,43.8);
+    \draw[Rtwo=0.6] (53.9,49.5) .. controls (51.1,45.7)
+      .. (46.7,41.4);
+   
+  % Joining a to c, top to bottom
+    \draw[alpha=0.620] (63.9,25.3)
+      .. controls (60.7,31.5) and (54.9,36.4) 
+      .. (48.1,38.4);
+    \draw[Rone=0.7] (47.0,35.6)        
+        .. controls (53.2,33.2) and (58.5,28.8)
+        .. (61.1,24.7); 
+    \draw[Rtwo=0.40] (44.7,33.4) .. controls (50.0,31.5) and (58.0,24.5) 
+      .. (59.0,22.8);
+
+  % Joining C to c, top to bottom
+    \draw[alpha=0.74, dash phase=1.5pt] (58.2,20.2)
+      .. controls (55.0,22.2) and (51.5,23.0)
+      .. (46.9,21.9); 
+    \draw[Rone=0.7]  (46.9,18.0)
+      .. controls (49.8,16.9) and (54.2,15.9) 
+      .. (58.8,17.2);
+
+    \draw[Rtwo=0.40] (45.0,15.8) 
+       .. controls (49.9,12.0) and (57.3,11.9)
+       .. (61.7,15.2);
+
+  % Joining B to c, left to right
+   \draw[Rone=0.6] (58.8,50.4)
+      .. controls (64.5,47.2) and (69.5,32.5)
+      .. (66.6,24.5);
+   \draw[Rtwo=0.40] (62.0,53.5) 
+      .. controls (70.5,47.0) and (73.9,32.5)
+      .. (69.4,22.5); 
+
+  % The outside
+  % alpha 
+    \draw[alpha=0.3, dash phase=-3pt] (59.4,60.3) 
+     .. controls (64.1,65.9) and (68.1,70.9)
+     .. (76.7,68.8);
+     \draw[alpha=0.54, dash phase=3pt] (76.7,68.8)
+     .. controls (82.7,68.0) and (93.7,53.6) 
+     .. (90.7,30.0);
+    \draw[alpha=0.513,  dash phase=12pt] (90.7,30.0)
+     .. controls (86.0,-6.5) and (44.0,-4.4)
+     .. (40.6,14.5);
+
+  % beta 
+    \draw[beta=0.7, dash phase=-4.5pt] (21.0,63.9)
+       .. controls (32.2,78.5) and (55.6,76.8)
+       .. (68.3,66.0);
+    \draw[beta=0.55, dash phase=-0.5pt] (68.3,66.0)
+       .. controls (83.0,53.0) and (85.1,23.9)
+       .. (69.8,18.7); 
+
+  % Draw the circles
+  \begin{scope}[draw=black, fill=white, line width=2.0pt, font=\normalsize]
+    \filldraw (20.5,57.3) circle [radius=7.1] node {$A$};
+    \filldraw (40.9,38.7) circle [radius=7.1] node {$a$};
+    \filldraw  (15.1,21.7) circle [radius=6.7] node {$b$};
+    \filldraw  (56.2,55.4) circle [radius=6.7] node {$B$};
+    \filldraw (64.1,19.6) circle [radius=6.2] node {$c$};
+    \filldraw  (41.3,19.4) circle [radius=6.2] node {$C$};
+  \end{scope}
+
+  \begin{scope}[font=\footnotesize]
+    % Labels around a
+    \node at (41.1,33.3) {$1$};
+    \node at (44.3,34.4) {$2$};
+    \node at (46.0,36.2) {$3$};
+    \node at (46.7,38.5) {$4$};
+    \node at (46.2,41.0) {$5$};
+    \node at (44.5,42.9) {$6$};
+    \node at (42.2,43.9) {$7$};
+    \node at (38.9,43.8) {$8$};
+    \node at (36.7,42.3) {$9$};
+    \node at (35.8,40.0) {$10$};
+    \node at (35.7,37.3) {$11$};
+
+    % Labels around A
+    \node at (24.8,61.2) {$1$};
+    \node at (26.1,58.6) {$2$};
+    \node at (26.1,56.1) {$3$};
+    \node at (25.0,53.9) {$4$};
+    \node at (23.25,52.4) {$5$};
+    \node at (21.1,52.0) {$6$};
+    \node at (19.0,52.2) {$7$};
+    \node at (17.1,53.1) {$8$};
+    \node at (15.5,54.8) {$9$};
+    \node at (15.2,57.5) {$10$};
+    \node at (21.0,62.7) {$11$};
+
+    % Labels around b
+    \node at (18.5,17.6) {$1$};
+    \node at (20.1,19.7) {$2$};
+    \node at (20.6,22.1) {$3$};
+    \node at (19.5,24.9) {$4$};
+    \node at (16.5,26.7) {$5$};
+    \node at (12.8,26.3) {$6$};
+    \node at (10.7,24.2) {$7$};
+    \node at (9.7,21.7) {$8$};
+
+    % Labels around B
+    \node at (59.2,51.2) {$1$};
+    \node at (54.5,50.6) {$2$};
+    \node at (52.5,51.9) {$3$};
+    \node at (51.3,53.6) {$4$};
+    \node at (50.9,55.9) {$5$};
+    \node at (52.2,58.8) {$6$};
+    \node at (59.3,59.5) {$7$};
+    \node at (61.2,53.7) {$8$};
+
+    % Labels around c
+    \node at (66.2,23.8) {$1$};
+    \node at (64.0,24.2) {$2$};
+    \node at (61.8,23.8) {$3$};
+    \node at (60.0,22.2) {$4$};
+    \node at (59.3,19.9) {$5$};
+    \node at (59.8,17.2) {$6$};
+    \node at (61.7,15.5) {$7$};
+    \node at (69.1,19.0) {$8$};
+    \node at (68.5,21.8) {$9$};
+
+    % Labels around C
+    \node at (41.4,23.9) {$1$};
+    \node at (45.6,21.9) {$2$};
+    \node at (46.1,18.4) {$3$};
+    \node at (44.5,16.1) {$4$};
+    \node at (40.9,14.8) {$5$};
+    \node at (37.6,16.3) {$6$};
+    \node at (36.6,18.3) {$7$};
+    \node at (36.7,20.8) {$8$};
+    \node at (38.0,22.7) {$9$};
+
+
+    %    
+
+  \end{scope}
+
+
+\end{tikzpicture}

@@ -4,8 +4,9 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{nmd/graphics}[2014/08/31 - Semester start edition]
-\newif\iftikz
-\newif\ifxy
+\RequirePackage{nmd/common}
+\newboolean{tikz}
+\newboolean{xy}
 \DeclareOption{xy}{\xytrue}
 \DeclareOption{tikz}{\tikztrue}
 \ProcessOptions
@@ -79,13 +80,14 @@
  \pgfkeys{/matplotlibfigure, default, #1}%
  \input{plots/#2}
 }
+\fi  % End \iftikz
 
-\else \relax \fi  % End \iftikz
 
+
+% Nathan's XY-pic based label overlay environment.  The usual version
+% is the second one below.  Args are: coor system, graphics modifiers,
+% graphics name.  Deprecated.
 \ifxy
-  % Nathan's XY-pic based label overlay environment.  The usual version
-  % is the second one below.  Args are: coor system, graphics modifiers,
-  % graphics name
   \usepackage[all,import,rotate]{xy}
    \newenvironment{xyoverpic}[3]
     {%
@@ -100,6 +102,6 @@
       \begin{xyoverpic}{#1}{#2}{#3}
       }{\end{xyoverpic}
     \end{center}}
-\else \relax \fi 
+\fi 
 
 

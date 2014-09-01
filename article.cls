@@ -25,7 +25,7 @@
 %  * fullpage: PDF is full US letter sized.  
 %  * fatpage: wider textwidth.  
 %  * grant: suitable for NSF grants.  
-%  * 
+%  
 %  Formating commands:
 %    \trimpages, \laptop, \printing
 

@@ -1,16 +1,16 @@
-% Setting up theorems, figures, etc.
+% Setting up theorems, figures, etc. Note: tried to get cleveref to work,
+% but proved too flaky to be worth it.  
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{nmd/thm}[2014/08/31 - Semester start edition]
-% Theorem definitions.  Note tried to get cleveref to work,
-% but proved too flaky to be worth it.  
+\RequirePackage{nmd/common}
+\RequirePackage{thmtools}
+\RequirePackage{thm-restate}
 
-% Load thmtools if haven't already 
-\@ifpackageloaded{thmtools}{}{
-   \usepackage{thmtools}
-   \define@key{thmdef}{nmd}[{}]{}
-}
+% define needed keyval key if necessary
+\ifthen{\isundefined{\KV@thmdef@nmd}}%
+   {\define@key{thmdef}{nmd}[{}]{}}
 
-\usepackage{thm-restate}
+% Theorem number should be first!  
 \swapnumbers
 
 % In AMS article, let's use slanted instead of italics in theorems
@@ -44,9 +44,9 @@
 \renewcommand{\theenumi}{\alph{enumi}}
 
 % Figures and tables 
-\usepackage{booktabs}
-\usepackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{caption} 
-\usepackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{subfig}
+\RequirePackage{booktabs}
+\RequirePackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{caption} 
+\RequirePackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{subfig}
 
 % Put figures, tables, and equations onto the common
 % subsection/theorem counter. There ought to be a better 
