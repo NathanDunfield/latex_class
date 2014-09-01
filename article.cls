@@ -30,28 +30,22 @@
 %    \trimpages, \laptop, \printing
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd}[2014/08/31 - Semester start edition]
+\ProvidesClass{nmd/article}[2014/08/31 - Semester start edition]
 \usepackage{etex}
-\usepackage{nmdmisc}
+\usepackage{nmd/common}
 
 %%% Setup options
 
 \newif\ifgt
 \newif\ifams
 \newif\ifcustom
-\newif\iftimes
-\newif\ifutopia
-\newif\iflucida
-\newif\ifcm
 \DeclareOption{gt}{\gttrue}
 \DeclareOption{ams}{\amstrue}
 \DeclareOption{custom}{\customtrue}
-\DeclareOption{times}{\timestrue}
-\DeclareOption{utopia}{\utopiatrue}
-\DeclareOption{lucida}{\lucidatrue}
-\DeclareOption{cm}{\cmtrue}
-
-\PassDownOptionToPackage{xy}{nmdgraphics}
+\PassDownOptionToPackage{xy}{nmd/graphics}
+\PassDownOptionToPackage{times}{nmd/fonts}
+\PassDownOptionToPackage{utopia}{nmd/fonts}
+\PassDownOptionToPackage{lucida}{nmd/fonts}
 
 % The GT style has a fixed size font, but the AMS and custom ones
 % doesn't.  
@@ -59,19 +53,10 @@
 \PassDownOptionToClass{9pt}{amsart}
 \PassDownOptionToClass{10pt}{amsart}
 \DeclareOption{11pt}{\PassOptionsToClass{11pt}{amsart}%
-          \PassOptionsToClass{11pt}{nmdcustom}}
+          \PassOptionsToClass{11pt}{nmd/custom}}
 \DeclareOption{12pt}{\PassOptionsToClass{12pt}{amsart}%
-           \PassOptionsToClass{12pt}{nmdcustom}}
+           \PassOptionsToClass{12pt}{nmd/custom}}
 \ProcessOptions
-
-\PassOptionsToClass{smalltitle}{../nmdcustom}
-
-%%% Switch to turn on Nathan's features if his custom option file exists
-\newif\ifnmd
-\InputIfFileExists{user-is-nathan-dunfield}{\nmdtrue}{\nmdfalse}
-
-%%% Other people probably don't have the Lucida fonts
-\ifnmd \relax \else \iflucida \lucidafalse \utopiatrue \fi \fi
 
 %%%  Make the custom style the default
 \customtrue
@@ -110,10 +95,11 @@
 
 %% Custom Style
 \ifcustom
-  % Make the default font Utopia 
-  \iflucida \relax \else \iftimes \relax \else \utopiatrue \fi \fi 
-  \LoadClassWithOptions{nmdcustom}
+  \LoadClassWithOptions{nmd/custom}
 \fi 
+
+%%% Set font %%% 
+\RequirePackage{nmd/fonts}
 
 % Dummy commands for things used by GT style
 \providecommand{\givenname}[1]{}
@@ -123,37 +109,8 @@
 \providecommand{\subject}[3]{}
 \providecommand{\keyword}[1]{}
 
-%%% Set font %%% 
-%
-%  Assumes we will use CM only if it is the default 
-%  font for a particular class. 
-
-\iftimes
-   \ifgt \relax \else 
-   \usepackage{mathptmx} 
-   \usepackage{mathrsfs}
-\fi \fi
-
-\ifutopia \usepackage{fourier} \fi
-
-\iflucida 
-  \let\digamma\undefined
-  \usepackage[lucidasmallscale, nofontinfo]{lucimatx}
-\fi
-
-%%% Change float params as per TeX FAQ to make things more 
-%%% flexible 
-
-\renewcommand{\topfraction}{.85}
-\renewcommand{\bottomfraction}{.7}
-\renewcommand{\textfraction}{.15}
-\renewcommand{\floatpagefraction}{.66}
-\renewcommand{\dbltopfraction}{.66}
-\renewcommand{\dblfloatpagefraction}{.66}
-\setcounter{topnumber}{9}
-\setcounter{bottomnumber}{9}
-\setcounter{totalnumber}{20}
-\setcounter{dbltopnumber}{9}
+%%% Change float params to make things more flexible
+\nmd@freefloats
 
 
 %%% For the bibilography
@@ -168,11 +125,9 @@
      \MR{#1#2#3}%
    \fi}
 \def\mathreviewsnumber#1{\checkMR MR#1 \relax}
-%%% Show current page layout using \layout
-\usepackage{layout}
 
-\RequirePackage[tikz]{nmdgraphics}
-\RequirePackage{nmdthm}
-\RequirePackage{nmdmath}
+\RequirePackage[tikz]{nmd/graphics}
+\RequirePackage{nmd/thm}
+\RequirePackage{nmd/math}
 
- % End of nmd class
+ % End of nmd article class

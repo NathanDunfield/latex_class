@@ -1,23 +1,19 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd-letter}[2014/08/31 - Semester start edition]
-\RequirePackage{nmdmisc}
+\ProvidesClass{nmd/letter}[2014/08/31 - Semester start edition]
+\RequirePackage{nmd/common}
 \newif\ifnologo
-\newif\iftimes
-\newif\ifutopia
-\newif\iflucida
-\newif\ifcm
 \DeclareOption{nologo}{\nologotrue}
-\DeclareOption{times}{\timestrue}
-\DeclareOption{utopia}{\utopiatrue}
-\DeclareOption{lucida}{\lucidatrue}
-\PassDownOptionToPackage{tikz}{nmdgraphics}
-\PassDownOptionToPackage{xy}{nmdgraphics}
+\PassDownOptionToPackage{times}{nmd/fonts}
+\PassDownOptionToPackage{utopia}{nmd/fonts}
+\PassDownOptionToPackage{lucida}{nmd/fonts}
+\PassDownOptionToPackage{tikz}{nmd/graphics}
+\PassDownOptionToPackage{xy}{nmd/graphics}
 \ProcessOptions
-
 \LoadClassWithOptions{article} 
-\RequirePackage{nmdgraphics}
+
+\RequirePackage{nmd/graphics}
 \usepackage{amsmath, amssymb, amsthm}
-\RequirePackage{nmdthm}
+\RequirePackage{nmd/thm}
 
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 \usepackage[margin=1in]{geometry}
@@ -27,22 +23,8 @@
 \pagestyle{empty}
 \thispagestyle{empty}
 
-% Make the default font Utopia 
-\iflucida \relax \else \iftimes \relax \else \utopiatrue \fi \fi 
-
-\iftimes
-   \usepackage{mathptmx} 
-   \usepackage{mathrsfs}
-\fi 
-
-\ifutopia \usepackage{fourier} \fi
-
-\iflucida 
-  \let\digamma\undefined
-  \usepackage[lucidasmallscale, nofontinfo]{lucimatx}
-\fi
-
-\RequirePackage{nmdmath}
+\RequirePackage{nmd/fonts}
+\RequirePackage{nmd/math}
 
 %%% Special letter stuff
 

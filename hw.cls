@@ -1,19 +1,19 @@
 % Nathan's worksheet LaTeX class
-%
-% Useful math macros are at the end of the file. 
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmdhw}
+\ProvidesClass{nmd/hw}[2014/08/31 - Semester start edition]
+\RequirePackage{nmd/common}
 \RequirePackage{expl3}
 \RequirePackage{xkeyval}
 \RequirePackage{xstring}
 \RequirePackage{datetime}
 \DeclareOptionX{stretch}{\def\nmdhw@baselinestretch{#1}}
 \DeclareOptionX{margin}{\def\nmdhw@margin{#1}}
-\newif\iftimes
-\newif\ifutopia
-\newif\iflucida
-\newif\ifcm
+\PassDownOptionToPackage{times}{nmd/fonts}
+\PassDownOptionToPackage{utopia}{nmd/fonts}
+\PassDownOptionToPackage{lucida}{nmd/fonts}
+\PassDownOptionToPackage{tikz}{nmd/graphics}
+\PassDownOptionToPackage{xy}{nmd/graphics}
 \ExecuteOptionsX{stretch=1.1, margin=0.8in}
 \ProcessOptionsX
 
@@ -25,9 +25,6 @@
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
 
-\utopiatrue
-\usepackage{fourier}
-\usepackage[scaled]{berasans}
 
 %%% For fun, let's extract the hw date from the file name,
 %%% which should have the form "hw(num)-(year)-(month)-(day).tex"
@@ -65,10 +62,8 @@
 \renewcommand{\labelenumi}{(\alph{enumi}) }
 \renewcommand{\theenumi}{\alph{enumi}}
 
-
-%%% Math(s) macros:
-
-\usepackage{nmdgraphics}
+\usepackage{nmd/fonts}
+\usepackage{nmd/graphics}
 \graphicspath{{images/}}
-\usepackage{nmdmath}
+\usepackage{nmd/math}
 

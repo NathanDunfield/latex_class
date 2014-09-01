@@ -1,0 +1,52 @@
+%%% Setting up the fonts, including booleans storing which font is
+%%% being used.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{nmd/fonts}[2014/08/31 - Semester start edition]
+\RequirePackage{nmd/common}
+\newif\ifnmd@times
+\newif\ifnmd@utopia
+\newif\ifnmd@lucida
+\newif\ifnmd@computermodern
+\newif\ifnmd@fontselected
+\DeclareOption{times}{\nmd@timestrue \nmd@fontselectedtrue}
+\DeclareOption{utopia}{\nmd@utopiatrue \nmd@fontselectedtrue}
+\DeclareOption{lucida}{\nmd@lucidatrue \nmd@fontselectedtrue}
+\DeclareOption{computermodern}{\nmd@computermoderntrue \nmd@fontselectedtrue}
+\ProcessOptions
+
+%%% Other people probably don't have the Lucida fonts
+\ifnmd \relax \else \ifnmd@lucida \nmd@lucidafalse \nmd@utopiatrue \fi
+
+%%% If no font is specified, infer from overall class or default to Utopia.
+\ifnmd@fontselected
+    \relax
+\else
+    \@ifclassloaded{amsart}{\nmd@computermoderntrue \nmd@fontselectedtrue}{}
+    \@ifclassloaded{gtpart}{\nmd@timestrue \nmd@fontselectedtrue}{}
+    \ifnmd@fontselected
+        \relax
+    \else
+        \nmd@utopiatrue
+    \fi
+\fi
+
+%%% Actually load the fontsf no font is specified, infer from overall
+%%% class or default to Utopia.
+
+\ifnmd@times
+     \@ifclassloaded{gtpart}{\relax}{% 
+       \usepackage{mathptmx} 
+       \usepackage{mathrsfs}
+     }
+\fi
+
+\ifnmd@utopia
+    \usepackage{fourier} 
+    \usepackage[scaled]{berasans}
+\fi
+
+\ifnmd@lucida 
+   \let\digamma\undefined
+   \usepackage[lucidasmallscale, nofontinfo]{lucimatx}
+\fi

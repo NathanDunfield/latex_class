@@ -1,4 +1,10 @@
-%% Miscellaneous macros
+%% Miscellaneous macros, loaded at the start of each class.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{nmd/common}[2014/08/31 - Semester start edition]
+
+%%% Switch to turn on Nathan's features if his custom option file exists
+\newif\ifnmd
+\InputIfFileExists{user-is-nathan-dunfield}{\nmdtrue}{\nmdfalse}
 
 %%% Package writing macros:
 
@@ -62,3 +68,18 @@
   \trimpages{0.5cm}
 }
  
+%%% Change float params as per TeX FAQ to make things more 
+%%% flexible 
+
+\newcommand{\nmd@freefloats}{%
+  \renewcommand{\topfraction}{.85}
+  \renewcommand{\bottomfraction}{.7}
+  \renewcommand{\textfraction}{.15}
+  \renewcommand{\floatpagefraction}{.66}
+  \renewcommand{\dbltopfraction}{.66}
+  \renewcommand{\dblfloatpagefraction}{.66}
+  \setcounter{topnumber}{9}
+  \setcounter{bottomnumber}{9}
+  \setcounter{totalnumber}{20}
+  \setcounter{dbltopnumber}{9}
+}

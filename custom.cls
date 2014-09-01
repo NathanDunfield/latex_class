@@ -6,7 +6,7 @@
 % vertical decoration next to theorems-type statements.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmdcustom}[2014/08/31 - Semester start edition]
+\ProvidesClass{nmd/custom}[2014/08/31 - Semester start edition]
 \newif\iffullpage
 \newif\iffatpage
 \newif\ifgrant

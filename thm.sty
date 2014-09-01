@@ -1,6 +1,6 @@
 % Setting up theorems, figures, etc.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{nmdthm}[2014/08/31 - Semester start edition]
+\ProvidesPackage{nmd/thm}[2014/08/31 - Semester start edition]
 % Theorem definitions.  Note tried to get cleveref to work,
 % but proved too flaky to be worth it.  
 
@@ -13,6 +13,7 @@
 \usepackage{thm-restate}
 \swapnumbers
 
+% In AMS article, let's use slanted instead of italics in theorems
 \@ifclassloaded{amsart}
    {\newtheoremstyle{plain}{}{}{\slshape}{}{\bfseries}{.}{0.5em}{}}
    {}

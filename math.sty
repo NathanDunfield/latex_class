@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{nmdmath}[2014/08/31 - Semester start edition]
+\ProvidesPackage{nmd/math}[2014/08/31 - Semester start edition]
 
 %%% Marking future tasks. 
 
@@ -95,10 +95,10 @@
 
 \newcommand{\makeassignmacro}[2]{\hspace{#1}\raisebox{#2}{\ensuremath{:}}\hspace{-#1}=}
 \newcommand{\assign}{:=}
-\ifutopia \renewcommand{\assign}{\makeassignmacro{0.45ex}{0.095ex}} \fi
-\iftimes \renewcommand{\assign}{\makeassignmacro{0.5ex}{0.06ex}} \fi
-\iflucida \renewcommand{\assign}{\makeassignmacro{0.6ex}{0.046ex}} \fi
-\ifcm \renewcommand{\assign}{\makeassignmacro{0.6ex}{0.085ex}} \fi
+\ifnmd@utopia \renewcommand{\assign}{\makeassignmacro{0.45ex}{0.095ex}} \fi
+\ifnmd@times \renewcommand{\assign}{\makeassignmacro{0.5ex}{0.06ex}} \fi
+\ifnmd@lucida \renewcommand{\assign}{\makeassignmacro{0.6ex}{0.046ex}} \fi
+\ifnmd@computermodern \renewcommand{\assign}{\makeassignmacro{0.6ex}{0.085ex}} \fi
 
 % Better overlines and tildes.  Example of useage
 % \newcommand{\barN}{\kernoverline{4}{N}{1}} 
