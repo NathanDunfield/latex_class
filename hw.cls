@@ -39,7 +39,7 @@
 \def\nmdhw@dayofweek{\dayofweekname{\nmdhw@day}{\nmdhw@month}{\nmdhw@year}}
 \newcommand{\class}[1]{% 
   \textsf{\textbf{\large Math #1: HW \nmdhw@number\ due % 
-  \nmdhw@dayofweek\ \monthname[\nmdhw@month] \nmdhw@day, \nmdhw@year.}}
+  \nmdhw@dayofweek, \monthname[\nmdhw@month] \nmdhw@day, \nmdhw@year.}}
   \vspace{0.5cm}
 }
 
@@ -67,4 +67,4 @@
 \RequirePackage{nmd/graphics}
 \RequirePackage{nmd/math}
 \graphicspath{{images/}}
-
+\RequirePackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
