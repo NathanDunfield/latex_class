@@ -86,3 +86,27 @@ Associate Professor \\
 University of Illinois
 \end{minipage}
 }
+
+\newcommand{\pompousclosing}{
+
+\vspace{0.5cm}
+
+\hspace{2in}
+\begin{minipage}[b]{4in}
+Sincerely, 
+
+\signature
+
+Nathan M. Dunfield 
+
+\vspace{2ex}
+
+Associate Professor of Mathematics \\
+University of Illinois \\
+\\ 
+Fellow of the American Mathematical Society (inducted 2013) \\
+Former Simons Fellow (2013--14) and Sloan Fellow (2004--08) \\
+LAS Dean's award for undergraduate teaching (2014) \\ 
+web: http://dunfield.info 
+\end{minipage}
+}
