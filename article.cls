@@ -43,6 +43,7 @@
 \DeclareOption{ams}{\amstrue}
 \DeclareOption{custom}{\customtrue}
 \PassDownOptionToPackage{xy}{nmd/graphics}
+\PassDownOptionToPackage{tikz}{nmd/graphics}
 \PassDownOptionToPackage{times}{nmd/fonts}
 \PassDownOptionToPackage{utopia}{nmd/fonts}
 \PassDownOptionToPackage{lucida}{nmd/fonts}
@@ -126,7 +127,7 @@
    \fi}
 \def\mathreviewsnumber#1{\checkMR MR#1 \relax}
 
-\RequirePackage[tikz]{nmd/graphics}
+\RequirePackage{nmd/graphics}
 \RequirePackage{nmd/thm}
 \RequirePackage{nmd/math}
 
