@@ -69,8 +69,13 @@
 \newcommand{\GL}[2]{\mathrm{GL}_{#1} #2}
 \newcommand{\PGL}[2]{\mathrm{PGL}_{#1} #2}
 \newcommand{\SU}{\mathrm{SU}}
+\newcommand{\SO}{\mathrm{SO}}
 \newcommand{\RP}{{{\mathbb{R}}\,\mathrm{P}}}
 \newcommand{\CP}{{{\mathbb{C}}\,\mathrm{P}}}
+\ifnmd@lucida
+   \renewcommand{\RP}{{{\mathbb{R}}\mathrm{P}}}
+   \renewcommand{\CP}{{{\mathbb{C}}\mathrm{P}}}
+\fi
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Out}{Out}
@@ -85,6 +90,8 @@
 \DeclareMathOperator{\Teich}{Teich}
 \DeclareMathOperator{\Homeo}{Homeo}
 \DeclareMathOperator{\inj}{inj}
+
+% Opinions vary
 \DeclareMathOperator{\arccosh}{arccosh}
 \DeclareMathOperator{\arcsinh}{arcsinh}
 \DeclareMathOperator{\arctanh}{arctanh}

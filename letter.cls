@@ -110,3 +110,26 @@ LAS Dean's award for undergraduate teaching (2014) \\
 web: http://dunfield.info 
 \end{minipage}
 }
+
+\newcommand{\somewhatpompousclosing}{
+
+\vspace{0.5cm}
+
+\hspace{2in}
+\begin{minipage}[b]{4in}
+Sincerely, 
+
+\signature
+
+Nathan M. Dunfield 
+
+\vspace{2ex}
+
+Associate Professor of Mathematics \\
+University of Illinois \\
+\\ 
+Fellow of the American Mathematical Society \\
+\\
+web: http://dunfield.info 
+\end{minipage}
+}
