@@ -1,4 +1,4 @@
-% The code that makes the article title is so horrible that must
+% The code that makes the article title is so horrible that it must
 % be hidden in its own file.  The horribleness is because of the 
 % need to handle multiple authors. 
 
@@ -69,6 +69,15 @@
     \textbf{Abstract.} }
   {\end{leftruledparagraph}\egroup}
 
+% The dedication 
+\newsavebox\dedicationbox
+\newenvironment{dedication}{%
+  \global\setbox\dedicationbox=\vtop \bgroup%
+  \begin{center} \dedicationfont
+   }
+{\end{center}\egroup}
+
+
 \def\maketitle{\par
   \@topnum\z@ % this prevents figures from falling at the top of page 
   \thispagestyle{empty}
@@ -89,6 +98,9 @@
   {\authorfont \authors}
   \vspace{10bp}
   
+  \noindent
+  \usebox{\dedicationbox}
+
   \noindent
   \usebox{\abstractbox}
 }

@@ -59,7 +59,7 @@
   \begin{list}{(\alph{subprobs})}
     {\usecounter{subprobs}
       \setlength{\leftmargin}{1.5em}
-      \setlength{\itemsep}{3ex}
+      \setlength{\itemsep}{2ex}
     }
  }
 {\end{list}}

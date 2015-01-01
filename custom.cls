@@ -67,10 +67,11 @@
 % First, load a nice sans-serif font
 
 \RequirePackage[scaled]{berasans}
-\newcommand{\nmd@setarticlefonts}[3]{
+\newcommand{\nmd@setarticlefonts}[4]{
    \DeclareFixedFont{\sectionfont}{T1}{fvs}{b}{n}{#1}
    \DeclareFixedFont{\titlefont}{T1}{fvs}{b}{n}{#2}
    \DeclareFixedFont{\authorfont}{T1}{fvs}{m}{it}{#3}
+   \DeclareFixedFont{\dedicationfont}{T1}{fvs}{m}{it}{#4}
 }
 
 % Load section formatting package 
@@ -90,16 +91,16 @@
 \ifelevenpt
    \nmd@settitlebar{-7bp}{23bp}
    \ifsmalltitle
-      \nmd@setarticlefonts{13.5bp}{18bp}{14bp}
+      \nmd@setarticlefonts{13.5bp}{18bp}{14bp}{10bp}
     \else 
-       \nmd@setarticlefonts{13.5bp}{22bp}{16bp}
+       \nmd@setarticlefonts{13.5bp}{22bp}{16bp}{10bp}
     \fi
 \else % twelve point
     \nmd@settitlebar{-10bp}{30bp}
     \ifsmalltitle
-      \nmd@setarticlefonts{15bp}{20bp}{15bp}
+      \nmd@setarticlefonts{15bp}{20bp}{15bp}{11bp}
     \else 
-       \nmd@setarticlefonts{15bp}{24bp}{18bp}
+       \nmd@setarticlefonts{15bp}{24bp}{18bp}{11bp}
     \fi
 \fi 
    
