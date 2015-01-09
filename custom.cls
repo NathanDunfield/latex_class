@@ -81,11 +81,13 @@
 \newcommand{\nmd@settitlebar}[2]{
   \newcommand{\titlebar}{%
     \setlength{\fboxsep}{0bp}%
-    \colorbox{nmdlight}{\hbox to \textwidth{\rule[#1]{0bp}{#2}}}%
+    \colorbox{nmdlight}{\vphantom{\rule[#1]{0bp}{#2}}%    
+            \hspace{\dimexpr\linewidth-2\fboxsep}}%
     \hspace*{-\textwidth}%
     \hspace{0.5em}\thesection %
   }
 }
+
 
 % Set things up depending on the font size
 \ifelevenpt
