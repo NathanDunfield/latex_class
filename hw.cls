@@ -9,6 +9,8 @@
 \RequirePackage{datetime}
 \DeclareOptionX{stretch}{\def\nmdhw@baselinestretch{#1}}
 \DeclareOptionX{margin}{\def\nmdhw@margin{#1}}
+\newboolean{nmdhw@draft}
+\DeclareOption{draft}{\nmdhw@drafttrue}
 \PassDownOptionToPackage{times}{nmd/fonts}
 \PassDownOptionToPackage{utopia}{nmd/fonts}
 \PassDownOptionToPackage{lucida}{nmd/fonts}
@@ -16,6 +18,7 @@
 \PassDownOptionToPackage{xy}{nmd/graphics}
 \ExecuteOptionsX{stretch=1.1, margin=0.8in}
 \ProcessOptionsX
+\ProcessOptions
 
 \LoadClass[12pt]{article}
 \RequirePackage[letterpaper, margin=\nmdhw@margin]{geometry}
@@ -37,10 +40,13 @@
 \nmdhw@stripleadingzero{\nmdhw@number}
 \nmdhw@stripleadingzero{\nmdhw@day}
 \def\nmdhw@dayofweek{\dayofweekname{\nmdhw@day}{\nmdhw@month}{\nmdhw@year}}
-\newcommand{\class}[1]{% 
-  \textsf{\textbf{\large Math #1: HW \nmdhw@number\ due % 
+\newcommand{\class}[2][HW]{% 
+  \textsf{\textbf{\large Math #2: %
+      \ifnmdhw@draft \color{red} //DRAFT ONLY// \else \relax\fi %
+      #1 \nmdhw@number\ due % 
   \nmdhw@dayofweek, \monthname[\nmdhw@month] \nmdhw@day, \nmdhw@year.}}
   \vspace{0.5cm}
+  
 }
 
 %%% Main problem list; subproblems handled by enumerate

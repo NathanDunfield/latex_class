@@ -390,7 +390,9 @@
 \newcommand{\That}{{\kernhat{2.5}{T}{0}}}
 \newcommand{\Uhat}{{\kernhat{2.5}{U}{0}}}
 \newcommand{\Vhat}{{\kernhat{2.5}{V}{0}}}
-\newcommand{\What}{{\kernhat{2.5}{W}{1}}}
+\ifthen{\isundefined{\What}}{
+  \newcommand{\What}{{\kernhat{2.5}{W}{1}}}
+}
 \newcommand{\Xhat}{{\kernhat{2.5}{X}{0}}}
 \newcommand{\Yhat}{{\kernhat{2.5}{Y}{0.5}}}
 \newcommand{\Zhat}{{\kernhat{3.5}{Z}{0}}}
@@ -417,7 +419,9 @@
 \newcommand{\that}{{\kernhat{2.5}{t}{0}}}
 \newcommand{\uhat}{{\kernhat{2.5}{u}{0}}}
 \newcommand{\vhat}{{\kernhat{2.5}{v}{0}}}
-\newcommand{\what}{{\kernhat{2.5}{w}{0}}}
+\ifthen{\isundefined{\what}}{
+  \newcommand{\what}{{\kernhat{2.5}{w}{0}}}
+}
 \newcommand{\xhat}{{\kernhat{2.5}{x}{0}}}
 \newcommand{\yhat}{{\kernhat{2.5}{y}{0}}}
 \newcommand{\zhat}{{\kernhat{2.5}{z}{0}}}
