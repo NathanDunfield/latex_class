@@ -31,9 +31,18 @@
 
 %%% For fun, let's extract the hw date from the file name,
 %%% which should have the form "hw(num)-(year)-(month)-(day).tex"
+%%% where the prefix 'hw' can be replaced with 'mt' or 'fi'.  
 
 \newcommand{\nmdhw@stripleadingzero}[1]{\IfBeginWith{#1}{0}{\StrGobbleLeft{#1}{1}[#1]}{\relax}}
-\StrBehind*{\jobname}{hw}[\nmdhw@jobname]
+\IfBeginWith*{\jobname}{hw}{%
+  \StrBehind*{\jobname}{hw}[\nmdhw@jobname]
+}{}
+\IfBeginWith*{\jobname}{mt}{%
+  \StrBehind*{\jobname}{mt}[\nmdhw@jobname]
+}{}
+\IfBeginWith*{\jobname}{fi}{%
+  \StrBehind*{\jobname}{fi}[\nmdhw@jobname]
+}{}
 \StrCut{\nmdhw@jobname}{-}{\nmdhw@number}{\nmdhw@jobname}
 \StrCut{\nmdhw@jobname}{-}{\nmdhw@year}{\nmdhw@jobname}
 \StrCut{\nmdhw@jobname}{-}{\nmdhw@month}{\nmdhw@day}
