@@ -1,0 +1,113 @@
+\documentclass[aspect=4:3]{nmd/slide}
+
+\newcommand{\alg}[1]{\textsc{\textbf{#1}}}
+\newcommand{\x}{\mathbf{x}}
+
+\begin{document}
+
+\begin{frame}
+
+  \begin{center}
+    {\Large Computational complexity}
+    
+    \medskip
+
+    {\Large  of problems in }
+
+    \medskip
+
+    {\Large  3-dimensional topology}
+
+    \vspace{2cm}
+
+    {Nathan Dunfield}
+
+    \smallskip
+
+    University of Illinois
+
+    \vspace{1cm}
+    
+    slides at: http://dunfield.info/preprints/
+    
+  \end{center}
+\end{frame}
+
+\begin{frame}
+
+\textbf{[Novikov 1962]} \textsl{For $n \geq 5$, there does not exist an algorithm which solves:}
+
+\vspace{0.2cm}
+
+\alg{IsSphere:} Given a triangulated $M^n$ is it homeomorphic to $S^n$?
+
+\vspace{1cm}
+
+\textbf{Thm} (Geometrization + many results)  \\
+\textsl{There is an algorithm to decide if two compact 3-mflds are homeomorphic.}
+
+\vspace{3cm}
+
+\textbf{Today:}  How hard are these 3-manifold questions?  How quickly can we solve them?
+
+\vfill
+\end{frame}
+
+\begin{frame}
+  \textbf{Decision Problems:}  Yes or no answer.  
+  
+  \bigskip
+  
+  \alg{Sorted:} Given a list of integers, is it sorted?
+
+  \medskip
+
+  \alg{SAT:} Given $p_1, \ldots p_n \in \F_2[x_1, \ldots, x_k]$ is there $\x \in \F_2^k$ with $p_i(\x) = 0$ for all $i$? 
+
+  \medskip
+
+  \alg{Unknotted:}  Given a planar diagram for $K$ in $S^3$ is $K$ the unknot?
+
+  \medskip
+
+  \alg{Invertible:} Given $A \in M_n(\Z)$ does it have an inverse in $M_n(\Z)$?
+
+  \vspace{1.5cm}
+
+  \textbf{P:} Decision problems which can be solved in polynomial time in the input size.
+
+  \smallskip 
+
+  \quad \alg{Sorted:} $O(\mbox{length of list})$
+
+  \smallskip 
+
+  \quad \alg{Invertible:} $O\big(n^{3.5} \log(\mbox{largest entry})^{1.1}\big)$
+\end{frame}
+
+\begin{frame}
+  \textbf{NP:}  Yes answers have proofs that can be checked in
+  polynomial time.  
+  
+  \medskip 
+  \alg{SAT:} Given $\x \in \F_2^k$, can check all $p_i(\x) = 0$ in linear time. 
+
+  \medskip
+
+  \alg{Unknotted:} A diagram of the unknot with $c$ crossings can be unknotted
+   in $O(c^{11})$ Reidemeister moves.  [Lackenby 2013]
+
+\vspace{1.5cm}
+
+\textbf{coNP:}  No answers can be checked in polynomial time.
+
+ \medskip
+ \alg{Unknotted:}  Yes, assuming the GRH [Kuperberg 2011]. 
+
+\vspace{1.5cm}
+
+\textbf{Conj:}  \alg{Unknotted} is in \textbf{P}.  
+
+\end{frame}
+
+\end{document}
