@@ -14,12 +14,16 @@
 \ProcessOptionsX
 \ProcessOptions
 
-\LoadClass[mathserif]{beamer}
+%\LoadClass[mathserif]{beamer}
+\LoadClass{beamer}
 \setbeamertemplate{navigation
   symbols}{\setcounter{page}{\value{framenumber}}}
 
-\RequirePackage{eulervm}
-\RequirePackage[defaultsans, scale=0.9]{opensans}
+%\RequirePackage{eulervm}
+%\RequirePackage[defaultsans, scale=0.9]{opensans}
+
+%\documentclass{beamer}
+\usepackage{libertine}
 
 \newlength{\nmdslide@width}
 \newlength{\nmdslide@height}

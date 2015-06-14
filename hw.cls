@@ -12,6 +12,7 @@
 \newboolean{nmdhw@draft}
 \DeclareOption{draft}{\nmdhw@drafttrue}
 \PassDownOptionToPackage{times}{nmd/fonts}
+\PassDownOptionToPackage{stix}{nmd/fonts}
 \PassDownOptionToPackage{utopia}{nmd/fonts}
 \PassDownOptionToPackage{lucida}{nmd/fonts}
 \PassDownOptionToPackage{tikz}{nmd/graphics}
@@ -45,7 +46,8 @@
 }{}
 \StrCut{\nmdhw@jobname}{-}{\nmdhw@number}{\nmdhw@jobname}
 \StrCut{\nmdhw@jobname}{-}{\nmdhw@year}{\nmdhw@jobname}
-\StrCut{\nmdhw@jobname}{-}{\nmdhw@month}{\nmdhw@day}
+\StrCut{\nmdhw@jobname}{-}{\nmdhw@month}{\nmdhw@jobname}
+\StrCut{\nmdhw@jobname}{-}{\nmdhw@day}{\nmdhw@jobname}
 \nmdhw@stripleadingzero{\nmdhw@number}
 \nmdhw@stripleadingzero{\nmdhw@day}
 \def\nmdhw@dayofweek{\dayofweekname{\nmdhw@day}{\nmdhw@month}{\nmdhw@year}}

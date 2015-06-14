@@ -4,6 +4,7 @@
 \newboolean{nologo}
 \DeclareOption{nologo}{\nologotrue}
 \PassDownOptionToPackage{times}{nmd/fonts}
+\PassDownOptionToPackage{stix}{nmd/fonts}
 \PassDownOptionToPackage{utopia}{nmd/fonts}
 \PassDownOptionToPackage{lucida}{nmd/fonts}
 \PassDownOptionToPackage{tikz}{nmd/graphics}

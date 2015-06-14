@@ -111,8 +111,6 @@
 \titlespacing*{\section}{0pt}{3ex}{2ex}
 \titlespacing{\subsection}{0ex}{1.5ex}{0.5em}
 \titleformat{\subsection}[runin]{\normalsize\bfseries}{\thesubsection}{0.35em}{}[.]
-
-
    
 %%% Set the page headers
   

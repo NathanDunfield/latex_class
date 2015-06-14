@@ -10,8 +10,8 @@
 % Main options: custom (default), gt, ams
 %  
 % Font options: 
-%   * custom look: utopia (default), times, lucida. 
-%   * ams look: computer modern (default), utopia, times, lucida.
+%   * custom look: utopia (default), times, stix, lucida. 
+%   * ams look: computer modern (default), utopia, times, stix, lucida.
 %   * gt look: times (default and only option).
 %  
 % Font size options:
@@ -45,6 +45,7 @@
 \PassDownOptionToPackage{xy}{nmd/graphics}
 \PassDownOptionToPackage{tikz}{nmd/graphics}
 \PassDownOptionToPackage{times}{nmd/fonts}
+\PassDownOptionToPackage{stix}{nmd/fonts}
 \PassDownOptionToPackage{utopia}{nmd/fonts}
 \PassDownOptionToPackage{lucida}{nmd/fonts}
 

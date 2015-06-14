@@ -465,3 +465,18 @@
 \newcommand{\Phihat}{{\kernhat{2.5}{\Phi}{0}}}
 \newcommand{\Psihat}{{\kernhat{2.5}{\Psi}{0}}}
 \newcommand{\Omegahat}{{\kernhat{2.5}{\Omega}{0}}}
+
+
+% Fixing bracket sizing in Fourier fonts, as per
+% http://tex.stackexchange.com/questions/61023/
+
+\ifnmd@utopia
+  \def\resetMathstrut@{%
+     \setbox\z@\hbox{%
+       \mathchardef\@tempa\mathcode`\(\relax
+       \def\@tempb##1"##2##3{\the\textfont"##3\char"}%
+       \expandafter\@tempb\meaning\@tempa \relax
+     }%
+     \ht\Mathstrutbox@1.2\ht\z@ \dp\Mathstrutbox@1.2\dp\z@
+   }
+\fi

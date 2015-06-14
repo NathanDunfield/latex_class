@@ -1,0 +1,30 @@
+% Based on http://tex.stackexchange.com/questions/61023
+
+\documentclass[12pt]{article}
+
+\usepackage{fourier}
+\usepackage{amsmath}
+
+
+\newcommand{\sizetest}[1]{%
+  #1 \ \big#1 \ \Big#1 \ \bigg#1 \ \Bigg#1 %
+}
+
+
+\makeatletter
+\def\resetMathstrut@{%
+   \setbox\z@\hbox{%
+     \mathchardef\@tempa\mathcode`\(\relax
+     \def\@tempb##1"##2##3{\the\textfont"##3\char"}%
+     \expandafter\@tempb\meaning\@tempa \relax
+   }%
+   \ht\Mathstrutbox@1.2\ht\z@ \dp\Mathstrutbox@1.2\dp\z@
+ }
+\makeatother
+
+\begin{document}
+\[
+\sizetest{|} \qquad \sizetest{\|}  \qquad \sizetest{(} \qquad \sizetest{)}
+\]
+
+\end{document}

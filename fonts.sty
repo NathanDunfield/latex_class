@@ -5,10 +5,12 @@
 \ProvidesPackage{nmd/fonts}[2014/08/31 - Semester start edition]
 \RequirePackage{nmd/common}
 \newboolean{nmd@times}
+\newboolean{nmd@stix}
 \newboolean{nmd@utopia}
 \newboolean{nmd@lucida}
 \newboolean{nmd@computermodern}
 \DeclareOption{times}{\nmd@timestrue}
+\DeclareOption{stix}{\nmd@stixtrue}
 \DeclareOption{utopia}{\nmd@utopiatrue}
 \DeclareOption{lucida}{\nmd@lucidatrue}
 \DeclareOption{computermodern}{\nmd@computermoderntrue}
@@ -20,7 +22,7 @@
 %%% If no font is specified, infer from overall class or default to
 %%% Utopia.
 
-\ifnotthen{\boolean{nmd@times} \or \boolean{nmd@utopia} %
+\ifnotthen{\boolean{nmd@times}  \or \boolean{nmd@stix} \or \boolean{nmd@utopia} %
            \or \boolean{nmd@lucida} \or \boolean{nmd@computermodern}}%
    { \nmd@utopiatrue % Default 
      \@ifclassloaded{amsart}{\nmd@computermoderntrue \nmd@utopiafalse}{}
@@ -34,7 +36,18 @@
      }
 \fi
 
+\ifnmd@stix
+     \@ifclassloaded{gtpart}{\relax}{% 
+       \RequirePackage{stix} 
+       \let\Obar\undefined
+       \let\Vbar\undefined 
+       \let\Zbar\undefined
+       \let\obar\undefined
+     }
+\fi
+
 \ifnmd@utopia
+    % Note: Mathdesign with Utopia is much uglier.
     \RequirePackage{fourier} 
     \RequirePackage[scaled]{berasans}
 \fi

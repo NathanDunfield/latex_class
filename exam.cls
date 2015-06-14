@@ -6,6 +6,7 @@
 \DeclareOptionX{stretch}{\def\nmdhw@baselinestretch{#1}}
 \DeclareOptionX{margin}{\def\nmdhw@margin{#1}}
 \PassDownOptionToPackage{times}{nmd/fonts}
+\PassDownOptionToPackage{stix}{nmd/fonts}
 \PassDownOptionToPackage{utopia}{nmd/fonts}
 \PassDownOptionToPackage{lucida}{nmd/fonts}
 \PassDownOptionToPackage{tikz}{nmd/graphics}
