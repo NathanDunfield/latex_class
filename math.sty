@@ -116,9 +116,20 @@
 \newcommand{\eulerminus}[1]{\chi_-{\left(#1\right)}}
 
 \newcommand{\Tor}{\mathcal{T} \!\!\!\! \mathit{or}}
+
+% The package "mathtools" has a slick way of providing things
+% such as the below. 
+%
+% Autosizing abs, norm, and angle brackets
 \newcommand{\norm}[1]{{\left\| #1 \right\|}}
 \newcommand{\abs}[1]{{\left| #1 \right|}}
 \newcommand{\pair}[1]{\left\langle #1 \right\rangle}
+% Manual versions of the same
+\newcommand{\normm}[2]{{#1\| #2 #1\|}}
+\newcommand{\absm}[2]{{#1| #2 #1|}}
+\newcommand{\pairm}[2]{{#1\langle #2 #1\rangle}}
+
+% Building set and similar type definitions
 \newcommand{\somethingdef}[4]{{\left#1 {#2} \ \left| \ {#3} \vphantom{#2} \right. \right#4}}
 \newcommand{\somethingdefm}[5]{{  #1#2  {#3}  \ #1 | \   {#4}  #1#5 }}
 
