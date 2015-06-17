@@ -134,3 +134,19 @@ Fellow of the American Mathematical Society \\
 web: http://dunfield.info 
 \end{minipage}
 }
+
+
+
+\newcommand{\basicclosing}{
+
+\vspace{0.5cm}
+
+\hspace{2in}
+\begin{minipage}[b]{4in}
+Sincerely, 
+
+\signature
+
+Nathan M. Dunfield 
+\end{minipage}
+}
