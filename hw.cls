@@ -32,7 +32,7 @@
 
 %%% For fun, let's extract the hw date from the file name,
 %%% which should have the form "hw(num)-(year)-(month)-(day).tex"
-%%% where the prefix 'hw' can be replaced with 'mt' or 'fi'.  
+%%% where the prefix 'hw' can be replaced with 'mt', 'fi', or 'ws'.  
 
 \newcommand{\nmdhw@stripleadingzero}[1]{\IfBeginWith{#1}{0}{\StrGobbleLeft{#1}{1}[#1]}{\relax}}
 \IfBeginWith*{\jobname}{hw}{%
@@ -44,6 +44,9 @@
 \IfBeginWith*{\jobname}{fi}{%
   \StrBehind*{\jobname}{fi}[\nmdhw@jobname]
 }{}
+\IfBeginWith*{\jobname}{ws}{%
+  \StrBehind*{\jobname}{ws}[\nmdhw@jobname]
+}{}
 \StrCut{\nmdhw@jobname}{-}{\nmdhw@number}{\nmdhw@jobname}
 \StrCut{\nmdhw@jobname}{-}{\nmdhw@year}{\nmdhw@jobname}
 \StrCut{\nmdhw@jobname}{-}{\nmdhw@month}{\nmdhw@jobname}
@@ -51,14 +54,20 @@
 \nmdhw@stripleadingzero{\nmdhw@number}
 \nmdhw@stripleadingzero{\nmdhw@day}
 \def\nmdhw@dayofweek{\dayofweekname{\nmdhw@day}{\nmdhw@month}{\nmdhw@year}}
-\newcommand{\class}[2][HW]{% 
-  \textsf{\textbf{\large Math #2: %
+
+
+
+\newcommand{\classtemplate}[3]{% 
+  \textsf{\textbf{\large #2: %
       \ifnmdhw@draft \color{red} //DRAFT ONLY// \else \relax\fi %
-      #1 \nmdhw@number\ due % 
+      #1 \nmdhw@number\ #3 % 
   \nmdhw@dayofweek, \monthname[\nmdhw@month] \nmdhw@day, \nmdhw@year.}}
   \vspace{0.5cm}
   
 }
+
+\newcommand{\class}[2][HW]{\classtemplate{#1}{Math #2}{due}}
+\newcommand{\worksheet}[1]{\classtemplate{Worksheet}{Math #1}{}}
 
 %%% Main problem list; subproblems handled by enumerate
 
