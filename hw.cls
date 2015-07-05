@@ -9,6 +9,8 @@
 \RequirePackage{datetime}
 \DeclareOptionX{stretch}{\def\nmdhw@baselinestretch{#1}}
 \DeclareOptionX{margin}{\def\nmdhw@margin{#1}}
+\PassDownOptionToPackage{a4paper}{geometry}
+\PassDownOptionToPackage{letterpaper}{geometry}
 \newboolean{nmdhw@draft}
 \DeclareOption{draft}{\nmdhw@drafttrue}
 \PassDownOptionToPackage{times}{nmd/fonts}
@@ -22,7 +24,7 @@
 \ProcessOptions
 
 \LoadClass[12pt]{article}
-\RequirePackage[letterpaper, margin=\nmdhw@margin]{geometry}
+\RequirePackage[margin=\nmdhw@margin]{geometry}
 
 \RequirePackage{amsmath,amssymb}
 \renewcommand{\baselinestretch}{\nmdhw@baselinestretch}
