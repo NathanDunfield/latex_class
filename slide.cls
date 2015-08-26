@@ -1,6 +1,6 @@
 % Nathan's slide class
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd/exam}[2015/03/08 - Stuck at ORD edition]
+\ProvidesClass{nmd/slide}[2015/03/08 - Stuck at ORD edition]
 
 \RequirePackage{nmd/common}
 \RequirePackage{expl3}
@@ -31,7 +31,7 @@
 \setlength{\nmdslide@width}{12.66667cm}
 
 \ifthen{\equal{\nmdslide@aspect}{16:10}}{
-    \setlength{\nmdslide@width}{19cm}
+    \setlength{\nmdslide@width}{15.2cm}
 }
 \ifthen{\equal{\nmdslide@aspect}{16:9}}{
     \setlength{\nmdslide@width}{16.8888889cm}
