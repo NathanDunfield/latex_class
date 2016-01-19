@@ -6,11 +6,15 @@
 \RequirePackage{expl3}
 \RequirePackage{xkeyval}
 \newif\ifnmdslide@half
+\newif\ifnmdslide@morethanhalf
 \DeclareOption{half}{\nmdslide@halftrue}
+\DeclareOption{morethanhalf}{\nmdslide@morethanhalftrue}
 \DeclareOptionX{aspect}{\def\nmdslide@aspect{#1}}
+\DeclareOptionX{hmargin}{\def\nmdslide@hmargin{#1}}
+\DeclareOptionX{vmargin}{\def\nmdslide@vmargin{#1}}
 \PassDownOptionToPackage{tikz}{nmd/graphics}
 \PassDownOptionToPackage{xy}{nmd/graphics}
-\ExecuteOptionsX{aspect=4:3}
+\ExecuteOptionsX{aspect=4:3, hmargin=0.5cm, vmargin=0cm}
 \ProcessOptionsX
 \ProcessOptions
 
@@ -41,8 +45,15 @@
 \setlength{\nmdslide@width}{0.5\nmdslide@width}
 \fi
 
+\ifnmdslide@morethanhalf
+  % In 4:3 mode, morethanhalf results in a slide width of 7.5cm
+  \ifthen{\equal{\nmdslide@aspect}{4:3}}{
+    \setlength{\nmdslide@width}{0.592105\nmdslide@width}
+  }
+\fi
 
-\geometry{papersize={\nmdslide@width, \nmdslide@height}, hmargin=0.5cm, vmargin=0cm}
+
+\geometry{papersize={\nmdslide@width, \nmdslide@height},     hmargin=\nmdslide@hmargin, vmargin=\nmdslide@vmargin}
 
 
 
