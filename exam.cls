@@ -1,10 +1,13 @@
 % Nathan's exam class
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd/exam}[2014/08/31 - Semester start edition]
+\ProvidesClass{nmd/exam}[2016/08/31 - Semester start edition]
 \RequirePackage{nmd/common}
 \RequirePackage{xkeyval}
-\DeclareOptionX{stretch}{\def\nmdhw@baselinestretch{#1}}
-\DeclareOptionX{margin}{\def\nmdhw@margin{#1}}
+\DeclareOptionX{stretch}{\def\nmdexam@baselinestretch{#1}}
+\DeclareOptionX{inner}{\def\nmdexam@inner{#1}}
+\DeclareOptionX{outer}{\def\nmdexam@outer{#1}}
+\DeclareOptionX{top}{\def\nmdexam@top{#1}}
+\DeclareOptionX{bottom}{\def\nmdexam@bottom{#1}}
 \PassDownOptionToPackage{times}{nmd/fonts}
 \PassDownOptionToPackage{stix}{nmd/fonts}
 \PassDownOptionToPackage{utopia}{nmd/fonts}
@@ -13,19 +16,15 @@
 \PassDownOptionToPackage{xy}{nmd/graphics}
 \newboolean{nmd@draft}
 \DeclareOption{draftmode}{\nmd@drafttrue}
-\ExecuteOptionsX{stretch=1.1, margin=0.8in}
+\ExecuteOptionsX{stretch=1.1, inner=1.5cm, outer=1cm, top=1cm, bottom=1cm}
 \ProcessOptions
 
 \LoadClass[12pt]{article}
-\RequirePackage[letterpaper, margin=\nmdhw@margin]{geometry}
+\RequirePackage[letterpaper, inner=\nmdexam@inner, outer=\nmdexam@outer, 
+                            top=\nmdexam@top, bottom=\nmdexam@bottom]{geometry}
 
 \RequirePackage{amsmath,amssymb}
-\renewcommand{\baselinestretch}{\nmdhw@baselinestretch}
-\setlength{\textwidth}{7.5in}
-\setlength{\evensidemargin}{ -0.6in}
-\setlength{\oddsidemargin}{ -0.4in}
-\setlength{\textheight}{10.45in}
-\setlength{\topmargin}{-1.25in}
+\renewcommand{\baselinestretch}{\nmdexam@baselinestretch}
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
 
@@ -105,7 +104,7 @@
 \newcommand{\checkbox}{\fbox{$\vphantom{)}$\hspace{1.0em}}}
 \newcommand{\abox}{\mbox{\colorbox{white}{\checkbox}}}
 \newcommand{\posnegzero}{\fbox{negative \quad  zero \quad positive}}
-
+\newcommand{\truefalse}{\fbox{true \quad  false}}
 
 %%% Load the rest of the nmd-specific styles
 \RequirePackage{nmd/fonts}
