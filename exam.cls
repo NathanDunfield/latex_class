@@ -17,6 +17,7 @@
 \newboolean{nmd@draft}
 \DeclareOption{draftmode}{\nmd@drafttrue}
 \ExecuteOptionsX{stretch=1.1, inner=1.5cm, outer=1cm, top=1cm, bottom=1cm}
+\ProcessOptionsX
 \ProcessOptions
 
 \LoadClass[12pt]{article}
