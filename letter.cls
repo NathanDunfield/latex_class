@@ -3,6 +3,8 @@
 \RequirePackage{nmd/common}
 \newboolean{nologo}
 \DeclareOption{nologo}{\nologotrue}
+\newboolean{signature}
+\DeclareOption{signature}{\signaturetrue}
 \PassDownOptionToPackage{times}{nmd/fonts}
 \PassDownOptionToPackage{stix}{nmd/fonts}
 \PassDownOptionToPackage{utopia}{nmd/fonts}
@@ -66,8 +68,14 @@
 \ifnologo
   \def\signature{\vspace{0.915in}}
 \else 
-  \def\signature{\hspace{-1.5cm}\includegraphics[scale=0.4]{nathand}}
+  \signaturetrue
 \fi
+
+\ifsignature
+  \def\signature{\hspace{-1.5cm}\includegraphics[scale=0.4]{nathand}}
+\fi 
+
+
 
 \newcommand{\closing}{
 
