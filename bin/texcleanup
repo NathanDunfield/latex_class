@@ -1,0 +1,20 @@
+#! /usr/bin/env python 
+
+"""
+Deletes all the crap the TeX generates.  If any option is given, it deletes the final PDF files as well.
+"""
+
+import os, sys, glob
+
+os.system("rm -rf *.dvi  *.blg *.log *.lof *.lot *.toc *.aux *.bak *.tex.sav *.fls *.fdb_latexmk *.nav *.snm *~ #*# .*~ *.synctex.gz _region_.* *.prv latexdiff-*")
+
+for texfile_base_name in [os.path.splitext(f)[0] for f in glob.glob("*.tex")]:
+    os.system("rm -rf " + texfile_base_name + ".out")
+    os.system("rm -rf " + texfile_base_name + ".synctex.gz")
+    os.system("rm -rf " + texfile_base_name + ".prv")
+    if len(sys.argv) > 1:
+        os.system("rm -rf " + texfile_base_name + ".pdf")
+
+
+        
+                         

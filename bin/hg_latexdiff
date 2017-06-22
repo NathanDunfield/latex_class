@@ -1,0 +1,66 @@
+#! /usr/bin/env python
+
+help_str = """\
+Usage: hg_latexdiff [-r REVISION] file.tex
+
+Creates a latexdiff PDF of file.tex with an earlier version from the repository,
+and opens it in Skim.
+
+Requires the following Perl script to be in the users path:
+
+http://mirror.hmc.edu/ctan/support/latexdiff/latexdiff
+"""
+
+import os, sys, re, tempfile
+from optparse import OptionParser
+
+def get_revision_numbers():
+    return re.findall("changeset:\s+(\d*):", os.popen("hg log").read())
+
+def select_revision_for_comparison(filename):
+    """
+    If the current file is identical to the head of the repository,
+    use the previous version; if it's modified, use the head.
+    """
+    revs = get_revision_numbers()
+    len_curr_diff = len(os.popen("hg diff " + filename).read())
+    return revs[0] if len_curr_diff > 0 else revs[1]
+
+def get_old_version(filename, revision):
+    oldfile = tempfile.mktemp()
+    os.system( "hg cat -r %s %s > %s" % (revision, filename, oldfile) )
+    return oldfile
+
+def latexdiff(filename, cmpfile):
+    outfile =  "latexdiff-" + filename
+    assert filename[-4:] == ".tex"
+    cmd = "latexdiff '%s' '%s' > %s" % (cmpfile, filename, outfile)
+    os.system( cmd )
+    os.system( "cp " + filename[:-4] + ".bbl " + outfile[:-4]  + ".bbl")
+    for i in range(3):
+        os.system("pdflatex " + outfile)
+    os.system("open -a Skim " + outfile[:-4] + ".pdf")
+
+if __name__ == "__main__":
+    parser = OptionParser()
+    parser.add_option("-r", "--revision", help="hg revision to use for comparison.  If no revision is specified, it uses the most recent revision that differs from file.tex ")
+    parser.set_usage(help_str)
+    options, args = parser.parse_args()
+    filename = args[0]
+    revision = options.revision
+    if not revision:
+        revision = select_revision_for_comparison(filename)
+    oldfile = get_old_version(filename, revision)
+    latexdiff(filename, oldfile)
+    os.remove(oldfile)  
+                      
+
+
+        
+                           
+               
+
+        
+    
+
+    
