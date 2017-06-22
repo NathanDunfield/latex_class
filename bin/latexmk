@@ -135,7 +135,7 @@ use List::Util qw( max );
 use Cwd;            # To be able to change cwd
 use Cwd "chdir";    # Ensure $ENV{PWD}  tracks cwd
 use Digest::MD5;
-
+use Time::HiRes qw (sleep);
 #use strict;
 
 # The following variables are assigned once and then used in symbolic 
@@ -2038,17 +2038,17 @@ if ( $pdf_mode == 2 ) {
 #    which is probably not what the user intended.
 # Sleep periods less than zero give infinite delay
 if ( $sleep_time < 0 ) {
-     warn "$My_name: Correcting negative sleep_time to 1 sec.\n";
-     $sleep_time = 1;
+      warn "$My_name: Correcting negative sleep_time to 1 sec.\n";
+      $sleep_time = 1;
 }
-elsif ( ($sleep_time < 1) && ( $sleep_time != 0 ) ) {
-     warn "$My_name: Correcting nonzero sleep_time of less than 1 sec to 1 sec.\n";
-     $sleep_time = 1;
-}
-elsif ( $sleep_time == 0 ) {
-     warn "$My_name: sleep_time was configured to zero.\n",
-    "    Do you really want to do this?  It will give 100% CPU usage.\n";
-}
+# elsif ( ($sleep_time < 1) && ( $sleep_time != 0 ) ) {
+#      warn "$My_name: Correcting nonzero sleep_time of less than 1 sec to 1 sec.\n";
+#      $sleep_time = 1;
+# }
+# elsif ( $sleep_time == 0 ) {
+#      warn "$My_name: sleep_time was configured to zero.\n",
+#     "    Do you really want to do this?  It will give 100% CPU usage.\n";
+# }
 
 # Make convenient forms for lookup.
 # Extensions always have period.
