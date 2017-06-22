@@ -1,0 +1,16 @@
+\begin{tikzpicture}[line width=1pt]
+  \draw[mid arrow=0.1,
+        mid arrow=0.2,
+        add coordinate={0.5}{A}, 
+        add coordinate={0.9}{B}, 
+        tangent vector={0.7}{2cm},
+        normal vector={0.7}{-2cm},
+        vector along={0.7}{(-45:2)},
+        ]
+     \easybezier{(0, 0)}{(10, 0)}{70}{0.2}{50}{0.5};
+ 
+  \node[below] at (A) {A};
+  \node[below] at (B) {B};
+  \draw[dashed] (A) -- (B);
+  \fill ($(A)!0.5!(B)$) circle (2pt);  
+\end{tikzpicture}

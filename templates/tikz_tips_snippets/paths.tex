@@ -1,0 +1,7 @@
+\begin{tikzpicture}
+  \def\somepath{(0, 0) .. controls (1, 1) and (2, -1) .. (4, 0)}
+  \draw[line width=2pt, color=blue] \somepath;
+  \begin{scope}[shift={(5, 0)}]
+    \draw[line width=1pt, color=red] \somepath;
+  \end{scope}
+\end{tikzpicture}

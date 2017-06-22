@@ -1,0 +1,172 @@
+\documentclass[grant, tikz, noaddress]{nmd/article}
+\trimpages{1cm}
+\setlength{\parindent}{0pt}
+\usepackage[scaled=0.82]{beramono}
+% Copied from the thmtools documentation source code
+\usepackage{listings}
+\lstloadlanguages{[LaTeX]TeX}
+\lstset{language=[LaTeX]TeX, 
+        basicstyle=\footnotesize\ttfamily,
+        keywordstyle=\mdseries, aboveskip=2\parsep,
+        framesep=2ex, 
+        xleftmargin=1em,
+        framexleftmargin=1em,
+        backgroundcolor=\color{nmdlight!30},
+        rulecolor=\color{white},
+        frame=lines}
+
+\lstMakeShortInline[basicstyle=\normalsize\ttfamily]{|}
+
+\newcommand{\exampleviacols}[1]{%
+  \begin{minipage}{0.60\textwidth}
+    \lstinputlisting{%
+      tikz_tips_snippets/#1.tex
+  } 
+  \end{minipage} \quad
+  \begin{minipage}{0.37\textwidth}
+    \input{tikz_tips_snippets/#1.tex}
+  \end{minipage}
+}
+
+
+\newcommand{\exampleviarows}[1]{%
+  \begin{minipage}{\textwidth}
+    \lstinputlisting{%
+      tikz_tips_snippets/#1.tex
+    }
+
+    \vspace{0.5ex}
+
+    \input{tikz_tips_snippets/#1.tex}
+
+    \vspace{1.5ex}
+  \end{minipage}
+}
+
+
+
+\title{TikZ tips and tricks}
+\author{Nathan M. Dunfield}
+
+\begin{document}
+\maketitle
+
+
+This document assumes that |nmd/graphics| has been loaded with the
+|tikz| option enabled.  The |nmdstd| style includes my preferred line
+styles and arrows.
+
+\exampleviacols{arrows}
+
+Note that |nmd/graphics| also loads the following TikZ libraries:
+
+\begin{lstlisting}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{intersections}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+\end{lstlisting}
+
+
+\section{Recommended workflow}
+
+\begin{enumerate}
+  \item On paper, draw sketches and the finalize overall design as much as
+    possible. The more that is fixed now, the easier this will be.
+    
+  \item Scan the final drawing and crop in e.g.~Preview.  Go to the
+    master document and do something like the following to determine
+    the rough size of the figure.
+
+\begin{lstlisting}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=4.5cm]{scan}
+  \end{center}
+  \caption{A caption}
+  \label{fig:test}
+\end{figure}    
+\end{lstlisting}
+
+  \item Create a file |plots/afig.tex| where the TikZ
+    code will live containing
+
+\begin{lstlisting}
+\begin{tikzpicture}[nmdstd]
+  \node[above right, opacity=0.3] 
+        at (0, 0) {\includegraphics[width=4.5cm]{scan}};  
+  \measurementgrid{5}{5};
+\end{tikzpicture}
+\end{lstlisting}
+
+    and setup a minimal document to use whilst
+    programming the figure
+
+\begin{lstlisting}
+\documentclass[margin=0.5cm]{standalone}
+\usepackage{nmd/math}
+\usepackage[tikz]{nmd/graphics}
+\begin{document}
+  \input plots/afig.tex
+\end{document}
+\end{lstlisting}
+
+  \item Now hack away at |afig.tex| while compiling the minimal
+    document.  A good approach is first to define |\coordinates| for
+    key points using the grid and plot them
+
+\begin{lstlisting}
+  \coordinate (A) at (0.8, 0.4);
+  \coordinate (B) at (4.5, 2.5);
+  \coordinate (C) at (0.6, 4.6);
+
+  \foreach \p in {A,B,C}{
+    \node[opacity=0.2] at (\p) {\p};
+  }
+\end{lstlisting}
+  
+    Now use convex combinations and barycentric coordinates to define
+    even more points
+
+\begin{lstlisting}
+    \coordinate (D) at ($(A)!0.25!(B)$);
+    \coordinate (center) at (barycentric cs:A=0.5,B=0.5,C=0.5);
+\end{lstlisting}
+
+\end{enumerate}
+
+\section{Drawing B\'ezier curves efficiently}
+
+Visualize the control points via the |show controls| style and specify
+them relative to the endpoints using polar coordinates as in the
+second example.
+
+\exampleviarows{controls}
+
+There is a whole package |spath| for working with paths as
+objects, but overall it seems like the best approach if you want to
+reuse a path is just to declare a macro.
+
+\exampleviarows{paths}
+
+Even better than in the previous examples, you can use my
+|easybezier| macro to specify the control points using polar
+coordinates oriented with respect to the line between the end points
+so that the distance between the endpoints is scaled to be one unit.
+
+\exampleviacols{easy}
+
+\section{Doing things along paths}
+
+Often we want to do something along a path, like add an arrow or a
+coordinate or add a tangent or normal vector.  This is done with the
+decorations/markings functionality of TikZ, which is a bit verbose, so
+I made shortcuts for some of these.
+
+\exampleviarows{oncurve}
+
+
+
+\end{document}

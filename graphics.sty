@@ -22,8 +22,12 @@
 
 \iftikz 
 \RequirePackage{tikz}
-\usetikzlibrary{positioning}
 \usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{intersections}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
 
 % USAGE:  \begin{tikzoverlay}[<graphics opts>]{file name}[tikz opts]
 %              (tikz commands in coordinate system where horizontal
@@ -82,8 +86,116 @@
  \input{plots/#2}
 }
 
-%%% Doing a TIkZ overlay over an entire page.
 
+% Basic default for all my TikZ pictures
+\tikzset{%
+  nmdstd/.style={%
+    line join=round,
+    line cap=round,
+    font=\footnotesize, 
+    % My preferred arrow has length 1pt + 5*(line width) and 
+    % width equal to its height.
+    >={Computer Modern Rightarrow[length=1pt 5, width'=0pt 1]},
+  }
+}
+
+% Default style for labels on subfigures
+\tikzset{%
+  subfig label/.style={%
+    font=\small
+  }
+}
+
+% Draw an arrow somewhere along a path
+\tikzset{%
+  mid arrow/.style={postaction={
+        decorate,
+        decoration={markings,
+                    mark=at position #1 with {\arrow{>}}}
+        }}
+}
+
+% Add a coordinate somewhere along a path
+\tikzset{%
+  add coordinate/.style 2 args={postaction={
+        decorate,
+        decoration={markings,
+                    mark=at position #1 with {\coordinate (#2);}}
+        }}
+}
+
+% Show the control points for the Bezier curves
+\tikzset{%
+  show controls/.style={
+    postaction={
+      decoration={
+        show path construction,
+        curveto code={
+          \draw [blue] 
+            (\tikzinputsegmentfirst) -- (\tikzinputsegmentsupporta)
+            (\tikzinputsegmentlast) -- (\tikzinputsegmentsupportb);
+          \fill [red, opacity=0.5] 
+            (\tikzinputsegmentsupporta) circle [radius=.5ex]
+            (\tikzinputsegmentsupportb) circle [radius=.5ex];
+        }
+      },
+      decorate
+}}} 
+
+% Add a tangent vector along a curve
+\tikzset{%
+  tangent vector/.style 2 args={
+    postaction={
+      decorate,
+      decoration={markings,
+         mark=at position #1 with {\draw (0, 0) -- (#2, 0);}}
+      }}
+}
+
+% Add a normal vector along a curve
+\tikzset{%
+  normal vector/.style 2 args={
+    postaction={
+      decorate,
+      decoration={markings,
+         mark=at position #1 with {\draw (0, 0) -- (0, #2);}}
+      }}
+}
+
+% Add a vector along a curve
+\tikzset{%
+    vector along/.style 2 args={
+    postaction={
+      decorate,
+      decoration={markings,
+         mark=at position #1 with {\draw (0, 0) -- #2;}}
+      }}
+}
+
+
+% Specifying Bezier curves in a relatively comprehensible way.
+\newcommand{\easybezier}[6]{%
+  #1 .. controls ($#1!#4!#3:#2$) and ($#2!#6!#5:#1$) .. #2
+}
+
+% Drawing a grid in the upper quadrant to measure stuff against
+
+\newcommand{\measurementgrid}[2]{%
+  \begin{scope}
+    \begin{scope}[line width=0.2pt, color=blue!30]
+      \draw[dashed, step=0.5] (0, 0) grid (#1, #2);
+      \draw[step=1]  (0, 0) grid (#1, #2);
+    \end{scope}
+    \begin{scope}[font=\scriptsize, color=black!40]
+      \foreach \x in {0,1,...,#1}{
+        \node[below] at (\x, 0) {\x};
+      }
+      \foreach \y in {0,1,...,#2}{
+        \node[left] at (0,\y) {\y};
+      }
+    \end{scope}
+  \end{scope}
+}
 
 
 \fi  % End \iftikz
