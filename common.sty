@@ -50,7 +50,11 @@
 \addtolength{\pdfpageheight}{\remnantmargin}
 }
 \newcommand{\trimpages}[1]{%
-   \AtBeginDocument{\trimpdfpages{#1}}
+  % This test is for compatibility with TikZ's picture
+  % caching ("externalization") system.  
+  \ifthen{\isundefined{\tikzexternalrealjob}}{%
+    \AtBeginDocument{\trimpdfpages{#1}}
+  } 
 }
 
 % Format for printing on US Letter pages
