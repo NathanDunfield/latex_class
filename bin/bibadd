@@ -1,0 +1,52 @@
+#! /usr/bin/env python
+
+import bib, sys, glob, re
+
+sep = '   '
+
+def add_eprint(bibentry):
+    ans = bib.add_eprints_to_bibtex_entry(bibentry)
+
+
+def sensible_name(bibentry):
+    if re.search('(@[a-zA-Z]*\s*{)(MR.*),', bibentry):
+        key = "".join(bib.get_bibtex_authors(bibentry)) + bib.get_bibtex_field(bibentry, 'year')
+        bibentry = re.sub('(@[a-zA-Z]*\s*{)(MR.*),', '\g<1>%s,' % key, bibentry)
+    return bibentry
+    
+def process_query(query, out):
+    if re.search("https{0,1}://", query):
+        print "Querying arXiv for " + query
+        ans = bib.make_arXiv_entry(query)
+    else:
+        if query[:2] == "MR":
+            print "Querying MathSciNet for " + query
+            ans = bib.query_mr(query)
+        else:
+            print "Querying MRef for " + query[:20]
+            ans = bib.query_mref(query)
+        ans = bib.add_eprints_to_bibtex_entry(ans)
+        ans = sensible_name(ans)
+
+    if ans:
+        print sep + "Added " + re.search('@[a-zA-Z]*\s*{(.*),', ans).group(1)
+        out.write(ans.encode('utf-8') + "\n\n")
+        out.flush()
+    else:
+        print sep + "Not found"
+
+
+if __name__ == "__main__":
+    bibfiles = [a for a in sys.argv if a[-4:] == ".bib"] + glob.glob("*.bib")
+    if len(bibfiles) > 0:
+        outfile = bibfiles[0]
+        print "Writing output to " + outfile
+        out = open(outfile, "a")
+    else:
+        print "Writing output to stdout"
+        out = sys.stdout
+
+    queries = [q for q in sys.argv[1:] if a[-4:] != ".bib"]
+    for query in queries:
+        process_query(query, out)
+
