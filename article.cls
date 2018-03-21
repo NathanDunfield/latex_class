@@ -48,6 +48,8 @@
 \PassDownOptionToPackage{stix}{nmd/fonts}
 \PassDownOptionToPackage{utopia}{nmd/fonts}
 \PassDownOptionToPackage{lucida}{nmd/fonts}
+\PassDownOptionToPackage{sepfignums}{nmd/thm}
+\PassDownOptionToPackage{defaultenums}{nmd/thm}
 
 % The GT style has a fixed size font, but the AMS and custom ones
 % doesn't.  

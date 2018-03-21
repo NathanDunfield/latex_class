@@ -1,0 +1,26 @@
+\documentclass[tikz]{nmd/article}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{intersections}
+
+\laptop
+
+\begin{document}
+
+\begin{tikzpicture}[line width=5pt]
+  \draw[dashed, color=black!10, line width=1pt] (-0.5, -0.5) grid (2.5, 2.5);
+  \draw[{Round Cap[reversed]}-{Round Cap[reversed]}] 
+          (0, 0) -- (2, 0);
+  \draw (-0.5, 1) -- (2.5, 1);
+  \draw[] 
+          (0, 1) -- (2, 1);
+\end{tikzpicture}
+
+\vspace{1cm}
+
+\begin{tikzpicture}[line width=5pt]
+  \draw[dashed, color=black!10, line width=1pt] (-0.5, -0.5) grid (2.5, 2.5);
+  \draw[name path=main path] (0, 0) .. controls (0, 2) and (2, 2) .. (2, 0);
+  \fill[name path=my circle, color=white] (1, 1.5) circle (0.4);
+\end{tikzpicture}
+
+\end{document}

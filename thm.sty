@@ -5,6 +5,13 @@
 \RequirePackage{nmd/common}
 \RequirePackage{thmtools}
 \RequirePackage{thm-restate}
+\newboolean{nmd@numfigswithrest}  \nmd@numfigswithresttrue
+\newboolean{nmd@usealphaenums}    \nmd@usealphaenumstrue
+\DeclareOption{sepfignums}{\nmd@numfigswithrestfalse}
+\DeclareOption{defaultenums}{\nmd@usealphaenumsfalse}
+\ProcessOptions
+
+
 
 % define needed keyval key if necessary
 \ifthen{\isundefined{\KV@thmdef@nmd}}%
@@ -40,8 +47,13 @@
 % Change enum to use letters, so there's no confusion 
 % with equation labels.  I'm not really happy with this. 
 
-\renewcommand{\labelenumi}{(\alph{enumi}) }
-\renewcommand{\theenumi}{\alph{enumi}}
+\ifnmd@usealphaenums
+  \renewcommand{\labelenumi}{(\alph{enumi}) }
+  \renewcommand{\theenumi}{\alph{enumi}}
+\else
+  \renewcommand{\labelenumi}{(\arabic{enumi}) }
+  \renewcommand{\theenumi}{\arabic{enumi}}
+\fi
 
 % Figures and tables 
 \RequirePackage{booktabs}
@@ -52,13 +64,14 @@
 % subsection/theorem counter. There ought to be a better 
 % way to equate two counters than this, but...
 
-\let\c@figure=\c@subsection
-\let\thefigure=\thesubsection
 \let\c@table=\c@subsection
 \let\thetable=\thesubsection
 \let\c@equation=\c@subsection
 \let\theequation=\thesubsection
-
+\ifnmd@numfigswithrest
+  \let\c@figure=\c@subsection
+  \let\thefigure=\thesubsection
+\fi
 
 % Ugly bug fix for thmtools restateable spacing issue.  See
 % 

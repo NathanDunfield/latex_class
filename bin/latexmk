@@ -7803,7 +7803,7 @@ sub glob_list1 {
         }
         else { 
             # This glob fails to work as desired, if the pattern contains spaces.
-            push @globbed, glob( "$file_spec" );
+            push @globbed, bsd_glob( "$file_spec" );
         }
     }
     return @globbed;

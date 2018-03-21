@@ -1,5 +1,5 @@
 #! /bin/sh
 
-cp $HOME/tex/pkgs/nmd/templates/slides.tex $1
+cp $HOME/tex/tex/nmd/templates/slides.tex $1
 open $1
 
