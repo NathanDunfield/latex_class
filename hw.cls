@@ -27,6 +27,7 @@
 \RequirePackage[margin=\nmdhw@margin]{geometry}
 
 \RequirePackage{amsmath,amssymb}
+\RequirePackage{enumitem}
 \renewcommand{\baselinestretch}{\nmdhw@baselinestretch}
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
@@ -73,19 +74,12 @@
 
 %%% Main problem list; subproblems handled by enumerate
 
-\newcounter{problems}
-\newenvironment{problems}{
-  \begin{list}%
-    % label
-    {\arabic{problems}.}
-    % parameters
-    {
-      \setlength{\leftmargin}{0.7cm}
-      \setlength{\labelwidth}{0.5cm}
-      \setlength{\labelsep}{0.3cm}
-      \usecounter{problems}
-    }
-  }{\end{list}}
+\newlist{problems}{enumerate}{10}
+\setlist[problems]{label=\arabic*.,
+  leftmargin=0.7cm,
+  labelwidth=0.5cm,
+  labelsep=0.3cm,
+}
 
 \renewcommand{\labelenumi}{(\alph{enumi}) }
 \renewcommand{\theenumi}{\alph{enumi}}
