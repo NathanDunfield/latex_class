@@ -3250,7 +3250,7 @@ sub cleanup1 {
     my $root_fixed = fix_pattern( $root_filename );
     foreach (@_) { 
         (my $name = /%R/ ? $_ : "%R.$_") =~ s/%R/$dir$root_fixed/;
-        unlink_or_move( glob( "$name" ) );
+        unlink_or_move( bsd_glob( "$name" ) );
     }
 } #END cleanup1
 
