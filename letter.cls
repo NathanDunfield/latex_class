@@ -91,7 +91,7 @@ Nathan M. Dunfield
 
 \vspace{2ex}
 
-Associate Professor \\
+Professor of Mathematics \\
 University of Illinois
 \end{minipage}
 }
@@ -110,7 +110,7 @@ Nathan M. Dunfield
 
 \vspace{2ex}
 
-Associate Professor of Mathematics \\
+Professor of Mathematics \\
 University of Illinois \\
 \\ 
 Fellow of the American Mathematical Society (inducted 2013) \\
@@ -134,7 +134,7 @@ Nathan M. Dunfield
 
 \vspace{2ex}
 
-Associate Professor of Mathematics \\
+Professor of Mathematics \\
 University of Illinois \\
 \\ 
 Fellow of the American Mathematical Society \\
