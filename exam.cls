@@ -95,6 +95,7 @@
 \newcommand{\Bigthreetuple}{\hspace{1.6in}, \hspace{1.6in}, \hspace{1.6in}}
 \newcommand{\ansvec}{\Big\langle\threetuple\Big\rangle}
 \newcommand{\anstwovec}[1]{\Big\langle \hspace{#1}, \hspace{#1} \Big\rangle}
+\newcommand{\ansthreevec}[1]{\Big\langle \hspace{#1}, \hspace{#1}, \hspace{#1} \Big\rangle}
 \newcommand{\ansbigvec}{\Big\langle\bigthreetuple\Big\rangle}
 \newcommand{\ansBigvec}{\Big\langle\Bigthreetuple\Big\rangle}
 \newcommand{\anspt}{\Big(\threetuple\Big)}
