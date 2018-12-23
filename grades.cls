@@ -73,6 +73,7 @@
 
 % student bar
 \newcommand{\studentbar}[1]{%
-\draw[color=black, line width=4pt] (#1, 0) -- (#1, 1.15*\nmd@plotheight);
-}
+\ifnotthen{\equal{#1}{EX}}{
+  \draw[color=black, line width=4pt] (#1, 0) -- (#1, 1.15*\nmd@plotheight);
+}}
 

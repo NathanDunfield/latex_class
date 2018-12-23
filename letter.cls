@@ -100,8 +100,8 @@ University of Illinois
 
 \vspace{0.5cm}
 
-\hspace{2in}
-\begin{minipage}[b]{4in}
+\hspace{1.1in}
+\begin{minipage}[b]{5in}
 Sincerely, 
 
 \signature
@@ -115,7 +115,9 @@ University of Illinois \\
 \\ 
 Fellow of the American Mathematical Society (inducted 2013) \\
 Former Simons Fellow (2013--14) and Sloan Fellow (2004--08) \\
-LAS Dean's award for undergraduate teaching (2014) \\ 
+LAS Dean's award for undergraduate teaching (2014) \\
+Faculty Teaching Award from the Associated Students of Caltech (2006)
+
 web: http://dunfield.info 
 \end{minipage}
 }
