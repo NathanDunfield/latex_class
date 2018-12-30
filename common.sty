@@ -90,3 +90,26 @@
   \setcounter{totalnumber}{20}
   \setcounter{dbltopnumber}{9}
 }
+
+%%% Showing current font sizes, see
+
+\newcommand\nmd@thefontsizeline[2]{#1 #2 & #1 \f@size pt & #1 \f@baselineskip \\}
+
+\newcommand{\showallfontsizes}{%
+  Here are the current font sizes in \TeX points, i.e. 72.27 pts/inch
+
+  \begin{tabular}{ccc}
+    name & size & baselineskip \\
+    \nmd@thefontsizeline{\tiny}{tiny}
+    \nmd@thefontsizeline{\scriptsize}{scriptsize}
+    \nmd@thefontsizeline{\footnotesize}{footnotesize}
+    \nmd@thefontsizeline{\small}{small}
+    \nmd@thefontsizeline{\normalsize}{normalsize}
+    \nmd@thefontsizeline{\large}{large}
+    \nmd@thefontsizeline{\Large}{Large}
+    \nmd@thefontsizeline{\LARGE}{LARGE}
+    \nmd@thefontsizeline{\huge}{huge}
+    \nmd@thefontsizeline{\Huge}{Huge}
+  \end{tabular}
+}
+

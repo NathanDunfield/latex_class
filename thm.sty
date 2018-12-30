@@ -66,13 +66,16 @@
 % subsection/theorem counter. There ought to be a better 
 % way to equate two counters than this, but...
 
-\let\c@table=\c@subsection
-\let\thetable=\thesubsection
 \let\c@equation=\c@subsection
 \let\theequation=\thesubsection
 \ifnmd@numfigswithrest
   \let\c@figure=\c@subsection
   \let\thefigure=\thesubsection
+  \let\c@table=\c@subsection
+  \let\thetable=\thesubsection
+\else % Still want tables and figures on the same counter
+  \let\c@table=\c@figure
+  \let\thetable=\thefigure
 \fi
 
 % Ugly bug fix for thmtools restateable spacing issue.  See
