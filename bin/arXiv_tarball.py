@@ -17,7 +17,7 @@ def parse_tex_output(base_name, include_all=False):
 
     includes = []
     for extention in ["tex", "cls", "sty", "bbl", "toc"]:
-        poss_includes = re.findall( "\s\((\S+\." + extention + ")[\s)]", data)
+        poss_includes = re.findall( "\s\((\S+\." + extention + ")", data)
         includes += [p for p in poss_includes
                      if not (re.search(TeXLive_prefix, p) or p in skips)]
 
@@ -47,7 +47,7 @@ def create_needed_directories(files, dest_dir):
     """
     We assume that any files contained in directories
     under the current one should be put into the arXiv
-    in the same way.  File elsewhere will just be put into
+    in the same way.  Files elsewhere will just be put into
     the root directory.  The exception is the nmd package.
     """
     dirs = set([ os.path.split(f)[0] for f in files if is_local(f)])

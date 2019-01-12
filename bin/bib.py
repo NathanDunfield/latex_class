@@ -122,6 +122,8 @@ def make_arXiv_entry(query, cite_name = None):
     arXiv_data = urllib.urlopen(url).read()
     pos = arXiv_data.find('</head>')
     arXiv_data = arXiv_data[ : pos + 7] + '</html>'
+    # In 2019/1, started have improperly escaped "&" symbols in some urls
+    arXiv_data = arXiv_data.replace('&', '')
     
     metas = dom.parseString(arXiv_data).getElementsByTagName('meta')
     pages = determine_arXiv_paper_length(find_meta(metas, 'citation_pdf_url'))
