@@ -9,11 +9,13 @@
 \newboolean{nmd@utopia}
 \newboolean{nmd@lucida}
 \newboolean{nmd@computermodern}
+\newboolean{nmd@eulercal}
 \DeclareOption{times}{\nmd@timestrue}
 \DeclareOption{stix}{\nmd@stixtrue}
 \DeclareOption{utopia}{\nmd@utopiatrue}
 \DeclareOption{lucida}{\nmd@lucidatrue}
 \DeclareOption{computermodern}{\nmd@computermoderntrue}
+\DeclareOption{eulercal}{\nmd@eulercaltrue}
 \ProcessOptions
 
 %%% Other people probably don't have the Lucida fonts
@@ -50,7 +52,20 @@
     % Note: Mathdesign with Utopia is much uglier.
     \RequirePackage{fourier} 
     \RequirePackage[scaled]{berasans}
-    \RequirePackage[]{rsfso}
+    % Use slanted RSFS script fonts as default or Euler as an option
+    \ifnmd@eulercal
+        \DeclareFontFamily{U}{eus}{}
+        \DeclareFontShape{U}{eus}{m}{n}{%
+          <-6>  s*[0.93] eusm5%
+          <6-9> s*[0.93] eusm7%
+          <9->  s*[0.93] eusm10%
+        }{}
+        \DeclareMathAlphabet\EuScript{U}{eus}{m}{n}
+        \SetMathAlphabet\EuScript{bold}{U}{eus}{b}{n}
+        \renewcommand{\mathcal}{\EuScript}
+    \else
+        \RequirePackage[]{rsfso}
+    \fi
 \fi
 
 \ifnmd@lucida 
