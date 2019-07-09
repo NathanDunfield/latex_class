@@ -14,6 +14,7 @@
 \DeclareOptionX{vmargin}{\def\nmdslide@vmargin{#1}}
 \PassDownOptionToPackage{tikz}{nmd/graphics}
 \PassDownOptionToPackage{xy}{nmd/graphics}
+\PassDownOptionToPackage{eulercal}{nmd/fonts}
 \PassDownOptionToClass{t}{beamer}
 \PassDownOptionToClass{c}{beamer}
 \ExecuteOptionsX{aspect=4:3, hmargin=0.5cm, vmargin=0cm}
