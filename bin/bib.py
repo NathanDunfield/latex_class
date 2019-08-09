@@ -122,9 +122,11 @@ def make_arXiv_entry(query, cite_name = None):
     arXiv_data = urllib.urlopen(url).read()
     pos = arXiv_data.find('</head>')
     arXiv_data = arXiv_data[ : pos + 7] + '</html>'
-    # In 2019/1, started have improperly escaped "&" symbols in some urls
+    # In 2019/1, started having improperly escaped "&" symbols in some urls
     arXiv_data = arXiv_data.replace('&', '')
-    
+    # In 2019/8, started having an unclosed tag in the header.
+    arXiv_data = arXiv_data.replace('font-awesome.min.css">',
+                                    'font-awesome.min.css"/>')
     metas = dom.parseString(arXiv_data).getElementsByTagName('meta')
     pages = determine_arXiv_paper_length(find_meta(metas, 'citation_pdf_url'))
     year = find_meta(metas, 'citation_online_date').split("/")[0]
