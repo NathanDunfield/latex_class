@@ -26,7 +26,9 @@
    {}
   
 \newcommand{\nmdnewtheorem}[1]{%
-  \declaretheorem[nmd, style=plain, sibling=subsection]{#1}}
+  \declaretheorem[nmd, style=plain, sibling=subsection]{#1}
+  \declaretheorem[nmd, style=plain, name={\thmt@modifycase #1}, numbered=no]{#1*}
+}
 
 \nmdnewtheorem{theorem}
 \nmdnewtheorem{conjecture}

@@ -11,6 +11,7 @@
 \newboolean{fullpage}
 \newboolean{fatpage}
 \newboolean{grant}
+\newboolean{nogeometry}
 \newboolean{address} \addresstrue
 \newboolean{smalltitle}
 \newboolean{elevenpt}
@@ -19,6 +20,7 @@
 \DeclareOption{fullpage}{\fullpagetrue}
 \DeclareOption{fatpage}{\fatpagetrue}
 \DeclareOption{grant}{\granttrue}
+\DeclareOption{nogeometry}{\nogeometrytrue}
 \DeclareOption{noaddress}{\addressfalse}
 \DeclareOption{smalltitle}{\smalltitletrue}
 \ProcessOptions
@@ -55,7 +57,8 @@
     \RequirePackage[paper=letterpaper, margin=1in]{geometry}
 \fi
 
-\ifnotthen{\boolean{fullpage} \or \boolean{fatpage} \or \boolean{grant}}{%
+\ifnotthen{\boolean{fullpage} \or \boolean{fatpage}
+           \or \boolean{grant} \or \boolean{nogeometry}}{%
     \RequirePackage[papersize={\nmdwidth+2\nmdhmargins,
          1.33\nmdwidth+2.66\nmdhmargins}, hmarginratio=1:1,
          top=0.85\nmdhmargins, textwidth=\nmdwidth,
@@ -146,6 +149,12 @@
     \thmnumber{\@upn{\the\thm@headfont#2\@ifnotempty{#1}{\hspace{0.35em}}}}%
 \thmname{#1}%
 \thmnote{ {#3}}}
+
+% Change font on notes when swapped numbers not used (rare)
+\def\thmhead@plain#1#2#3{%
+  \thmname{#1}\thmnumber{\@ifnotempty{#1}{ }\@upn{#2}}%
+  \thmnote{ {#3}}}
+\let\thmhead\thmhead@plain
 
 % Add the rule on the left
 \RequirePackage{settobox}
