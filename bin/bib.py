@@ -127,6 +127,9 @@ def make_arXiv_entry(query, cite_name = None):
     # In 2019/8, started having an unclosed tag in the header.
     arXiv_data = arXiv_data.replace('font-awesome.min.css">',
                                     'font-awesome.min.css"/>')
+    # In 2020/1, another unclosed tag in the header.
+    arXiv_data = arXiv_data.replace('initial-scale=1">',
+                                    'initial-scale=1"/>')
     metas = dom.parseString(arXiv_data).getElementsByTagName('meta')
     pages = determine_arXiv_paper_length(find_meta(metas, 'citation_pdf_url'))
     year = find_meta(metas, 'citation_online_date').split("/")[0]
