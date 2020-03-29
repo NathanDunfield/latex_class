@@ -79,7 +79,11 @@ def main(base_name, include_all=False):
         else:
             target = ''
         os.system("cp -RL " + f + " " + arXiv_dir + "/" + target)
-    os.system("tar cfz " + arXiv_dir + ".tar.gz " + arXiv_dir)
+    tar_cmd = "tar cfz "
+    if sys.platform == 'darwin':
+        # turn off special handling of ._* files in tar
+        tar_cmd = "COPYFILE_DISABLE=1 " + tar_cmd
+    os.system(tar_cmd + arXiv_dir + ".tar.gz " + arXiv_dir)
     os.system("rm -rf " + arXiv_dir)
     
 if __name__ == "__main__":
