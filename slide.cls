@@ -43,6 +43,9 @@
 \ifthen{\equal{\nmdslide@aspect}{16:9}}{
     \setlength{\nmdslide@width}{16.8888889cm}
 }
+\ifthen{\equal{\nmdslide@aspect}{3:2}}{
+    \setlength{\nmdslide@width}{14.25cm}
+}
 
 \ifnmdslide@half
 \setlength{\nmdslide@width}{0.5\nmdslide@width}
