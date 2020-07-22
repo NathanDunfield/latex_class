@@ -62,13 +62,15 @@ def create_needed_directories(files, dest_dir):
 
 
 
-def main(base_name, include_all=False):
+def main(base_name, include_all=False, extra_includes=None):
     arXiv_dir = "arXiv_" + base_name
     os.system("rm -rf " + arXiv_dir + " " + arXiv_dir + ".tar.gz")
     os.mkdir(arXiv_dir)
     includes = parse_tex_output(base_name, include_all=include_all)
+    if not extra_includes is None:
+        includes += extra_includes
     for i in includes:
-        print i
+        print(i)
     
     create_needed_directories(includes, arXiv_dir)
     for f in includes:
@@ -89,9 +91,10 @@ def main(base_name, include_all=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument('texfile', help='the name of the main tex file')
-    parser.add_argument('-a', '--all', action='store_true', help='include eps, bib, and bst files', )
+    parser.add_argument('-a', '--all', action='store_true', help='include eps, bib, and bst files')
+    parser.add_argument('-i', '--include', action='append', help='file to include manually')
     args = parser.parse_args()
     base_name = os.path.splitext(args.texfile)[0]
-    main(base_name, args.all)
+    main(base_name, args.all, args.include)
     
     
