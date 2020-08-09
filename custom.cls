@@ -8,7 +8,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nmd/custom}[2014/08/31 - Semester start edition]
 \RequirePackage{nmd/common}
-\RequirePackage{microtype}
 \newboolean{fullpage}
 \newboolean{fatpage}
 \newboolean{grant}
@@ -34,8 +33,12 @@
 
 %%% Load base: LaTeX's article class
 \LoadClass{article}
-   
- %%% Set page size
+
+%%% Fine tuning of fonts
+
+\RequirePackage{microtype}
+
+%%% Set page size
 \RequirePackage{calc}
 \newlength{\nmdwidth}
 \newlength{\nmdhmargins}
