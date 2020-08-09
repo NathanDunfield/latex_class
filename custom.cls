@@ -8,6 +8,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nmd/custom}[2014/08/31 - Semester start edition]
 \RequirePackage{nmd/common}
+\RequirePackage{microtype}
 \newboolean{fullpage}
 \newboolean{fatpage}
 \newboolean{grant}
