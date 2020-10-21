@@ -116,20 +116,13 @@ def determine_arXiv_paper_length(url):
         sys.exit()
 
 def make_arXiv_entry(query, cite_name = None):
-    # Get data from arXiv.  In 2013/10 the xml started being misformed, so we
-    # cut of the top of the document where the actual data is.  
+    # Get data from arXiv. By late 2020, the html was so malformed
+    # that I gave up using xml to parse the whole thing and switched
+    # to regexs.
     url = query if re.match("https{0,1}://", query) else "http://arxiv.org/abs/" + query
     arXiv_data = urllib.urlopen(url).read()
-    pos = arXiv_data.find('</head>')
-    arXiv_data = arXiv_data[ : pos + 7] + '</html>'
-    # In 2019/1, started having improperly escaped "&" symbols in some urls
-    arXiv_data = arXiv_data.replace('&', '')
-    # In 2019/8, started having an unclosed tag in the header.
-    arXiv_data = arXiv_data.replace('font-awesome.min.css">',
-                                    'font-awesome.min.css"/>')
-    # In 2020/1, another unclosed tag in the header.
-    arXiv_data = arXiv_data.replace('initial-scale=1">',
-                                    'initial-scale=1"/>')
+    metas = re.findall('<meta.*?/>', arXiv_data, re.MULTILINE)
+    arXiv_data = '<head>\n' + '\n'.join(metas) + '\n</head>\n'
     metas = dom.parseString(arXiv_data).getElementsByTagName('meta')
     pages = determine_arXiv_paper_length(find_meta(metas, 'citation_pdf_url'))
     year = find_meta(metas, 'citation_online_date').split("/")[0]
