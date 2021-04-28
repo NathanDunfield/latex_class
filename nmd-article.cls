@@ -30,9 +30,9 @@
 %    \trimpages, \laptop, \printing
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd/article}[2014/08/31 - Semester start edition]
+\ProvidesClass{nmd-article}[2014/08/31 - Semester start edition]
 \RequirePackage{etex}
-\RequirePackage{nmd/common}
+\RequirePackage{nmd-common}
 
 %%% Setup options
 
@@ -42,15 +42,15 @@
 \DeclareOption{gt}{\gttrue}
 \DeclareOption{ams}{\amstrue}
 \DeclareOption{custom}{\customtrue}
-\PassDownOptionToPackage{xy}{nmd/graphics}
-\PassDownOptionToPackage{tikz}{nmd/graphics}
-\PassDownOptionToPackage{times}{nmd/fonts}
-\PassDownOptionToPackage{stix}{nmd/fonts}
-\PassDownOptionToPackage{utopia}{nmd/fonts}
-\PassDownOptionToPackage{lucida}{nmd/fonts}
-\PassDownOptionToPackage{eulercal}{nmd/fonts}
-\PassDownOptionToPackage{sepfignums}{nmd/thm}
-\PassDownOptionToPackage{defaultenums}{nmd/thm}
+\PassDownOptionToPackage{xy}{nmd-graphics}
+\PassDownOptionToPackage{tikz}{nmd-graphics}
+\PassDownOptionToPackage{times}{nmd-fonts}
+\PassDownOptionToPackage{stix}{nmd-fonts}
+\PassDownOptionToPackage{utopia}{nmd-fonts}
+\PassDownOptionToPackage{lucida}{nmd-fonts}
+\PassDownOptionToPackage{eulercal}{nmd-fonts}
+\PassDownOptionToPackage{sepfignums}{nmd-thm}
+\PassDownOptionToPackage{defaultenums}{nmd-thm}
 
 % The GT style has a fixed size font, but the AMS and custom ones
 % doesn't.  
@@ -58,9 +58,9 @@
 \PassDownOptionToClass{9pt}{amsart}
 \PassDownOptionToClass{10pt}{amsart}
 \DeclareOption{11pt}{\PassOptionsToClass{11pt}{amsart}%
-          \PassOptionsToClass{11pt}{nmd/custom}}
+          \PassOptionsToClass{11pt}{nmd-custom}}
 \DeclareOption{12pt}{\PassOptionsToClass{12pt}{amsart}%
-           \PassOptionsToClass{12pt}{nmd/custom}}
+           \PassOptionsToClass{12pt}{nmd-custom}}
 \ProcessOptions
 
 %%%  Make the custom style the default
@@ -98,13 +98,14 @@
   urlcolor=blue]{hyperref}
 \fi
 
+
 %% Custom Style
 \ifcustom
-  \LoadClassWithOptions{nmd/custom}
-\fi 
+  \LoadClassWithOptions{nmd-custom}
+\fi
 
 %%% Set font %%% 
-\RequirePackage{nmd/fonts}
+\RequirePackage{nmd-fonts}
 
 % Dummy commands for things used by GT style
 \providecommand{\givenname}[1]{}
@@ -131,8 +132,8 @@
    \fi}
 \def\mathreviewsnumber#1{\checkMR MR#1 \relax}
 
-\RequirePackage{nmd/graphics}
-\RequirePackage{nmd/thm}
-\RequirePackage{nmd/math}
+\RequirePackage{nmd-graphics}
+\RequirePackage{nmd-thm}
+\RequirePackage{nmd-math}
 
  % End of nmd article class

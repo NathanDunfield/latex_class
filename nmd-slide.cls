@@ -1,8 +1,8 @@
 % Nathan's slide class
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd/slide}[2015/03/08 - Stuck at ORD edition]
+\ProvidesClass{nmd-slide}[2015/03/08 - Stuck at ORD edition]
 
-\RequirePackage{nmd/common}
+\RequirePackage{nmd-common}
 \RequirePackage{expl3}
 \RequirePackage{xkeyval}
 \newif\ifnmdslide@half
@@ -12,9 +12,9 @@
 \DeclareOptionX{aspect}{\def\nmdslide@aspect{#1}}
 \DeclareOptionX{hmargin}{\def\nmdslide@hmargin{#1}}
 \DeclareOptionX{vmargin}{\def\nmdslide@vmargin{#1}}
-\PassDownOptionToPackage{tikz}{nmd/graphics}
-\PassDownOptionToPackage{xy}{nmd/graphics}
-\PassDownOptionToPackage{eulercal}{nmd/fonts}
+\PassDownOptionToPackage{tikz}{nmd-graphics}
+\PassDownOptionToPackage{xy}{nmd-graphics}
+\PassDownOptionToPackage{eulercal}{nmd-fonts}
 \PassDownOptionToClass{t}{beamer}
 \PassDownOptionToClass{c}{beamer}
 \ExecuteOptionsX{aspect=4:3, hmargin=0.5cm, vmargin=0cm}
@@ -63,7 +63,7 @@
 
 
 
-\RequirePackage{nmd/fonts}
-\RequirePackage{nmd/graphics}
-\RequirePackage{nmd/math}
+\RequirePackage{nmd-fonts}
+\RequirePackage{nmd-graphics}
+\RequirePackage{nmd-math}
 \graphicspath{{images/}}

@@ -1,26 +1,26 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd/letter}[2014/08/31 - Semester start edition]
-\RequirePackage{nmd/common}
+\ProvidesClass{nmd-letter}[2014/08/31 - Semester start edition]
+\RequirePackage{nmd-common}
 \newboolean{nologo}
 \DeclareOption{nologo}{\nologotrue}
 \newboolean{signature}
 \DeclareOption{signature}{\signaturetrue}
-\PassDownOptionToPackage{times}{nmd/fonts}
-\PassDownOptionToPackage{stix}{nmd/fonts}
-\PassDownOptionToPackage{utopia}{nmd/fonts}
-\PassDownOptionToPackage{lucida}{nmd/fonts}
-\PassDownOptionToPackage{tikz}{nmd/graphics}
-\PassDownOptionToPackage{xy}{nmd/graphics}
+\PassDownOptionToPackage{times}{nmd-fonts}
+\PassDownOptionToPackage{stix}{nmd-fonts}
+\PassDownOptionToPackage{utopia}{nmd-fonts}
+\PassDownOptionToPackage{lucida}{nmd-fonts}
+\PassDownOptionToPackage{tikz}{nmd-graphics}
+\PassDownOptionToPackage{xy}{nmd-graphics}
 \ProcessOptions
 \LoadClassWithOptions{article} 
 
-\RequirePackage{nmd/graphics}
+\RequirePackage{nmd-graphics}
 \RequirePackage{amsmath, amssymb, amsthm}
-\RequirePackage{nmd/thm}
+\RequirePackage{nmd-thm}
 \RequirePackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 \RequirePackage[margin=1in]{geometry}
-\RequirePackage{nmd/fonts}
-\RequirePackage{nmd/math}
+\RequirePackage{nmd-fonts}
+\RequirePackage{nmd-math}
 
 %%% Special letter stuff
 

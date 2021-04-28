@@ -6,8 +6,8 @@
 % vertical decoration next to theorems-type statements.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd/custom}[2014/08/31 - Semester start edition]
-\RequirePackage{nmd/common}
+\ProvidesClass{nmd-custom}[2014/08/31 - Semester start edition]
+\RequirePackage{nmd-common}
 \newboolean{fullpage}
 \newboolean{fatpage}
 \newboolean{grant}
@@ -190,7 +190,7 @@
 
 
 %%% Title/author/address code is so bad it had to hide elsewhere:
-\RequirePackage{nmd/title}
+\RequirePackage{nmd-title}
 
 \newcommand{\keywords}[1]{}
 \newcommand{\subjclass}[2][2010]{}

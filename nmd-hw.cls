@@ -1,8 +1,8 @@
 % Nathan's worksheet LaTeX class
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd/hw}[2014/08/31 - Semester start edition]
-\RequirePackage{nmd/common}
+\ProvidesClass{nmd-hw}[2014/08/31 - Semester start edition]
+\RequirePackage{nmd-common}
 \RequirePackage{expl3}
 \RequirePackage{xkeyval}
 \RequirePackage{xstring}
@@ -13,12 +13,12 @@
 \PassDownOptionToPackage{letterpaper}{geometry}
 \newboolean{nmdhw@draft}
 \DeclareOption{draft}{\nmdhw@drafttrue}
-\PassDownOptionToPackage{times}{nmd/fonts}
-\PassDownOptionToPackage{stix}{nmd/fonts}
-\PassDownOptionToPackage{utopia}{nmd/fonts}
-\PassDownOptionToPackage{lucida}{nmd/fonts}
-\PassDownOptionToPackage{tikz}{nmd/graphics}
-\PassDownOptionToPackage{xy}{nmd/graphics}
+\PassDownOptionToPackage{times}{nmd-fonts}
+\PassDownOptionToPackage{stix}{nmd-fonts}
+\PassDownOptionToPackage{utopia}{nmd-fonts}
+\PassDownOptionToPackage{lucida}{nmd-fonts}
+\PassDownOptionToPackage{tikz}{nmd-graphics}
+\PassDownOptionToPackage{xy}{nmd-graphics}
 \ExecuteOptionsX{stretch=1.1, margin=0.8in}
 \ProcessOptionsX
 \ProcessOptions
@@ -85,8 +85,8 @@
 \renewcommand{\theenumi}{\alph{enumi}}
 
 %%% Load the rest of the nmd-specific styles
-\RequirePackage{nmd/fonts}
-\RequirePackage{nmd/graphics}
-\RequirePackage{nmd/math}
+\RequirePackage{nmd-fonts}
+\RequirePackage{nmd-graphics}
+\RequirePackage{nmd-math}
 \graphicspath{{images/}}
 \RequirePackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}

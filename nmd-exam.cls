@@ -1,19 +1,19 @@
 % Nathan's exam class
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd/exam}[2016/08/31 - Semester start edition]
-\RequirePackage{nmd/common}
+\ProvidesClass{nmd-exam}[2016/08/31 - Semester start edition]
+\RequirePackage{nmd-common}
 \RequirePackage{xkeyval}
 \DeclareOptionX{stretch}{\def\nmdexam@baselinestretch{#1}}
 \DeclareOptionX{inner}{\def\nmdexam@inner{#1}}
 \DeclareOptionX{outer}{\def\nmdexam@outer{#1}}
 \DeclareOptionX{top}{\def\nmdexam@top{#1}}
 \DeclareOptionX{bottom}{\def\nmdexam@bottom{#1}}
-\PassDownOptionToPackage{times}{nmd/fonts}
-\PassDownOptionToPackage{stix}{nmd/fonts}
-\PassDownOptionToPackage{utopia}{nmd/fonts}
-\PassDownOptionToPackage{lucida}{nmd/fonts}
-\PassDownOptionToPackage{tikz}{nmd/graphics}
-\PassDownOptionToPackage{xy}{nmd/graphics}
+\PassDownOptionToPackage{times}{nmd-fonts}
+\PassDownOptionToPackage{stix}{nmd-fonts}
+\PassDownOptionToPackage{utopia}{nmd-fonts}
+\PassDownOptionToPackage{lucida}{nmd-fonts}
+\PassDownOptionToPackage{tikz}{nmd-graphics}
+\PassDownOptionToPackage{xy}{nmd-graphics}
 \newboolean{nmd@draft}
 \DeclareOption{draftmode}{\nmd@drafttrue}
 \ExecuteOptionsX{stretch=1.1, inner=1.5cm, outer=1cm, top=1cm, bottom=1cm}
@@ -109,8 +109,8 @@
 \newcommand{\truefalse}{\fbox{true \quad  false}}
 
 %%% Load the rest of the nmd-specific styles
-\RequirePackage{nmd/fonts}
-\RequirePackage{nmd/graphics}
-\RequirePackage{nmd/math}
+\RequirePackage{nmd-fonts}
+\RequirePackage{nmd-graphics}
+\RequirePackage{nmd-math}
 \graphicspath{{images/}}
 \RequirePackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
