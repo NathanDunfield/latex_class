@@ -133,14 +133,7 @@
 \else
    \lhead{\small \hrulefill\hspace{0.5em}\raisebox{-0.6ex}{\thepage}\hspace{0.5em}\hrulefill}
 \fi 
- 
 
-
-%%% AMS Maths 
-
-\RequirePackage{amsmath, amssymb}
-   
-   
 
 %%% Theorems
 
