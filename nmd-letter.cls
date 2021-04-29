@@ -14,13 +14,13 @@
 \ProcessOptions
 \LoadClassWithOptions{article} 
 
-\RequirePackage{nmd/nmd-graphics}
-\RequirePackage{amsmath, amssymb, amsthm}
-\RequirePackage{nmd/nmd-thm}
 \RequirePackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 \RequirePackage[margin=1in]{geometry}
+\RequirePackage{amsthm}
 \RequirePackage{nmd/nmd-fonts}
 \RequirePackage{nmd/nmd-math}
+\RequirePackage{nmd/nmd-thm}
+\RequirePackage{nmd/nmd-graphics}
 
 %%% Special letter stuff
 

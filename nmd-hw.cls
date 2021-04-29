@@ -25,8 +25,6 @@
 
 \LoadClass[12pt]{article}
 \RequirePackage[margin=\nmdhw@margin]{geometry}
-
-\RequirePackage{amsmath,amssymb}
 \RequirePackage{enumitem}
 \renewcommand{\baselinestretch}{\nmdhw@baselinestretch}
 \setlength{\parindent}{0pt}

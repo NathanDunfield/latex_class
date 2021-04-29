@@ -49,6 +49,7 @@
 \PassDownOptionToPackage{utopia}{nmd-fonts}
 \PassDownOptionToPackage{lucida}{nmd-fonts}
 \PassDownOptionToPackage{eulercal}{nmd-fonts}
+\PassDownOptionToPackage{computermodern}{nmd-fonts}
 \PassDownOptionToPackage{sepfignums}{nmd-thm}
 \PassDownOptionToPackage{defaultenums}{nmd-thm}
 

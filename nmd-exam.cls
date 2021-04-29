@@ -24,7 +24,6 @@
 \RequirePackage[letterpaper, inner=\nmdexam@inner, outer=\nmdexam@outer, 
                             top=\nmdexam@top, bottom=\nmdexam@bottom]{geometry}
 
-\RequirePackage{amsmath,amssymb}
 \renewcommand{\baselinestretch}{\nmdexam@baselinestretch}
 \setlength{\parindent}{0pt}
 \pagestyle{empty}

@@ -11,7 +11,6 @@
 \RequirePackage{pdfpages}
 \RequirePackage[tikz]{nmd/nmd-graphics}
 \RequirePackage[utopia]{nmd/nmd-fonts}
-\RequirePackage{amsmath, amssymb}
 \RequirePackage{nmd/nmd-math}
 
 \pgfkeys{
