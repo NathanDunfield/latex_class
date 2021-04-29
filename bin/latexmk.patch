@@ -1,0 +1,19 @@
+--- /usr/local/texlive/2021/bin/universal-darwin/latexmk	2020-09-30 16:27:38.000000000 -0500
++++ latexmk	2021-04-28 20:10:57.000000000 -0500
+@@ -354,6 +354,7 @@
+ use Cwd;            # To be able to change cwd
+ #use Cwd "chdir";    # Ensure $ENV{PWD}  tracks cwd.  NO NEED, and it messes up -cd -outdir=
+ use Digest::MD5;
++use Time::HiRes qw (sleep);
+ 
+ #use strict;
+ 
+@@ -2399,7 +2400,7 @@
+      warn "$My_name: Correcting negative sleep_time to 1 sec.\n";
+      $sleep_time = 1;
+ }
+-elsif ( ($sleep_time < 1) && ( $sleep_time != 0 ) ) {
++elsif ( ($sleep_time < 0.01) && ( $sleep_time != 0 ) ) {
+      warn "$My_name: Correcting nonzero sleep_time of less than 1 sec to 1 sec.\n";
+      $sleep_time = 1;
+ }
