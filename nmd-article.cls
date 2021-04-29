@@ -30,9 +30,9 @@
 %    \trimpages, \laptop, \printing
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd-article}[2014/08/31 - Semester start edition]
+\ProvidesClass{nmd/nmd-article}[2021/04/30]
 \RequirePackage{etex}
-\RequirePackage{nmd-common}
+\RequirePackage{nmd/nmd-common}
 
 %%% Setup options
 
@@ -101,11 +101,11 @@
 
 %% Custom Style
 \ifcustom
-  \LoadClassWithOptions{nmd-custom}
+  \LoadClassWithOptions{nmd/nmd-custom}
 \fi
 
 %%% Set font %%% 
-\RequirePackage{nmd-fonts}
+\RequirePackage{nmd/nmd-fonts}
 
 % Dummy commands for things used by GT style
 \providecommand{\givenname}[1]{}
@@ -132,8 +132,8 @@
    \fi}
 \def\mathreviewsnumber#1{\checkMR MR#1 \relax}
 
-\RequirePackage{nmd-graphics}
-\RequirePackage{nmd-thm}
-\RequirePackage{nmd-math}
+\RequirePackage{nmd/nmd-graphics}
+\RequirePackage{nmd/nmd-thm}
+\RequirePackage{nmd/nmd-math}
 
  % End of nmd article class

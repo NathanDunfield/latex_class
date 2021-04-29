@@ -2,17 +2,17 @@
 % composting tasks.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd-overlay}[2016/10/26 - tired midfall edition]
-\RequirePackage{nmd-common}
+\ProvidesClass{nmd/nmd-overlay}[2016/10/26 - tired midfall edition]
+\RequirePackage{nmd/nmd-common}
 \ProcessOptions
 \LoadClassWithOptions{article} 
 \RequirePackage{environ}
 \RequirePackage[margin=0pt]{geometry}
 \RequirePackage{pdfpages}
-\RequirePackage[tikz]{nmd-graphics}
-\RequirePackage[utopia]{nmd-fonts}
+\RequirePackage[tikz]{nmd/nmd-graphics}
+\RequirePackage[utopia]{nmd/nmd-fonts}
 \RequirePackage{amsmath, amssymb}
-\RequirePackage{nmd-math}
+\RequirePackage{nmd/nmd-math}
 
 \pgfkeys{
   /nmd/pdf page overlay/page/.initial=1, 

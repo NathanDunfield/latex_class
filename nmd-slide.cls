@@ -1,8 +1,8 @@
 % Nathan's slide class
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd-slide}[2015/03/08 - Stuck at ORD edition]
+\ProvidesClass{nmd/nmd-slide}[2015/03/08 - Stuck at ORD edition]
 
-\RequirePackage{nmd-common}
+\RequirePackage{nmd/nmd-common}
 \RequirePackage{expl3}
 \RequirePackage{xkeyval}
 \newif\ifnmdslide@half
@@ -63,7 +63,7 @@
 
 
 
-\RequirePackage{nmd-fonts}
-\RequirePackage{nmd-graphics}
-\RequirePackage{nmd-math}
+\RequirePackage{nmd/nmd-fonts}
+\RequirePackage{nmd/nmd-graphics}
+\RequirePackage{nmd/nmd-math}
 \graphicspath{{images/}}

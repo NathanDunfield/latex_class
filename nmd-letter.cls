@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd-letter}[2014/08/31 - Semester start edition]
-\RequirePackage{nmd-common}
+\ProvidesClass{nmd/nmd-letter}[2014/08/31 - Semester start edition]
+\RequirePackage{nmd/nmd-common}
 \newboolean{nologo}
 \DeclareOption{nologo}{\nologotrue}
 \newboolean{signature}
@@ -14,13 +14,13 @@
 \ProcessOptions
 \LoadClassWithOptions{article} 
 
-\RequirePackage{nmd-graphics}
+\RequirePackage{nmd/nmd-graphics}
 \RequirePackage{amsmath, amssymb, amsthm}
-\RequirePackage{nmd-thm}
+\RequirePackage{nmd/nmd-thm}
 \RequirePackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 \RequirePackage[margin=1in]{geometry}
-\RequirePackage{nmd-fonts}
-\RequirePackage{nmd-math}
+\RequirePackage{nmd/nmd-fonts}
+\RequirePackage{nmd/nmd-math}
 
 %%% Special letter stuff
 

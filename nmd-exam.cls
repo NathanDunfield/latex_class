@@ -1,7 +1,7 @@
 % Nathan's exam class
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd-exam}[2016/08/31 - Semester start edition]
-\RequirePackage{nmd-common}
+\ProvidesClass{nmd/nmd-exam}[2016/08/31 - Semester start edition]
+\RequirePackage{nmd/nmd-common}
 \RequirePackage{xkeyval}
 \DeclareOptionX{stretch}{\def\nmdexam@baselinestretch{#1}}
 \DeclareOptionX{inner}{\def\nmdexam@inner{#1}}
@@ -109,8 +109,8 @@
 \newcommand{\truefalse}{\fbox{true \quad  false}}
 
 %%% Load the rest of the nmd-specific styles
-\RequirePackage{nmd-fonts}
-\RequirePackage{nmd-graphics}
-\RequirePackage{nmd-math}
+\RequirePackage{nmd/nmd-fonts}
+\RequirePackage{nmd/nmd-graphics}
+\RequirePackage{nmd/nmd-math}
 \graphicspath{{images/}}
 \RequirePackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}

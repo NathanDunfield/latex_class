@@ -1,8 +1,8 @@
 % Nathan's worksheet LaTeX class
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nmd-hw}[2014/08/31 - Semester start edition]
-\RequirePackage{nmd-common}
+\ProvidesClass{nmd/nmd-hw}[2014/08/31 - Semester start edition]
+\RequirePackage{nmd/nmd-common}
 \RequirePackage{expl3}
 \RequirePackage{xkeyval}
 \RequirePackage{xstring}
@@ -85,8 +85,8 @@
 \renewcommand{\theenumi}{\alph{enumi}}
 
 %%% Load the rest of the nmd-specific styles
-\RequirePackage{nmd-fonts}
-\RequirePackage{nmd-graphics}
-\RequirePackage{nmd-math}
+\RequirePackage{nmd/nmd-fonts}
+\RequirePackage{nmd/nmd-graphics}
+\RequirePackage{nmd/nmd-math}
 \graphicspath{{images/}}
 \RequirePackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
