@@ -52,8 +52,12 @@
 \PassDownOptionToPackage{computermodern}{nmd-fonts}
 \PassDownOptionToPackage{sepfignums}{nmd-thm}
 \PassDownOptionToPackage{defaultenums}{nmd-thm}
-\PassOptionsToClass{noaddress}{nmd-custom}
-\PassOptionsToClass{grant}{nmd-custom}
+\PassDownOptionToClass{noaddress}{nmd-custom}
+\PassDownOptionToClass{grant}{nmd-custom}
+\PassDownOptionToClass{fullpage}{nmd-custom}
+\PassDownOptionToClass{fatpage}{nmd-custom}
+\PassDownOptionToClass{nogeometry}{nmd-custom}
+\PassDownOptionToClass{smalltitle}{nmd-custom}
 
 % The GT style has a fixed size font, but the AMS and custom ones
 % doesn't.  
