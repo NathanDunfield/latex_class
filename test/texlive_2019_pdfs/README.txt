@@ -6,4 +6,5 @@ Date:   Sun Sep 8 16:22:13 2019 -0500
 
     Added more flexible options
 
-using TeXLive 2019.  Everything compiled correctly.
+using TeXLive 2019.  Everything compiled correctly, but the output for
+art5.pdf has the wrong font (Utopia not STIX) due to some bug.
