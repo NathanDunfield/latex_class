@@ -114,7 +114,7 @@ Professor of Mathematics \\
 University of Illinois \\
 \\ 
 Fellow of the American Mathematical Society (inducted 2013) \\
-Former Simons Fellow (2013--14) and Sloan Fellow (2004--08) \\
+Former Simons Fellow (2013--14 and 2020--2021) and Sloan Fellow (2004--08) \\
 LAS Dean's award for undergraduate teaching (2014) \\
 Faculty Teaching Award from the Associated Students of Caltech (2006)
 

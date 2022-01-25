@@ -5,27 +5,27 @@
 % "Algebraic Topology").  In particular, a document that uses this
 % style can easily be switched over to either "amsart" or "gtpart"
 % with minimal modification.  See "template.tex" a minimal useage
-% example.  
+% example.
 %
 % Main options: custom (default), gt, ams
-%  
-% Font options: 
-%   * custom look: utopia (default), times, stix, lucida. 
+%
+% Font options:
+%   * custom look: utopia (default), times, stix, lucida.
 %   * ams look: computer modern (default), utopia, times, stix, lucida.
 %   * gt look: times (default and only option).
-%  
+%
 % Font size options:
 %
-%  * custom: 12pt (default), 11pt.  
-%  * ams look: 9-12pt with 10pt the default.  
+%  * custom: 12pt (default), 11pt.
+%  * ams look: 9-12pt with 10pt the default.
 %  * gt look: 11pt (default and only option).
-%    
+%
 % Additional options in the custom look:
-% 
-%  * fullpage: PDF is full US letter sized.  
-%  * fatpage: wider textwidth.  
-%  * grant: suitable for NSF grants.  
-%  
+%
+%  * fullpage: PDF is full US letter sized.
+%  * fatpage: wider textwidth.
+%  * grant: suitable for NSF grants.
+%
 %  Formating commands:
 %    \trimpages, \laptop, \printing
 
@@ -51,6 +51,7 @@
 \PassDownOptionToPackage{eulercal}{nmd-fonts}
 \PassDownOptionToPackage{computermodern}{nmd-fonts}
 \PassDownOptionToPackage{sepfignums}{nmd-thm}
+\PassDownOptionToPackage{sepfigandtablenums}{nmd-thm}
 \PassDownOptionToPackage{defaultenums}{nmd-thm}
 \PassDownOptionToClass{noaddress}{nmd-custom}
 \PassDownOptionToClass{grant}{nmd-custom}
@@ -60,7 +61,7 @@
 \PassDownOptionToClass{smalltitle}{nmd-custom}
 
 % The GT style has a fixed size font, but the AMS and custom ones
-% doesn't.  
+% doesn't.
 
 \PassDownOptionToClass{9pt}{amsart}
 \PassDownOptionToClass{10pt}{amsart}
@@ -75,11 +76,11 @@
 \ifams \customfalse \fi
 \ifgt \customfalse \fi
 
-%%% Load underlying Latex class 
+%%% Load underlying Latex class
 
 %% G&T Style
 \ifgt
- \LoadClass[microtype]{gtpart} 
+ \LoadClass[microtype]{gtpart}
   %% Improve fit on US letter
   \addtolength{\topmargin}{-1.3cm}
   \addtolength{\oddsidemargin}{0.35cm}
@@ -88,19 +89,19 @@
 
   \RequirePackage{tocloft}
   \setlength{\cftbeforesecskip}{0.05cm}
-  \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} 
+  \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
   % \dedicatory{{\scriptsize \versioninfo}}
   \renewcommand{\subjclass}[2][2010]{}
 
-   % gtpart hardwires the max width of a biblabel, so we rewire it manually.  
-   \def\thebibliography#1 {\@thebibliography@{999999}\small\parskip0pt 
+   % gtpart hardwires the max width of a biblabel, so we rewire it manually.
+   \def\thebibliography#1 {\@thebibliography@{999999}\small\parskip0pt
    plus2pt\relax\addcontentsline{toc}{section}{Bibliography}}
 \fi
 
 %% AMS Style
-\ifams 
-  \LoadClass{amsart} 
+\ifams
+  \LoadClass{amsart}
   \RequirePackage[colorlinks=true, linkcolor=blue, citecolor=blue,
   urlcolor=blue]{hyperref}
 \fi
@@ -111,7 +112,7 @@
   \LoadClassWithOptions{nmd/nmd-custom}
 \fi
 
-%%% Set font %%% 
+%%% Set font %%%
 \RequirePackage{nmd/nmd-fonts}
 
 % Dummy commands for things used by GT style
@@ -128,7 +129,7 @@
 
 %%% For the bibilography
 \RequirePackage{ragged2e}
-%%% For the MathReview links 
+%%% For the MathReview links
 
 \def\MR#1{\href{http://www.ams.org/mathscinet-getitem?mr=#1}{MR#1}}
 \def\checkMR MR#1#2#3 #4\relax%

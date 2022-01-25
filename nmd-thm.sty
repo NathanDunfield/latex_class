@@ -1,13 +1,16 @@
 % Setting up theorems, figures, etc. Note: tried to get cleveref to work,
-% but proved too flaky to be worth it.  
+% but proved too flaky to be worth it.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{nmd/nmd-thm}[2014/08/31 - Semester start edition]
 \RequirePackage{nmd/nmd-common}
 \RequirePackage{thmtools}
 \RequirePackage{thm-restate}
 \newboolean{nmd@numfigswithrest}  \nmd@numfigswithresttrue
-\newboolean{nmd@usealphaenums}    \nmd@usealphaenumstrue
+\newboolean{nmd@numfigsandtablestogether} \nmd@numfigsandtablestogethertrue
+\newboolean{nmd@usealphaenums}  \nmd@usealphaenumstrue
 \DeclareOption{sepfignums}{\nmd@numfigswithrestfalse}
+\DeclareOption{sepfigandtablenums}{\nmd@numfigswithrestfalse
+                                   \nmd@numfigsandtablestogetherfalse}
 \DeclareOption{defaultenums}{\nmd@usealphaenumsfalse}
 \ProcessOptions
 
@@ -17,14 +20,14 @@
 \ifthen{\isundefined{\KV@thmdef@nmd}}%
    {\define@key{thmdef}{nmd}[{}]{}}
 
-% Theorem number should be first!  
+% Theorem number should be first!
 \swapnumbers
 
 % In AMS article, let's use slanted instead of italics in theorems
 \@ifclassloaded{amsart}
    {\newtheoremstyle{plain}{}{}{\slshape}{}{\bfseries}{.}{0.5em}{}}
    {}
-  
+
 \newcommand{\nmdnewtheorem}[1]{%
   \declaretheorem[nmd, style=plain, sibling=subsection]{#1}
   \declaretheorem[nmd, style=plain, name={\thmt@modifycase #1}, numbered=no]{#1*}
@@ -48,8 +51,8 @@
 \declaretheorem[style=remark, sibling=subsection]{remark}
 \declaretheorem[style=remark, sibling=subsection]{example}
 
-% Change enum to use letters, so there's no confusion 
-% with equation labels.  I'm not really happy with this. 
+% Change enum to use letters, so there's no confusion
+% with equation labels.  I'm not really happy with this.
 
 \ifnmd@usealphaenums
   \renewcommand{\labelenumi}{(\alph{enumi}) }
@@ -59,13 +62,13 @@
   \renewcommand{\theenumi}{\arabic{enumi}}
 \fi
 
-% Figures and tables 
+% Figures and tables
 \RequirePackage{booktabs}
-\RequirePackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{caption} 
+\RequirePackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{caption}
 \RequirePackage[margin=15pt,font=small,labelfont=bf, labelsep=period]{subfig}
 
 % Put figures, tables, and equations onto the common
-% subsection/theorem counter. There ought to be a better 
+% subsection/theorem counter. There ought to be a better
 % way to equate two counters than this, but...
 
 \let\c@equation=\c@subsection
@@ -75,16 +78,18 @@
   \let\thefigure=\thesubsection
   \let\c@table=\c@subsection
   \let\thetable=\thesubsection
-\else % Still want tables and figures on the same counter
-  \let\c@table=\c@figure
-  \let\thetable=\thefigure
+\else
+  \ifnmd@numfigsandtablestogether
+    \let\c@table=\c@figure
+    \let\thetable=\thefigure
+  \fi
 \fi
 
 % Ugly bug fix for thmtools restateable spacing issue.  See
-% 
+%
 %      http://tex.stackexchange.com/questions/111639/
 %
-% For details.  
+% For details.
 
 \renewenvironment{thmt@restatable}[3][]{%
   \thmt@toks{}% will hold body
