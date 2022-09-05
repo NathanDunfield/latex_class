@@ -5,10 +5,14 @@
 \RequirePackage{nmd/nmd-common}
 \RequirePackage{thmtools}
 \RequirePackage{thm-restate}
+\RequirePackage{chngcntr}
 \newboolean{nmd@numfigswithrest}  \nmd@numfigswithresttrue
+\newboolean{nmd@numfigsbysection}  \nmd@numfigsbysectionfalse
 \newboolean{nmd@numfigsandtablestogether} \nmd@numfigsandtablestogethertrue
 \newboolean{nmd@usealphaenums}  \nmd@usealphaenumstrue
 \DeclareOption{sepfignums}{\nmd@numfigswithrestfalse}
+\DeclareOption{sepfignumsbysection}{\nmd@numfigswithrestfalse
+                                    \nmd@numfigsbysectiontrue}
 \DeclareOption{sepfigandtablenums}{\nmd@numfigswithrestfalse
                                    \nmd@numfigsandtablestogetherfalse}
 \DeclareOption{defaultenums}{\nmd@usealphaenumsfalse}
@@ -79,6 +83,9 @@
   \let\c@table=\c@subsection
   \let\thetable=\thesubsection
 \else
+  \ifnmd@numfigsbysection
+    \counterwithin{figure}{section}
+  \fi
   \ifnmd@numfigsandtablestogether
     \let\c@table=\c@figure
     \let\thetable=\thefigure
