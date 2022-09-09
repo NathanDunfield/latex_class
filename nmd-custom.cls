@@ -16,6 +16,7 @@
 \newboolean{smalltitle}
 \newboolean{elevenpt}
 \newboolean{twelvept}
+\newboolean{nmd@lineno}
 \DeclareOption{11pt}{\elevenpttrue \PassOptionsToClass{11pt}{article}}
 \DeclareOption{fullpage}{\fullpagetrue}
 \DeclareOption{fatpage}{\fatpagetrue}
@@ -23,6 +24,7 @@
 \DeclareOption{nogeometry}{\nogeometrytrue}
 \DeclareOption{noaddress}{\addressfalse}
 \DeclareOption{smalltitle}{\smalltitletrue}
+\DeclareOption{lineno}{\nmd@linenotrue}
 \ProcessOptions
 
 %%% make 12 point the default
@@ -111,8 +113,13 @@
     \else 
        \nmd@setarticlefonts{15bp}{24bp}{18bp}{11bp}
     \fi
-\fi 
-   
+\fi
+
+\ifnmd@lineno
+\RequirePackage[mathlines]{lineno}
+\linenumbers
+\fi
+
 % Rest of of (sub)section formating
 \titleformat{\section}[hang]{\sectionfont}{\titlebar}{0.7em}{}[]
 \titlespacing*{\section}{0pt}{3ex}{2ex}

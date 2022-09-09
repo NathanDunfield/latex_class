@@ -59,6 +59,7 @@
 \PassDownOptionToClass{fatpage}{nmd-custom}
 \PassDownOptionToClass{nogeometry}{nmd-custom}
 \PassDownOptionToClass{smalltitle}{nmd-custom}
+\PassDownOptionToClass{lineno}{nmd-custom}
 
 % The GT style has a fixed size font, but the AMS and custom ones
 % doesn't.
