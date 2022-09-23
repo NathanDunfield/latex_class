@@ -67,7 +67,7 @@
 % histogram
 \newcommand{\histogrambars}[1]{
   \foreach \x / \y in {#1} {
-    \onehistbar{\x}{\y};
+    \onehistbar{\x}{\y}
   }
 }
 
