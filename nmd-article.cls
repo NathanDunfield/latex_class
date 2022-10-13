@@ -67,7 +67,10 @@
 \PassDownOptionToClass{9pt}{amsart}
 \PassDownOptionToClass{10pt}{amsart}
 \DeclareOption{11pt}{\PassOptionsToClass{11pt}{amsart}%
-          \PassOptionsToClass{11pt}{nmd-custom}}
+           \PassOptionsToClass{11pt}{nmd-custom}}
+\DeclareOption{11.25pt}{\PassOptionsToClass{11.25pt}{nmd-custom}}
+\DeclareOption{11.5pt}{\PassOptionsToClass{11.5pt}{nmd-custom}}
+\DeclareOption{11.75pt}{\PassOptionsToClass{11.75pt}{nmd-custom}}
 \DeclareOption{12pt}{\PassOptionsToClass{12pt}{amsart}%
            \PassOptionsToClass{12pt}{nmd-custom}}
 \ProcessOptions
