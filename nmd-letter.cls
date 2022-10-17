@@ -4,6 +4,11 @@
 \newboolean{nologo}
 \DeclareOption{nologo}{\nologotrue}
 \newboolean{signature}
+\newboolean{elevenpt}
+\newboolean{eleventwofivept}
+\newboolean{elevenfivept}
+\newboolean{elevensevenfivept}
+\newboolean{twelvept}
 \DeclareOption{signature}{\signaturetrue}
 \PassDownOptionToPackage{times}{nmd-fonts}
 \PassDownOptionToPackage{stix}{nmd-fonts}
@@ -11,8 +16,25 @@
 \PassDownOptionToPackage{lucida}{nmd-fonts}
 \PassDownOptionToPackage{tikz}{nmd-graphics}
 \PassDownOptionToPackage{xy}{nmd-graphics}
+\DeclareOption{11pt}{\elevenpttrue \PassOptionsToClass{11pt}{article}}
+\DeclareOption{11.25pt}{\eleventwofivepttrue \PassOptionsToClass{11pt}{article}}
+\DeclareOption{11.5pt}{\elevenfivepttrue \PassOptionsToClass{11pt}{article}}
+\DeclareOption{11.75pt}{\elevensevenfivepttrue \PassOptionsToClass{12pt}{article}}
+\DeclareOption{12pt}{\twelvepttrue \PassOptionsToClass{12pt}{article}}
 \ProcessOptions
-\LoadClassWithOptions{article} 
+\LoadClassWithOptions{article}
+
+%%% Nonstandard sizes are useful when trying to hit a precise page
+%%% limit.
+\ifeleventwofivept
+  \usepackage[fontsize=11.25pt]{scrextend}
+\fi
+\ifelevenfivept
+  \usepackage[fontsize=11.5pt]{scrextend}
+  \fi
+\ifelevensevenfivept
+  \usepackage[fontsize=11.75pt]{scrextend}
+\fi
 
 \RequirePackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 \RequirePackage[margin=1in]{geometry}
