@@ -59,9 +59,16 @@
 \fi
 
 
-\geometry{papersize={\nmdslide@width, \nmdslide@height},     hmargin=\nmdslide@hmargin, vmargin=\nmdslide@vmargin}
+\geometry{papersize={\nmdslide@width, \nmdslide@height},  hmargin=\nmdslide@hmargin, vmargin=\nmdslide@vmargin}
 
-
+\newenvironment{wideframe}{%
+  \eject
+  \pdfpagewidth=2\nmdslide@width
+  \begin{frame}
+}{%
+  \end{frame}
+  \eject
+}
 
 \RequirePackage{nmd/nmd-fonts}
 \RequirePackage{nmd/nmd-graphics}

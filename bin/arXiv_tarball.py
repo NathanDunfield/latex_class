@@ -30,6 +30,7 @@ def parse_tex_output(base_name, include_all=False):
     
     # add image files 
     images = re.findall( "<use (\S+)>", data)
+    images += re.findall( "<use (\S+), page \d+>", data)
     if include_all:
         poss_eps = [os.path.splitext(im)[0] + ".eps" for im in images]
         images = list( set(images).union(set([im for im in poss_eps if os.path.exists(im)])) )
