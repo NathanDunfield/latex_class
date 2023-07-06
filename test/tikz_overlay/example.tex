@@ -1,0 +1,15 @@
+\documentclass[noaddress, tikz]{nmd-article}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz_cache/]
+\graphicspath{../figs_and_tables}
+\begin{document}
+\includegraphics[width=4cm]{2fusion-link}
+
+\begin{tikzpicture}[nmdstd]
+  \begin{tikzoverlay*}[width=4cm]{2fusion-link}
+    \node at (50, 50) {C};
+  \end{tikzoverlay*}
+\end{tikzpicture}
+
+Some text there is.
+\end{document}

@@ -1,4 +1,4 @@
-%%%  Code for graphics.  
+%%%  Code for graphics.
 %%%
 %%%  Two options: tikz and xy
 
@@ -26,9 +26,9 @@
 % nmddark   {0.1, 0, 0.5}      #1A0080
 
 
-%%% TikZ addons  
+%%% TikZ addons
 
-\iftikz 
+\iftikz
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
 \usetikzlibrary{positioning}
@@ -37,6 +37,29 @@
 \usetikzlibrary{decorations.markings}
 \usetikzlibrary{decorations.pathreplacing}
 
+% USAGE:
+%
+% \begin{tikzpicture}
+%   \begin{tikzoverlay*}[<graphics opts>]{file name}
+%      (TikZ commands in coordinate system where horizontal direction is 100)
+%   \end{tikzoverlay*}
+% \end{tikzpicture}
+%
+% This is a variant of the tikzoverlay environment defined below.  It
+% is sometimes advantageous to have the tikzpicture command be
+% explicit, e.g. it is compatible with TikZ's externalize library.
+
+\newenvironment{tikzoverlay*}[2][]{%
+  \node[anchor=south west, inner sep=0] (image) at (0,0) {\includegraphics[#1]{#2}};
+  \newdimen\nmd@tikzoverlaywidth
+  \pgfextractx{\nmd@tikzoverlaywidth}{\pgfpointanchor{image}{south east}}
+  \begin{scope}
+    \tikzset{x=0.01\nmd@tikzoverlaywidth}
+    \tikzset{y=0.01\nmd@tikzoverlaywidth}
+  }{
+  \end{scope}
+}
+
 % USAGE:  \begin{tikzoverlay}[<graphics opts>]{file name}[tikz opts]
 %              (tikz commands in coordinate system where horizontal
 %              direction is 100)
@@ -44,7 +67,7 @@
 %
 % The variant tikzoverlayabs uses coordinates going from (0,0) to (1,1).
 %
-% Modeled on 
+% Modeled on
 %
 % http://bazaar.launchpad.net/~tex-sx/tex-sx/development/view/head:/onimage.dtx
 
@@ -80,11 +103,11 @@
     \end{tikzpicture}
 }
 
-%%%  Including Matplotlib figures with TikZ overlay 
+%%%  Including Matplotlib figures with TikZ overlay
 
 \pgfkeys{
-  /matplotlibfigure/.is family, /matplotlibfigure, 
-  default/.style = {width = 0.95\textwidth, font = \footnotesize}, 
+  /matplotlibfigure/.is family, /matplotlibfigure,
+  default/.style = {width = 0.95\textwidth, font = \footnotesize},
   width/.store in = \matplotlibfigurewidth,
   font/.store in = \matplotlibfigurefont,
 }
@@ -100,8 +123,8 @@
   nmdstd/.style={%
     line join=round,
     line cap=round,
-    font=\footnotesize, 
-    % My preferred arrow has length 1pt + 5*(line width) and 
+    font=\footnotesize,
+    % My preferred arrow has length 1pt + 5*(line width) and
     % width equal to its height.
     >={Computer Modern Rightarrow[length=1pt 5, width'=0pt 1]},
   }
@@ -139,16 +162,16 @@
       decoration={
         show path construction,
         curveto code={
-          \draw [blue, -] 
+          \draw [blue, -]
             (\tikzinputsegmentfirst) -- (\tikzinputsegmentsupporta)
             (\tikzinputsegmentlast) -- (\tikzinputsegmentsupportb);
-          \fill [red, opacity=0.5] 
+          \fill [red, opacity=0.5]
             (\tikzinputsegmentsupporta) circle [radius=.5ex]
             (\tikzinputsegmentsupportb) circle [radius=.5ex];
         }
       },
       decorate
-}}} 
+}}}
 
 % Add a tangent vector along a curve
 \tikzset{%
@@ -228,6 +251,4 @@
       \begin{xyoverpic}{#1}{#2}{#3}
       }{\end{xyoverpic}
     \end{center}}
-\fi 
-
-
+\fi
