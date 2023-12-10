@@ -1,19 +1,22 @@
---- /usr/local/texlive/2021/bin/universal-darwin/latexmk	2020-09-30 16:27:38.000000000 -0500
-+++ latexmk	2021-04-28 20:10:57.000000000 -0500
-@@ -354,6 +354,7 @@
- use Cwd;            # To be able to change cwd
- #use Cwd "chdir";    # Ensure $ENV{PWD}  tracks cwd.  NO NEED, and it messes up -cd -outdir=
- use Digest::MD5;
-+use Time::HiRes qw (sleep);
- 
- #use strict;
- 
-@@ -2399,7 +2400,7 @@
-      warn "$My_name: Correcting negative sleep_time to 1 sec.\n";
+--- latexmk_4.81.orig	2023-12-10 09:47:04
++++ latexmk	2023-12-10 09:55:05
+@@ -2677,8 +2677,8 @@
+      warn "$My_name: sleep_time was configured to zero.\n",
+     "    Do you really want to do this?  It can give 100% CPU usage.\n";
+ }
+-elsif ( $sleep_time < 1 ) {
+-     warn "$My_name: Correcting nonzero sleep_time of less than 1 sec to 1 sec.\n";
++elsif ( $sleep_time < 0.01 ) {
++     warn "$My_name: Correcting nonzero sleep_time of less than 0.01 sec to 1 sec.\n";
       $sleep_time = 1;
  }
--elsif ( ($sleep_time < 1) && ( $sleep_time != 0 ) ) {
-+elsif ( ($sleep_time < 0.01) && ( $sleep_time != 0 ) ) {
-      warn "$My_name: Correcting nonzero sleep_time of less than 1 sec to 1 sec.\n";
-      $sleep_time = 1;
- }
+ 
+@@ -4377,7 +4377,7 @@
+         );
+         print "\n=== Watching for updated files. Use ctrl/C to stop ...\n";
+   WAIT: while (1) {
+-           sleep( $sleep_time );
++           Time::HiRes::sleep( $sleep_time );
+            if ($have_break) { last WAIT; }
+            my %changes = ();
+            if ( rdb_remake_needed(\%changes, 1, keys %rules_to_watch) ) { 
