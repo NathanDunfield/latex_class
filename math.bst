@@ -2,45 +2,50 @@
 %% 	Bibliography style math
 %% 	Curt McMullen January 1989
 %%
-%%	Modified by Nathan Dunfield and Martin Pergler 1997-2011.  
+%%	Modified by Nathan Dunfield and Martin Pergler 1997-2023.
 %%
 %%-----------------------------------------------
 FUNCTION {print.ver}  % executed below after READ
 %%
- {"You are using math.bst v1.6." top$ }
+ {"You are using math.bst v1.7." top$ }
                       % Future revisions should change version # inside
 %%
 %% -VERSION HISTORY----------
 %%
-
+%%
+%% [ver 1.7] Modified by Nathan Dunfield 2023/12 so that clicking on
+%%           the article title gotes to HIDDENURL if it exists, else
+%%           the DOI.  If the URL matches the DOI, do not include the
+%%           DOI to reduce clutter.
+%%
 %% [ver 1.6] Modified by Nathan Dunfield 2011/3 to ignore the DOI field
-%%      in favor of using the HIDDENURL field since that's what MathSciNet
-%%      always gives you.  
-%% 
-%%      Added support for MR numbers with links 
-%%     
+%%           in favor of using the HIDDENURL field since that's what MathSciNet
+%%           always gives you.
+%%
+%%           Added support for MR numbers with links
+%%
 %% [ver 1.5] Modified by Nathan Dunfield 2010/10 to change the alpha
-%%             label formating to use the full name if it's four characters.  
-%% 
-%% [ver 1.4] Modified by Nathan Dunfield 2010/2 to add hyperref support, 
-%%	following utphys.bst.    
-%% 
+%%           label formating to use the full name if it's four characters.
+%%
+%% [ver 1.4] Modified by Nathan Dunfield 2010/2 to add hyperref support,
+%%	     following utphys.bst.
+%%
 %% In particular, the following fields are supported:
 %%
 %%   EPRINT, with typical values {arXiv:math.GT/9801045}
 %%   {arXiv:math.GT/9801045} is added at the end of the entry.
 %%
 %%   DOI, with typical value {10.1090/S0025-5718-99-01036-4} is turned into
-%%   a hyperlink for the title via http://dx.doi.org but not otherwise printed.  
+%%   a hyperlink for the title via http://dx.doi.org but not otherwise printed.
 %%
-%%   URL, with typical value {http://dunfield.info} is added at the end 
+%%   URL, with typical value {http://dunfield.info} is added at the end
 %%   of the entry.
 %%
 %%   HIDDENURL, is turned into a hyperlink for the title but not
 %%   actually printed.
 %%
 %%
-%% [ver 1.3] Modified by Nathan Dunfield 2005/10 to add an eprint field. 
+%% [ver 1.3] Modified by Nathan Dunfield 2005/10 to add an eprint field.
 %%
 %% [ver 1.2] Modified Martin Pergler Mar 99 to
 %% a) insert space between journal volume number and year (looks nicer
@@ -59,7 +64,7 @@ FUNCTION {print.ver}  % executed below after READ
 %%    Limitation: URL cannot contain | else \verb| | gets confused.
 %%    At some point someone could add support for e-print servers.
 %% -----------
-%% Modified 
+%% Modified
 %% by Nathan Dunfield Dec 1997
 %% a) change to line in format.names so that first names
 %%    will be abbreviated.
@@ -69,43 +74,43 @@ FUNCTION {print.ver}  % executed below after READ
 %% designed to provide an alternative to the plain and alpha styles
 %% which is more commonly used in mathematics; and to correct certain
 %% quirks of those styles.
-%% 
+%%
 %% 0.  To use the style, you simply use bibtex as usual but specify
 %% \bibliographystyle{math}.
-%% 
+%%
 %% 1.  You can specify alphanumeric keys for papers.  Thus a typical entry in
 %% you .bib file might read
-%% 
+%%
 %% @article{Harrison:modules,
 %% 	key="Har",
 %% 	author="J. Harrison",
 %% 	title="Rings of modules",
 %% 	journal="J. of Modules",volume="21",year="1982",pages="11-12"}
-%% 
+%%
 %% This then appears in the bibliography as
-%% 
-%% [Har]  J. Harrison.  Rings of modules.  J. of Modules (<-italicized) 21 (1982), 11-12. 
-%% 
+%%
+%% [Har]  J. Harrison.  Rings of modules.  J. of Modules (<-italicized) 21 (1982), 11-12.
+%%
 %% and your citations are rendered as e.g. "for further information, see [Har]".
-%% 
+%%
 %% 2.  If no key is specified, one is concocted from the name.  If several
 %% references are made to different bibliography entries with the same key
 %% (e.g. several papers by Harrison) they become numbered [Har1], [Har2], etc.
-%% 
+%%
 %% 3.  The standard bibliography styles have an annoying decapitalization ``feature''.
 %% In math style, what you write is what appears.
-%% 
+%%
 %% 4.  If you prefer the style
-%% 
+%%
 %% [Har]  J. Harrison.  Rings of modules.  J. of Modules (italicized) 21:11-12, 1982.
-%% 
+%%
 %% it can be invoked by using @article.plain (instead of @article) in the
 %% bibliography database entry.
-%% 
+%%
 %% 5.  Bibliography entries are sorted first by name, then by year, then by title.
 %% Preprints can be included by specifying e.g. journal="Preprint", and leaving
 %% out the year entry.  They will appear after all dated entries by the same author.
-%% 
+%%
 %% 6.  (July 1995).  To obtain these advantages but with
 %% numerical keys, you may invoke the bibliographystyle
 %% math.num.  It differs from math only in that the
@@ -113,10 +118,10 @@ FUNCTION {print.ver}  % executed below after READ
 %
 %---------------------------------------------------
 %
-%  Modified from alpha.bst, December 1988.  
+%  Modified from alpha.bst, December 1988.
 %  Modified for new version of BibTeX, May 1989
 %  Bug fixed, 25 Feb 1991:
-%       int.to.chr$/int.to.str$; 
+%       int.to.chr$/int.to.str$;
 %	to produce keys of the form %	Name10, Name11, etc.
 %
 %  Bug fixed, 29 Jan 1991:
@@ -138,13 +143,14 @@ FUNCTION {print.ver}  % executed below after READ
 %    [Ab1], [AB2].
 %    Uses the year 9999 if no year is given.  This lists
 %    preprints AFTER published work.
-%   
+%
 
 ENTRY
   { address
     author
     booktitle
     chapter
+    doi
     edition
     editor
     eprint
@@ -209,7 +215,7 @@ FUNCTION {output.nonnull}
   s
 }
 
-%  Supress comma 
+%  Supress comma
 FUNCTION {output.nonnull.nocomma}
 { 's :=
   output.state mid.sentence =
@@ -378,26 +384,12 @@ FUNCTION {bold}
   if$
 }
 
-% Format a URL using hyperref.  
-FUNCTION {output.url}
-{
-  duplicate$ empty$
-    { pop$ }
-    { "\url{" swap$ * "} " *  % URLs shouldn't have a | in them
-      output.nonnull
-      before.all 'output.state := % Don't put periods or commas
-                                    % afterwards, so pretend we're
-                                    % right after citation key
-    }
-  if$
-}
-
 FUNCTION {format.archive}
 {
   archivePrefix empty$
       { "" }
       { archivePrefix ":" *}
-  if$            
+  if$
 }
 
 FUNCTION {format.primaryClass}
@@ -405,17 +397,17 @@ FUNCTION {format.primaryClass}
   primaryClass empty$
       { "" }
       { " [" primaryClass * "]" *}
-  if$            
+  if$
 }
 
 FUNCTION {format.eprint}
 { eprint empty$
-     { ""}
+     { "" }
      { archive empty$
-          {"\href{http://arxiv.org/abs/" eprint * "}" * 
+          {"\href{http://arxiv.org/abs/" eprint * "}" *
              "{{\tt " * format.archive * eprint *
               format.primaryClass * "}}" *}
-          {"\href{" archive *  "/" * eprint * "}" * 
+          {"\href{" archive *  "/" * eprint * "}" *
              "{{\tt " * format.archive * eprint *
               format.primaryClass * "}}" *}
        if$
@@ -423,38 +415,61 @@ FUNCTION {format.eprint}
      if$
 }
 
-%% FUNCTION {add.doi}
-%% { duplicate$ empty$
-%%   { skip$ }
-%%     { doi empty$
-%%        {}
-%%       {"\href{http://dx.doi.org/" doi * "}{" * swap$ * "}" *}
-%%      if$
-%%    }
-%%  if$
-%% 
+FUNCTION {url.doi}
+{ doi empty$
+  { "" }
+  { "https://doi.org/" doi * }
+  if$
+}
+
+FUNCTION {add.doi}
+{ duplicate$ empty$
+   { skip$ }
+   { "\href{" url.doi * "}{" * swap$ * "}" * }
+  if$
+}
+
 
 FUNCTION {add.hiddenurl}
 { duplicate$ empty$
     { skip$ }
     { hiddenurl empty$
-        {}
-        {"\href{"  hiddenurl  * "}{" * swap$ * "}" *}
+        { add.doi }
+        { "\href{"  hiddenurl  * "}{" * swap$ * "}" * }
       if$
     }
   if$
 }
 
+% Format a URL using hyperref.
+FUNCTION {output.url}
+{
+  duplicate$ empty$
+    { pop$ }
+    { duplicate$ url.doi =
+    { pop$ }
+    {"\url{" swap$ * "} " *  % URLs shouldn't have a | in them
+        output.nonnull
+        before.all 'output.state := % Don't put periods or commas
+                                   % afterwards, so pretend we're
+        % right after citation key
+    }
+     if$
+    }
+  if$
+}
+
+
 FUNCTION {check.mrnumber}
 {mrnumber 't :=
   ""
     { t empty$ not }
-    { t #1 #2 substring$ "\#" = 
+    { t #1 #2 substring$ "\#" =
 			{ t #1 #2 substring$ *
 	 			 t #2 global.max$ substring$ 't :=
 			}
 			{
-			  t #1 #1 substring$ "#" = 
+			  t #1 #1 substring$ "#" =
 					{ "\#" *
 		 					 t #2 global.max$ substring$ 't :=
 					}
@@ -472,7 +487,7 @@ FUNCTION {format.mrnumber}
 { mrnumber empty$
     { "" }
     {	bother "other" =
-		     {check.mrnumber} 
+		     {check.mrnumber}
 		     {"\mathreviewsnumber{" check.mrnumber * "}" * }
 			if$
     }
@@ -492,8 +507,8 @@ FUNCTION {format.names}
 %    The next line was changed by NMD in Dec 97 from
 %
 %    { s nameptr "{ff~}{vv~}{ll}{, jj}" format.name$ 't :=
-% 
-%   so that first names will be abbreviated.  Line copyied
+%
+%   so that first names will be abbreviated.  Line copied
 %   from abbrv.bst
 %
 	{ s nameptr "{f.~}{vv~}{ll}{, jj}" format.name$ 't :=
@@ -581,7 +596,7 @@ FUNCTION {format.date}
       if$
     }
     { month empty$
-	'year 
+	'year
 	{ month " " * year * }
       if$
     }
