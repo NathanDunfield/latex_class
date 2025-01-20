@@ -180,17 +180,20 @@
 
 %%% Set the page headers
 
-\RequirePackage{fancyhdr}
-\pagestyle{fancy}
-
-% Clear everthing
-\lhead{} \chead{} \rhead{} \lfoot{} \rfoot{} \cfoot{}
-\renewcommand{\headrulewidth}{0pt}
-
-\ifgrant
-   \cfoot{\thepage}
+\ifnogeometry
+  \relax
 \else
-   \lhead{\small \hrulefill\hspace{0.5em}\raisebox{-0.6ex}{\thepage}\hspace{0.5em}\hrulefill}
+  \RequirePackage{fancyhdr}
+  \pagestyle{fancy}
+   % Clear everthing
+   \lhead{} \chead{} \rhead{} \lfoot{} \rfoot{} \cfoot{}
+   \renewcommand{\headrulewidth}{0pt}
+
+   \ifgrant
+     \cfoot{\thepage}
+   \else
+     \lhead{\small \hrulefill\hspace{0.5em}\raisebox{-0.6ex}{\thepage}\hspace{0.5em}\hrulefill}
+   \fi
 \fi
 
 

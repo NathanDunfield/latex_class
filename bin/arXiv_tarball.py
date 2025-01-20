@@ -1,4 +1,4 @@
-#! /usr/bin/env python2.7
+#! /usr/bin/env python
 
 description="""\
 Make a tarbar suitable for uploading to the arXiv.
@@ -16,7 +16,7 @@ def parse_tex_output(base_name, include_all=False):
     # ones that live in TeXLive
 
     includes = []
-    for extention in ["tex", "cls", "sty", "bbl", "toc"]:
+    for extention in ["tex", "cls", "sty", "bbl", "toc", "pdf_tex"]:
         poss_includes = re.findall( "\s\((\S+\." + extention + ")", data)
         includes += [p for p in poss_includes
                      if not (re.search(TeXLive_prefix, p) or p in skips)]

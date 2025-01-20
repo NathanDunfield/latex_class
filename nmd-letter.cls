@@ -3,6 +3,12 @@
 \RequirePackage{nmd/nmd-common}
 \newboolean{nologo}
 \DeclareOption{nologo}{\nologotrue}
+\newboolean{nmd@capitalI}
+\newboolean{nmd@blockI}
+\nmd@capitalItrue
+\nmd@blockIfalse
+\DeclareOption{capital}{\nmd@capitalItrue\nmd@blockIfalse}
+\DeclareOption{block}{\nmd@blockItrue\nmd@capitalIfalse}
 \newboolean{signature}
 \newboolean{elevenpt}
 \newboolean{eleventwofivept}
@@ -62,13 +68,23 @@
 
 \ifnologo
   \def\logo{\null\vspace{30pt}\centerline{\hfill \datebox}}
-\else 
+  \else
+    \ifnmd@capitalI  
+     \def\logo{
+     \null\vspace{-60pt}\begingroup
+     \centerline{\includegraphics{full_mark_vert_bold}}
+     \vspace{10pt}
+     \centerline{\completeaddress \hfill \datebox}
+     \endgroup\par}
+  \fi
+  \ifnmd@blockI  
   \def\logo{
-  \null\vspace{-60pt}\begingroup
-  \centerline{\includegraphics{full_mark_vert_bold}}
-  \vspace{10pt}
-  \centerline{\completeaddress \hfill \datebox}
-  \endgroup\par}
+    \null\vspace{-40pt}\begingroup
+    \centerline{\includegraphics{U-LAS-MATH-Letterhead_Header-2024.pdf}}
+    \vspace{-15pt}
+    \hfill \datebox
+     \endgroup\par}
+  \fi
 \fi
 
 % Code specific to letters.
