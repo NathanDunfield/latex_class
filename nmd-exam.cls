@@ -16,11 +16,44 @@
 \PassDownOptionToPackage{xy}{nmd-graphics}
 \newboolean{nmd@draft}
 \DeclareOption{draftmode}{\nmd@drafttrue}
+\newboolean{nmd@elevenpt}
+\newboolean{nmd@eleventwofivept}
+\newboolean{nmd@elevenfivept}
+\newboolean{nmd@elevensevenfivept}
+\newboolean{nmd@twelvept}
+\DeclareOption{11pt}{\nmd@elevenpttrue \PassOptionsToClass{11pt}{article}}
+\DeclareOption{11.25pt}{\nmd@eleventwofivepttrue \PassOptionsToClass{11pt}{article}}
+\DeclareOption{11.5pt}{\nmd@elevenfivepttrue \PassOptionsToClass{11pt}{article}}
+\DeclareOption{11.75pt}{\nmd@elevensevenfivepttrue \PassOptionsToClass{12pt}{article}}
+\DeclareOption{12pt}{\nmd@twelvepttrue\PassOptionsToClass{12pt}{article}}%%% make 12 point the default
+\ifnotthen{\boolean{nmd@elevenpt}\or\boolean{nmd@elevenfivept}\or\boolean{nmd@eleventwofivept}\or\boolean{nmd@elevensevenfivept}\or\boolean{nmd@twelvept}}{%
+   \nmd@twelvepttrue
+   \PassOptionsToClass{12pt}{article}
+}
+\ProcessOptions
 \ExecuteOptionsX{stretch=1.1, inner=1.5cm, outer=1cm, top=1cm, bottom=1cm}
 \ProcessOptionsX
-\ProcessOptions
 
-\LoadClass[12pt]{article}
+%%% make 12 point the default
+\ifnotthen{\boolean{nmd@elevenpt}\or\boolean{nmd@elevenfivept}\or\boolean{nmd@eleventwofivept}\or\boolean{nmd@elevensevenfivept}\or\boolean{nmd@twelvept}}{%
+   \nmd@twelvepttrue
+   \PassOptionsToClass{12pt}{article}
+}
+
+\LoadClass{article}
+
+%%% Nonstandard sizes are useful when trying to hit a precise page
+%%% limit.
+\ifnmd@eleventwofivept
+  \usepackage[fontsize=11.25pt]{scrextend}
+\fi
+\ifnmd@elevenfivept
+  \usepackage[fontsize=11.5pt]{scrextend}
+  \fi
+\ifnmd@elevensevenfivept
+  \usepackage[fontsize=11.75pt]{scrextend}
+\fi
+
 \RequirePackage[letterpaper, inner=\nmdexam@inner, outer=\nmdexam@outer, 
                             top=\nmdexam@top, bottom=\nmdexam@bottom]{geometry}
 

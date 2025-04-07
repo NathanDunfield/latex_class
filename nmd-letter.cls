@@ -10,11 +10,11 @@
 \DeclareOption{capital}{\nmd@capitalItrue\nmd@blockIfalse}
 \DeclareOption{block}{\nmd@blockItrue\nmd@capitalIfalse}
 \newboolean{signature}
-\newboolean{elevenpt}
-\newboolean{eleventwofivept}
-\newboolean{elevenfivept}
-\newboolean{elevensevenfivept}
-\newboolean{twelvept}
+\newboolean{nmd@elevenpt}
+\newboolean{nmd@eleventwofivept}
+\newboolean{nmd@elevenfivept}
+\newboolean{nmd@elevensevenfivept}
+\newboolean{nmd@twelvept}
 \DeclareOption{signature}{\signaturetrue}
 \PassDownOptionToPackage{times}{nmd-fonts}
 \PassDownOptionToPackage{stix}{nmd-fonts}
@@ -22,23 +22,30 @@
 \PassDownOptionToPackage{lucida}{nmd-fonts}
 \PassDownOptionToPackage{tikz}{nmd-graphics}
 \PassDownOptionToPackage{xy}{nmd-graphics}
-\DeclareOption{11pt}{\elevenpttrue \PassOptionsToClass{11pt}{article}}
-\DeclareOption{11.25pt}{\eleventwofivepttrue \PassOptionsToClass{11pt}{article}}
-\DeclareOption{11.5pt}{\elevenfivepttrue \PassOptionsToClass{11pt}{article}}
-\DeclareOption{11.75pt}{\elevensevenfivepttrue \PassOptionsToClass{12pt}{article}}
-\DeclareOption{12pt}{\twelvepttrue \PassOptionsToClass{12pt}{article}}
+\DeclareOption{11pt}{\nmd@elevenpttrue \PassOptionsToClass{11pt}{article}}
+\DeclareOption{11.25pt}{\nmd@eleventwofivepttrue \PassOptionsToClass{11pt}{article}}
+\DeclareOption{11.5pt}{\nmd@elevenfivepttrue \PassOptionsToClass{11pt}{article}}
+\DeclareOption{11.75pt}{\nmd@elevensevenfivepttrue \PassOptionsToClass{12pt}{article}}
+\DeclareOption{12pt}{\nmd@twelvepttrue \PassOptionsToClass{12pt}{article}}
 \ProcessOptions
-\LoadClassWithOptions{article}
+
+%%% make 12 point the default
+\ifnotthen{\boolean{nmd@elevenpt}\or\boolean{nmd@elevenfivept}\or\boolean{nmd@eleventwofivept}\or\boolean{nmd@elevensevenfivept}\or\boolean{nmd@twelvept}}{%
+   \nmd@twelvepttrue
+   \PassOptionsToClass{12pt}{article}
+}
+
+\LoadClass{article}
 
 %%% Nonstandard sizes are useful when trying to hit a precise page
 %%% limit.
-\ifeleventwofivept
+\ifnmd@eleventwofivept
   \usepackage[fontsize=11.25pt]{scrextend}
 \fi
-\ifelevenfivept
+\ifnmd@elevenfivept
   \usepackage[fontsize=11.5pt]{scrextend}
   \fi
-\ifelevensevenfivept
+\ifnmd@elevensevenfivept
   \usepackage[fontsize=11.75pt]{scrextend}
 \fi
 
@@ -153,7 +160,7 @@ University of Illinois \\
 \\ 
 Fellow of the American Mathematical Society (inducted 2013) \\
 Former Simons Fellow (2013--14 and 2020--2021) and Sloan Fellow (2004--08) \\
-LAS Dean's award for undergraduate teaching (2014) \\
+Campus Award for Undergraduate Teaching (2025) \\
 Faculty Teaching Award from the Associated Students of Caltech (2006)
 
 web: http://dunfield.info 
@@ -178,8 +185,7 @@ Professor of Mathematics \\
 University of Illinois \\
 \\ 
 Fellow of the American Mathematical Society \\
-\\
-web: http://dunfield.info 
+% web: http://dunfield.info 
 \end{minipage}
 }
 

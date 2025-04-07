@@ -10,14 +10,14 @@ TeXLive_prefix = "/usr/local/texlive"
 skips = ["/Users/dunfield/tex/inputs/user-is-nathan-dunfield.tex"]
 
 def parse_tex_output(base_name, include_all=False):
-    data = open(base_name + ".log").read()
+    data = open(base_name + ".log", encoding='latin-1').read()
 
     # First find all the included packages, excluding the
     # ones that live in TeXLive
 
     includes = []
     for extention in ["tex", "cls", "sty", "bbl", "toc", "pdf_tex"]:
-        poss_includes = re.findall( "\s\((\S+\." + extention + ")", data)
+        poss_includes = re.findall(r"\s\((\S+\." + extention + ")", data)
         includes += [p for p in poss_includes
                      if not (re.search(TeXLive_prefix, p) or p in skips)]
 
@@ -29,8 +29,8 @@ def parse_tex_output(base_name, include_all=False):
         includes += glob.glob("*.bst")
     
     # add image files 
-    images = re.findall( "<use (\S+)>", data)
-    images += re.findall( "<use (\S+), page \d+>", data)
+    images = re.findall(r"<use (\S+)>", data)
+    images += re.findall(r"<use (\S+), page \d+>", data)
     if include_all:
         poss_eps = [os.path.splitext(im)[0] + ".eps" for im in images]
         images = list( set(images).union(set([im for im in poss_eps if os.path.exists(im)])) )

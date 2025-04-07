@@ -12,6 +12,12 @@
 \PassDownOptionToPackage{a4paper}{geometry}
 \PassDownOptionToPackage{letterpaper}{geometry}
 \newboolean{nmdhw@draft}
+\newboolean{nogeometry}
+\newboolean{elevenpt}
+\newboolean{eleventwofivept}
+\newboolean{elevenfivept}
+\newboolean{elevensevenfivept}
+\newboolean{twelvept}
 \DeclareOption{draft}{\nmdhw@drafttrue}
 \PassDownOptionToPackage{times}{nmd-fonts}
 \PassDownOptionToPackage{stix}{nmd-fonts}
@@ -19,16 +25,40 @@
 \PassDownOptionToPackage{lucida}{nmd-fonts}
 \PassDownOptionToPackage{tikz}{nmd-graphics}
 \PassDownOptionToPackage{xy}{nmd-graphics}
+\DeclareOption{11pt}{\elevenpttrue \PassOptionsToClass{11pt}{article}}
+\DeclareOption{11.25pt}{\eleventwofivepttrue \PassOptionsToClass{11pt}{article}}
+\DeclareOption{11.5pt}{\elevenfivepttrue \PassOptionsToClass{11pt}{article}}
+\DeclareOption{11.75pt}{\elevensevenfivepttrue \PassOptionsToClass{12pt}{article}}
+\DeclareOption{12pt}{\twelvepttrue \PassOptionsToClass{12pt}{article}}
+\DeclareOption{nogeometry}{\nogeometrytrue}
 \ExecuteOptionsX{stretch=1.1, margin=0.8in}
 \ProcessOptionsX
 \ProcessOptions
 
-\LoadClass[12pt]{article}
+%%% make 12 point the default
+\ifnotthen{\boolean{elevenpt}\or\boolean{elevenfivept}\or\boolean{eleventwofivept}\or\boolean{elevensevenfivept}}{%
+   \twelvepttrue
+   \PassOptionsToClass{12pt}{article}
+}
+
+\LoadClass{article}
 \RequirePackage[margin=\nmdhw@margin]{geometry}
 \RequirePackage{enumitem}
 \renewcommand{\baselinestretch}{\nmdhw@baselinestretch}
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
+
+%%% Nonstandard sizes are useful when trying to hit a precise page
+%%% limit.
+\ifeleventwofivept
+  \usepackage[fontsize=11.25pt]{scrextend}
+\fi
+\ifelevenfivept
+  \usepackage[fontsize=11.5pt]{scrextend}
+  \fi
+\ifelevensevenfivept
+  \usepackage[fontsize=11.75pt]{scrextend}
+\fi
 
 
 %%% For fun, let's extract the hw date from the file name,
